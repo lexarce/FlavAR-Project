@@ -30,7 +30,6 @@ jobs:
         run: |
           git config --local user.email lexarce7@gmail.com
           git config --local user.name Alexis Arce
-	  git restore package-lock.json # Revert changes to package-lock.json
           git add figmaData.json
           git commit -m "Update Figma data [skip ci]"
           git push
