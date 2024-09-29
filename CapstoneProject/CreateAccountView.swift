@@ -19,22 +19,36 @@ struct CreateAccountView: View {
     @State var emailAddress: String = ""
     @State var password: String = ""
     @State var confirmedPassword: String = ""
-    @State private var errorMessage = ""
+    @State private var errorMessage = "Email Address is not formatted correctly or Email Address is already used for another account. Example: coolname@gmail.com"
     @State private var isAccountCreated = false
     @State private var toLoginPage = false
     
     
     var body: some View {
         VStack {
+            
+            Image("logo2") // Refers to the image called "logo1" in your Assets folder
+                .resizable() // Makes the image resizable
+                .aspectRatio(contentMode: .fit) // Preserves the aspect ratio and fits the image
+                .frame(width: 80, height: 80)
+                .offset(y: -40)
+            
+            Text("Sign Up")
+                .bold()
+                .foregroundStyle(.white)
+                .padding()
+                .font(.system(size: 40, weight: .bold, design: .default))
+                .offset(y: -70)
+            
             //A HStack stacks objects within it horizontally
             HStack {
                 //A normal text field
                 TextField("First Name", text: $firstName)
                     .padding()
                     .background {
-                        RoundedRectangle(cornerRadius: 20)
+                        RoundedRectangle(cornerRadius: 10)
                             .fill(.white)
-                            //.stroke(Color.black, lineWidth: 2)
+                            .frame(height: 50)
                     }
                     .padding(.leading, 16)
                     .padding(.trailing, 16)
@@ -43,69 +57,84 @@ struct CreateAccountView: View {
                 TextField("Last Name", text: $lastName)
                     .padding()
                     .background {
-                        RoundedRectangle(cornerRadius: 20)
+                        RoundedRectangle(cornerRadius: 10)
                             .fill(.white)
-                            //.stroke(Color.black, lineWidth: 2)
+                            .frame(height: 50)
                     }
                     .padding(.leading, 16)
                     .padding(.trailing, 16)
                     .autocorrectionDisabled(true)
                 
             }//End of HStack
+            .offset(y: -50)
             
             //Text field for the user to enter email address
             TextField("Email Address", text: $emailAddress)
                 .padding()
                 .background {
-                    RoundedRectangle(cornerRadius: 20)
+                    RoundedRectangle(cornerRadius: 10)
                         .fill(.white)
-                        //.stroke(Color.black, lineWidth: 2)
+                        .frame(height: 50)
                 }
                 .padding(.leading, 16)
                 .padding(.trailing, 16)
                 .autocorrectionDisabled(true)
+                .offset(y: -40)
             
             //Phone Number Text Field
             TextField("Phone Number", text: $phoneNumber)
                 .padding()
                 .background {
-                    RoundedRectangle(cornerRadius: 20)
+                    RoundedRectangle(cornerRadius: 10)
                         .fill(.white)
-                        //.stroke(Color.black, lineWidth: 2)
+                        .frame(height: 50)
                 }
                 .padding(.leading, 16)
                 .padding(.trailing, 16)
                 .autocorrectionDisabled(true)
+                .offset(y: -30)
+            
+            Text("Minimum 10 characters")
+                .bold()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .offset(y: -10)
+                .padding(.leading, 20)
+                .padding(.trailing, 20)
+                .foregroundStyle(.white)
+            
             
             //Password text field
             SecureField("Password", text: $password)
                 .padding()
                 .background {
-                    RoundedRectangle(cornerRadius: 20)
+                    RoundedRectangle(cornerRadius: 10)
                         .fill(.white)
-                        //.stroke(Color.black, lineWidth: 2)
+                        .frame(height: 50)
                 }
                 .padding(.leading, 16)
                 .padding(.trailing, 16)
-                .textContentType(.none)
+                .textContentType(.newPassword)
                 .keyboardType(.default)
                 .autocorrectionDisabled(true)
                 .autocapitalization(.none)
+                .disableAutocorrection(true) // This is also important
             
             //Confirm password text field
             SecureField("Confirm Password", text: $confirmedPassword)
                 .padding()
                 .background {
-                    RoundedRectangle(cornerRadius: 20)
+                    RoundedRectangle(cornerRadius: 10)
                         .fill(.white)
-                        //.stroke(Color.black, lineWidth: 2)
+                        .frame(height: 50)
                 }
                 .padding(.leading, 16)
                 .padding(.trailing, 16)
-                .textContentType(.none)
+                .textContentType(.newPassword)
                 .keyboardType(.default)
                 .autocorrectionDisabled(true)
+                .disableAutocorrection(true)
                 .autocapitalization(.none)
+                .offset(y: 10)
             
             
             //The sign in button
@@ -131,23 +160,29 @@ struct CreateAccountView: View {
                     }
                 }
             } label: {//This is the physical button
-                Text("Sign Up")
+                Text("REGISTER  >")
                     .bold()
                     .foregroundStyle(.white)
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(
-                        RoundedRectangle(cornerRadius: 20)
-                            .fill(Color.blue)
+                        RoundedRectangle(cornerRadius: 30)
+                            .fill(Color("AppColor4"))
                     )
             }
-            .padding(.leading, 100)
-            .padding(.trailing, 100)
+            .padding(.leading, 20)
+            .padding(.trailing, 20)
+            .offset(y: 50)
             
             //To display all the error messages from invalid input
             Text(errorMessage)
                 .bold()
                 .frame(maxWidth: .infinity, alignment: .center)
+                .offset(y: 80)
+                .foregroundStyle(.white)
+                .padding(.leading, 20)
+                .padding(.trailing, 20)
+            
             
             // NavigationLink to HomePageView
             NavigationLink(destination: LoginView(), isActive: $toLoginPage) {
@@ -161,13 +196,14 @@ struct CreateAccountView: View {
                 .offset(y: 180)
                 .padding(.leading, 20)
                 .padding(.trailing, 20)
+                .foregroundStyle(.white)
             
         }//End of VStack
         .frame(maxWidth: .infinity, maxHeight: .infinity) // Make the VStack fill the entire screen
         //This is how the page background gradually changes between 2 colors
         .background(
                     LinearGradient(
-                        gradient: Gradient(colors: [.blue, .purple]),  // Colors for the gradient
+                        gradient: Gradient(colors: [Color("AppColor2"), Color("AppColor1")]),  // Colors for the gradient
                         startPoint: .top,                             // Starting from the top
                         endPoint: .bottom                             // Transition to the bottom
                     )
@@ -233,7 +269,7 @@ struct CreateAccountView: View {
             return false
         }
         
-        if password.count < 9 {
+        if password.count < 10 {
             errorMessage = "Password is too short"
             return false
         }

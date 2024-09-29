@@ -27,59 +27,52 @@ struct LoginView: View {
             //A VStack vertically stacks the objects within it like Text and TextField
             VStack {
                 
-                //A text object
-                Text("Email")
+                Image("logo1") // Refers to the image called "logo1" in your Assets folder
+                    .resizable() // Makes the image resizable
+                    .aspectRatio(contentMode: .fit) // Preserves the aspect ratio and fits the image
+                    .frame(width: 80, height: 80)
+                    .offset(y: -40)
+                
+                Text("LOGIN")
                     .bold()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading, 20)
+                    .foregroundStyle(.white)
+                    .padding()
+                    .font(.system(size: 40, weight: .bold, design: .default))
+                    .offset(y: -70)
                 
                 //A normal text field
-                TextField("Enter Email", text: $emailInput)
+                TextField("Email Address", text: $emailInput)
                     .padding()
                     .background {
-                        RoundedRectangle(cornerRadius: 20)
+                        RoundedRectangle(cornerRadius: 15)
                             .fill(.white)
                             .stroke(Color.black, lineWidth: 2)
                     }
-                    .padding(.leading, 16)
-                    .padding(.trailing, 16)
-                    .autocorrectionDisabled(true)
-                
-                //A Text object
-                Text("Password")
-                    .bold()
-                    .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading, 20)
+                    .padding(.trailing, 20)
+                    .autocorrectionDisabled(true)
+                    .offset(y: -80)
+                
                 
                 //A text (secure) field that censors the text
-                SecureField("Enter Password", text: $passwordInput)
+                SecureField("Password", text: $passwordInput)
                     .padding()
                     .background {
-                        RoundedRectangle(cornerRadius: 20)
+                        RoundedRectangle(cornerRadius: 15)
                             .fill(.white)
                             .stroke(Color.black, lineWidth: 2)
                     }
-                    .padding(.leading, 16)
-                    .padding(.trailing, 16)
+                    .padding(.leading, 20)
+                    .padding(.trailing, 20)
                     //All these extra attributes keep the auto strong password suggestion from appearing
                     .autocorrectionDisabled(true)
-                    .textContentType(.none)
+                    .textContentType(.newPassword)
                     .keyboardType(.default)
                     .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    .offset(y: -70)
                 
                 
-                Button {
-                    //Where the functionality for the pressing of "Forgot Password" will go
-                    
-                } label: {//The "label" is the physical button that can be pressed
-                    //The label is the text itself
-                    Text("Forgot Password")
-                        .bold()
-                        .foregroundStyle(.blue)
-                        .padding()
-                }
-                .offset(y: -15)
-                .frame(maxWidth: .infinity, alignment: .trailing)
                 
                 //Sign In Button
                 Button {
@@ -88,22 +81,41 @@ struct LoginView: View {
                     loginUser(email: emailInput, password: passwordInput)
                     
                 } label: {//This is the physical button
-                    Text("Sign In")
+                    Text("CONTINUE  >")
                         .bold()
                         .foregroundStyle(.white)
                         .padding()
                         .frame(maxWidth: .infinity)
                         .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(Color.blue)
+                            RoundedRectangle(cornerRadius: 30)
+                                .fill(Color("AppColor4"))
                         )
                 }
-                .padding(.leading, 100)
-                .padding(.trailing, 100)
+                .padding(.leading, 20)
+                .padding(.trailing, 20)
+                .offset(y: -50)
+                
+                Button {
+                    //Where the functionality for the pressing of "Forgot Password" will go
+                    
+                } label: {//The "label" is the physical button that can be pressed
+                    //The label is the text itself
+                    Text("Forgot Password?")
+                        .bold()
+                        .foregroundStyle(.white)
+                        .padding()
+                        .underline()
+                        .padding(.leading, 20)
+                }
+                .offset(y: -50)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 
                 Text(errorMessage)
                     .bold()
                     .frame(maxWidth: .infinity, alignment: .center)
+                    .foregroundStyle(.white)
+                    .offset(y: -50)
+                
                 
                 
                 //A button to take the user to CreateAccountView
@@ -112,14 +124,24 @@ struct LoginView: View {
                 } label: {//This is the physical button
                     //It will take us to CreateAccountView
                     NavigationLink(destination: CreateAccountView()) {
-                        Text("Don't have an account? Create one here")
+                        Text("CREATE AN ACCOUNT  >")
                             .bold()
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(Color("AppColor1"))
                             .padding()
                             .frame(maxWidth: .infinity)
+                            .background(
+//                                RoundedRectangle(cornerRadius: 30)
+//                                    .fill(Color.white)
+                                RoundedRectangle(cornerRadius: 30)
+                                    .fill(
+                                        LinearGradient(gradient: Gradient(colors: [Color("AppColor3"), Color.white, Color("AppColor3")]), startPoint: .leading, endPoint: .trailing) // Center color is blue
+                                    )
+                            )
                     }
                 }
-                .offset(y: 200)
+                .offset(y: -30)
+                .padding(.leading, 20)
+                .padding(.trailing, 20)
                 
                 // NavigationLink to HomePageView
                 NavigationLink(destination: HomePageView(), isActive: $loginSuccessful) {
@@ -128,6 +150,9 @@ struct LoginView: View {
                 .hidden() // Hides the EmptyView
 
             }//End of the VStack
+            .frame(maxWidth: .infinity, maxHeight: .infinity) // Make the background color cover the full screen
+            .background(Color("AppColor1")) // Set your desired color here
+            .edgesIgnoringSafeArea(.all)
 
         }//End of Navigation Stack
 
