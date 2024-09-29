@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		34DDE8D02CA1C2A900CB47FC /* CapstoneProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE8CF2CA1C2A900CB47FC /* CapstoneProjectApp.swift */; };
-		34DDE8D22CA1C2A900CB47FC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE8D12CA1C2A900CB47FC /* ContentView.swift */; };
 		34DDE8D42CA1C2AB00CB47FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34DDE8D32CA1C2AB00CB47FC /* Assets.xcassets */; };
 		34DDE8D72CA1C2AB00CB47FC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34DDE8D62CA1C2AB00CB47FC /* Preview Assets.xcassets */; };
 		34DDE8DE2CA1C2D800CB47FC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE8DD2CA1C2D800CB47FC /* LoginView.swift */; };
@@ -43,7 +42,6 @@
 /* Begin PBXFileReference section */
 		34DDE8CC2CA1C2A900CB47FC /* CapstoneProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CapstoneProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34DDE8CF2CA1C2A900CB47FC /* CapstoneProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapstoneProjectApp.swift; sourceTree = "<group>"; };
-		34DDE8D12CA1C2A900CB47FC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		34DDE8D32CA1C2AB00CB47FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		34DDE8D62CA1C2AB00CB47FC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		34DDE8DD2CA1C2D800CB47FC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -107,7 +105,6 @@
 			children = (
 				34DDE8CF2CA1C2A900CB47FC /* CapstoneProjectApp.swift */,
 				34DDE8DF2CA1FB3100CB47FC /* GoogleService-Info.plist */,
-				34DDE8D12CA1C2A900CB47FC /* ContentView.swift */,
 				34DDE8D32CA1C2AB00CB47FC /* Assets.xcassets */,
 				34DDE8D52CA1C2AB00CB47FC /* Preview Content */,
 				34DDE8DD2CA1C2D800CB47FC /* LoginView.swift */,
@@ -225,7 +222,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				34DDE8DE2CA1C2D800CB47FC /* LoginView.swift in Sources */,
-				34DDE8D22CA1C2A900CB47FC /* ContentView.swift in Sources */,
 				34DDE9112CA2200C00CB47FC /* HomePageView.swift in Sources */,
 				34DDE8D02CA1C2A900CB47FC /* CapstoneProjectApp.swift in Sources */,
 				34DDE9132CA220EF00CB47FC /* CreateAccountView.swift in Sources */,
