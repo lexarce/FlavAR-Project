@@ -19,7 +19,7 @@ struct CreateAccountView: View {
     @State var emailAddress: String = ""
     @State var password: String = ""
     @State var confirmedPassword: String = ""
-    @State private var errorMessage = "Email Address is not formatted correctly or Email Address is already used for another account. Example: coolname@gmail.com"
+    @State private var errorMessage = ""
     @State private var isAccountCreated = false
     @State private var toLoginPage = false
     
@@ -27,7 +27,7 @@ struct CreateAccountView: View {
     var body: some View {
         VStack {
             
-            Image("logo2") // Refers to the image called "logo1" in your Assets folder
+            Image("logo2") // Refers to the image called "logo2" in your Assets folder
                 .resizable() // Makes the image resizable
                 .aspectRatio(contentMode: .fit) // Preserves the aspect ratio and fits the image
                 .frame(width: 80, height: 80)
