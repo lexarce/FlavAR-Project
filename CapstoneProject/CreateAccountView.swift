@@ -215,16 +215,16 @@ struct CreateAccountView: View {
 //        do {
 //            let db = Firestore.firestore()
 //            fullName = firstName + lastName
-//            
+//
 //            //The name of the document is the first and last name of the user
 //            let documentID = fullName.replacingOccurrences(of: " ", with: "_")
-//            
+//
 //            db.document("users/\(documentID)").setData([
 //            "firstName": firstName,
 //            "lastName": lastName,
 //            "emailAddress": emailAddress,
 //            "phoneNumber": phoneNumber
-//            
+//
 //          ])
 //        }
 //    }

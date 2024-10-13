@@ -1,0 +1,5 @@
+*.xcuserstate
+*.xcscmblueprint
+*.xcscheme
+.DS_Store
+node_modules/
