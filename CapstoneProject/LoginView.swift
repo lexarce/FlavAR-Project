@@ -66,7 +66,7 @@ struct LoginView: View {
                     .padding(.trailing, 20)
                     //All these extra attributes keep the auto strong password suggestion from appearing
                     .autocorrectionDisabled(true)
-                    .textContentType(.newPassword)
+                    .textContentType(.none)
                     .keyboardType(.default)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
@@ -157,9 +157,32 @@ struct LoginView: View {
         }//End of Navigation Stack
 
     }//End of body
+    
+    //checks if the email of the current user is verified by the verification emaill
+    func checkIfEmailIsVerified(completion: @escaping (Bool) -> Void) {
+        if let user = Auth.auth().currentUser {
+            user.reload { error in
+                if let error = error {
+                    print("Error reloading user: \(error.localizedDescription)")
+                    completion(false)
+                } else {
+                    if user.isEmailVerified {
+                        print("Email is verified")
+                        completion(true)
+                        // Proceed to the next screen, such as home
+                    } else {
+                        print("Email is not verified yet")
+                        // Prompt the user to check their email or resend the verification email
+                        completion(false)
+                    }
+                }
+            }
+        }
+    }
         
     //Authenticates the user with their entered email address and password
     func loginUser(email: String, password: String) {
+        
             //This is a firebase function call, we pass it the email and password
             Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                 // Check if there's an error during the login process
@@ -175,7 +198,31 @@ struct LoginView: View {
                     // successful login
                     print("Simulating successful login")
                     
-                    loginSuccessful = true //We use this boolean to prove that the user was authenticatteed
+                    //check if email is verified
+                    checkIfEmailIsVerified { isVerified in
+                        if isVerified {
+                            print("Email is verified. Proceed to next screen.")
+                            // Navigate to the home screen or unlock features
+                            
+                            loginSuccessful = true //We use this boolean to prove that the user was authenticatteed
+                            
+                        } else {
+                            print("Email is not verified.")
+                            //logout the user before reaching the next screen
+                            do {
+                                try Auth.auth().signOut()
+                                    print("User has been logged out because email is not verified.")
+                                
+                                    loginSuccessful = false // Reset the login status
+                                
+                                } catch let signOutError as NSError {
+                                    
+                                    print("Error signing out: \(signOutError.localizedDescription)")
+                                    
+                                                }
+                            
+                        }
+                    }
                     
                 }
             }

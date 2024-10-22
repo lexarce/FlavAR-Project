@@ -113,7 +113,7 @@ struct CreateAccountView: View {
                 }
                 .padding(.leading, 16)
                 .padding(.trailing, 16)
-                .textContentType(.newPassword)
+                .textContentType(.none)
                 .keyboardType(.default)
                 .autocorrectionDisabled(true)
                 .autocapitalization(.none)
@@ -129,7 +129,7 @@ struct CreateAccountView: View {
                 }
                 .padding(.leading, 16)
                 .padding(.trailing, 16)
-                .textContentType(.newPassword)
+                .textContentType(.none)
                 .keyboardType(.default)
                 .autocorrectionDisabled(true)
                 .disableAutocorrection(true)
@@ -293,11 +293,27 @@ struct CreateAccountView: View {
                 // Handle error
                 errorMessage = error.localizedDescription
                 completion(false) // Return false if there was an error
-            } else {
+            } else if let user = authResult?.user{
                 // Successfully created the account
+                
+                //perform the email verification
+                sendEmailVerification(user: user)
+                
+                //return true
                 completion(true) // Return true if the account was created
             }
         }
+    }
+    
+    //for sending emaill verification
+    func sendEmailVerification(user: User) {
+            user.sendEmailVerification { error in
+                if let error = error {
+                    errorMessage = error.localizedDescription
+                } else {
+                    errorMessage = "A verification email has been sent. Please check your inbox."
+                }
+            }
     }
     
 }
