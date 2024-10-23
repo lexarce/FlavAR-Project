@@ -22,6 +22,7 @@ struct CreateAccountView: View {
     @State private var errorMessage = ""
     @State private var isAccountCreated = false
     @State private var toLoginPage = false
+    @State private var id = ""
     
     
     var body: some View {
@@ -146,16 +147,14 @@ struct CreateAccountView: View {
                             isAccountCreated = true
                             print("Account created successfully!")
                             
-                            //Create the database document to store this users info
-                            createDocument()
-                            
                             //Will cause the navigator to switch to LoginView
                             toLoginPage = true
                             
                         } else {//This means that the email was incorrect or improperly formatted
                             print("Failed to create account")
+                            
                             errorMessage = "Email Address is not formatted correctly or Email Address is already used for another account. Example: coolname@gmail.com"
-                            // Show an alert with the error message or update the UI
+
                         }
                     }
                 }
@@ -211,24 +210,24 @@ struct CreateAccountView: View {
     }
     
     //Creates the document that holds the user information in firebase
-    func createDocument() {
-        // Add a new document with a generated ID
-        do {
-            let db = Firestore.firestore()
-            fullName = firstName + lastName
-            
-            //The name of the document is the first and last name of the user
-            let documentID = fullName.replacingOccurrences(of: " ", with: "_")
-            
-            db.document("users/\(documentID)").setData([
-            "firstName": firstName,
-            "lastName": lastName,
-            "emailAddress": emailAddress,
-            "phoneNumber": phoneNumber
-            
-          ])
-        }
-    }
+//    func createDocument() {
+//        // Add a new document with a generated ID
+//        do {
+//            let db = Firestore.firestore()
+//            fullName = firstName + lastName
+//            
+//            //The name of the document is the first and last name of the user
+//            let documentID = fullName.replacingOccurrences(of: " ", with: "_")
+//            
+//            db.document("users/\(documentID)").setData([
+//            "firstName": firstName,
+//            "lastName": lastName,
+//            "emailAddress": emailAddress,
+//            "phoneNumber": phoneNumber
+//            
+//          ])
+//        }
+//    }
     
     //Checks for invalid input from the user
     func checkInput() -> Bool {
@@ -286,7 +285,7 @@ struct CreateAccountView: View {
         return true
     }
     
-    //Function that creates the user account and stores the username and password for authentication in firebase. This allows user logins to be authenticated in LoginView
+    //Function that creates the user account and stores the username and password for authentication in firebase. A document with all user info is also stored. This allows user logins to be authenticated in LoginView
     func createAccount(emailAddress: String, password: String, completion: @escaping (Bool) -> Void) {
         Auth.auth().createUser(withEmail: emailAddress, password: password) { authResult, error in
             if let error = error {
@@ -295,6 +294,23 @@ struct CreateAccountView: View {
                 completion(false) // Return false if there was an error
             } else if let user = authResult?.user{
                 // Successfully created the account
+                
+                //create the document for the user
+                do {
+                    let db = Firestore.firestore()
+                    
+                    //The name of the document is the first and last name of the user
+                    let documentID = fullName.replacingOccurrences(of: " ", with: "_")
+                    
+                    db.document("users/\(user.uid)").setData([
+                    "firstName": firstName,
+                    "lastName": lastName,
+                    "emailAddress": emailAddress,
+                    "phoneNumber": phoneNumber,
+                    "isAdmin" : false
+                    
+                  ])
+                }
                 
                 //perform the email verification
                 sendEmailVerification(user: user)
@@ -305,13 +321,11 @@ struct CreateAccountView: View {
         }
     }
     
-    //for sending emaill verification
+    //for sending email verification
     func sendEmailVerification(user: User) {
             user.sendEmailVerification { error in
                 if let error = error {
                     errorMessage = error.localizedDescription
-                } else {
-                    errorMessage = "A verification email has been sent. Please check your inbox."
                 }
             }
     }

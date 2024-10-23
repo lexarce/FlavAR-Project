@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		344789102CC879E8006543A4 /* UserPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3447890F2CC879E8006543A4 /* UserPermissions.swift */; };
 		34B412372CB9FFBD00ED5BAF /* MenuItemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B412362CB9FFBD00ED5BAF /* MenuItemService.swift */; };
 		34B4123B2CBA3FAD00ED5BAF /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B4123A2CBA3FAD00ED5BAF /* ImageDownloader.swift */; };
 		34DDE8D02CA1C2A900CB47FC /* CapstoneProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE8CF2CA1C2A900CB47FC /* CapstoneProjectApp.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3447890F2CC879E8006543A4 /* UserPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPermissions.swift; sourceTree = "<group>"; };
 		34B412362CB9FFBD00ED5BAF /* MenuItemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemService.swift; sourceTree = "<group>"; };
 		34B4123A2CBA3FAD00ED5BAF /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		34DDE8CC2CA1C2A900CB47FC /* CapstoneProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CapstoneProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +118,7 @@
 				34DDE8DD2CA1C2D800CB47FC /* LoginView.swift */,
 				C3829B672CB4FFB500001049 /* CustomerMenuView.swift */,
 				34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */,
+				3447890F2CC879E8006543A4 /* UserPermissions.swift */,
 				34DDE9102CA2200C00CB47FC /* HomePageView.swift */,
 				34B4123A2CBA3FAD00ED5BAF /* ImageDownloader.swift */,
 				34B412362CB9FFBD00ED5BAF /* MenuItemService.swift */,
@@ -233,6 +236,7 @@
 				C3829B682CB4FFBE00001049 /* CustomerMenuView.swift in Sources */,
 				34B4123B2CBA3FAD00ED5BAF /* ImageDownloader.swift in Sources */,
 				34DDE8DE2CA1C2D800CB47FC /* LoginView.swift in Sources */,
+				344789102CC879E8006543A4 /* UserPermissions.swift in Sources */,
 				34DDE9112CA2200C00CB47FC /* HomePageView.swift in Sources */,
 				34DDE8D02CA1C2A900CB47FC /* CapstoneProjectApp.swift in Sources */,
 				34DDE9132CA220EF00CB47FC /* CreateAccountView.swift in Sources */,

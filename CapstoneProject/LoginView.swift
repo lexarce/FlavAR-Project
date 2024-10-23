@@ -160,12 +160,15 @@ struct LoginView: View {
     
     //checks if the email of the current user is verified by the verification emaill
     func checkIfEmailIsVerified(completion: @escaping (Bool) -> Void) {
+        
+        //get the current user if a user is logged in
         if let user = Auth.auth().currentUser {
             user.reload { error in
                 if let error = error {
                     print("Error reloading user: \(error.localizedDescription)")
                     completion(false)
                 } else {
+                    //check if email is verified
                     if user.isEmailVerified {
                         print("Email is verified")
                         completion(true)
@@ -195,17 +198,16 @@ struct LoginView: View {
                     // Simulate that user is not logged in
                     loginSuccessful = false
                 } else {
-                    // successful login
-                    print("Simulating successful login")
+                    //The email and password are correct
                     
                     //check if email is verified
                     checkIfEmailIsVerified { isVerified in
                         if isVerified {
                             print("Email is verified. Proceed to next screen.")
-                            // Navigate to the home screen or unlock features
+                            // Navigate to the home screen
                             
                             loginSuccessful = true //We use this boolean to prove that the user was authenticatteed
-                            
+
                         } else {
                             print("Email is not verified.")
                             //logout the user before reaching the next screen
@@ -218,16 +220,12 @@ struct LoginView: View {
                                 } catch let signOutError as NSError {
                                     
                                     print("Error signing out: \(signOutError.localizedDescription)")
-                                    
-                                                }
-                            
+                                }
                         }
                     }
-                    
                 }
             }
         }
-    
 }
 
 //We can preset values for variables in #Preview to see their effects on the UI preview
