@@ -11,6 +11,7 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 
+//This is where the program starts
 @main
 struct CapstoneProjectApp: App {
     
@@ -20,9 +21,14 @@ struct CapstoneProjectApp: App {
         FirebaseApp.configure()
     }
     
+    //The program will start in LoginView()
     var body: some Scene {
         WindowGroup {
+            //Change this line to change where the simulator opens from.
+            //It must be a view file
+            
             LoginView()
+            //CustomerMenuView()
         }
     }
 }
