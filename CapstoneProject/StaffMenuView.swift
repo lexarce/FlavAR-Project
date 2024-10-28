@@ -9,50 +9,33 @@ import SwiftUI
 import Firebase
 import FirebaseFirestore
 
-struct StaffMenuView: View 
+struct StaffMenuView: View
 {
     @State private var searchText: String = ""
     @State private var menuItems: [MenuItem] = []  // menu items from firebase
 
     let menuItemService = MenuItemService()
     
-    var body: some View 
+    var body: some View
     {
-        NavigationView 
+        NavigationView
         {
-            ZStack 
+            ZStack
             {
                 BackgroundView(imageName: "StaffMenuViewBG")
                 
+                
                 VStack(alignment: .leading, spacing: 1)
                 {
-                    // search bar for items
-                    SearchBar(searchText: $searchText)
-                    
-                    // buttons for adding items and categories
-                    ButtonGroupView()
-                    
-                    // line to separate
-                    Image("Line")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: .infinity)
-                    
-                    // ------- Categories -----------
-                    // header
-                    // TODO: change font
-                    Text("Categories")
-                        .font(.title)
-                        .foregroundColor(.white)
-                        .padding(.leading)
-                    
-                    // stack for item categories
-                    // TODO: center
-                    HStack(spacing: 20) {
-                        CategoryItemView(imageName: "PremiumBoxesIcon", categoryName: "Premium Jin's Box")
-                        CategoryItemView(imageName: "KoreanFoodIcon", categoryName: "Korean Food")
-                        CategoryItemView(imageName: "PopularIcon", categoryName: "Popular")
+                    // Jin BBQ Logo
+                    HStack {
+                        Image("JinBBQTakeout")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 90)
+                            .padding(.top, 10)
                     }
+                    .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.horizontal)
                     
                     // line to separate
@@ -60,7 +43,53 @@ struct StaffMenuView: View
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: .infinity)
+                        .padding(.vertical, 5)
                     
+                    // search bar for items
+                    SearchBar(searchText: $searchText)
+                        . padding(.vertical,10)
+                    
+                    // line to separate
+                    Image("Line")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 5)
+                    
+                    // ------- Categories -----------
+                    // header
+                    // TODO: change font
+                    Text("Categories")
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundColor(.white)
+                        .padding(.leading, 5)
+                        .padding(.bottom, 10)
+                        .padding(.top, 10)
+                    
+                    // stack for item categories
+                    // TODO: center
+                    HStack(spacing: 10) {
+                        CategoryItemView(imageName: "PremiumBoxesIcon", categoryName: "Premium Jin's Box")
+                        CategoryItemView(imageName: "KoreanFoodIcon", categoryName: "Korean Food")
+                        CategoryItemView(imageName: "PopularIcon", categoryName: "Popular")
+                    }
+                    .frame(maxWidth: .infinity, alignment: .center) // center the hstack
+                    .padding(.horizontal)
+                    .padding(.bottom, 10)
+                    
+                    // line to separate
+                    Image("Line")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 5)
+                    
+                    // button for adding an item
+                    ButtonGroupView()
+                        .padding(.top, 2)
+                        .padding(.bottom, 2)
+                    
+                    MenuItemList()
                     
                     
                 }
@@ -72,46 +101,87 @@ struct StaffMenuView: View
     }
 }
 
-// add category and item buttons
-struct ButtonGroupView: View 
+// add item button
+struct ButtonGroupView: View
 {
-    var body: some View 
+    var body: some View
     {
-        HStack(spacing: 20) 
+        HStack(spacing: 20)
         {
-            Button(action: {
-                // write action here
-            }) {
-                Image("AddCategoryButton")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 150, height: 100)
-                    .padding()
-            }
+            Spacer() // push button to the right
 
             Button(action: {
                 // write action here
             }) {
-                Image("AddItemButton")
+                Image("PlusButton")
                     .resizable()
-                    .scaledToFit()
-                    .frame(width: 150, height: 100)
-                    .padding()
+                    .scaledToFill()
+                    .frame(width: 60, height: 10)
+                    .padding(.top, 15)
             }
         }
         .padding(.horizontal)
     }
 }
 
+struct MenuItemList: View {
+    var body: some View {
+        // ------- Categories -----------
+        // header
+        // TODO: change font
+        Text("Popular")
+            .font(.system(size: 24, weight: .bold))
+            .foregroundColor(.white)
+            .padding(.leading, 5)
+            .padding(.bottom, 10)
+            .padding(.top, 10)
+        
+        // line to separate
+        Image("Line")
+            .resizable()
+            .scaledToFit()
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 5)
+        
+        Text("Premium Jin's Box")
+            .font(.system(size: 24, weight: .bold))
+            .foregroundColor(.white)
+            .padding(.leading, 5)
+            .padding(.bottom, 10)
+            .padding(.top, 10)
+        
+        // line to separate
+        Image("Line")
+            .resizable()
+            .scaledToFit()
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 5)
+        
+        Text("Korean Food")
+            .font(.system(size: 24, weight: .bold))
+            .foregroundColor(.white)
+            .padding(.leading, 5)
+            .padding(.bottom, 10)
+            .padding(.top, 10)
+        
+        // line to separate
+        Image("Line")
+            .resizable()
+            .scaledToFit()
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 5)
+    }
+}
+
 // food item categories
-struct CategoryItemView: View 
+struct CategoryItemView: View
 {
     let imageName: String
     let categoryName: String
     
-    var body: some View 
+    var body: some View
     {
-        VStack 
+        VStack
         {
             // category icon
             Image(imageName)
@@ -134,7 +204,7 @@ struct BackgroundView: View
 {
     var imageName: String
     
-    var body: some View 
+    var body: some View
     {
         Image("StaffMenuViewBG")
             .resizable()
@@ -148,12 +218,12 @@ struct SearchBar: View
 {
     @Binding var searchText: String
     
-    var body: some View 
+    var body: some View
     {
         ZStack(alignment: .leading)
         {
             // placeholder text
-            if searchText.isEmpty 
+            if searchText.isEmpty
             {
                 Text("Your order?")
                     .foregroundColor(.white)
@@ -176,12 +246,13 @@ struct SearchBar: View
                     RoundedRectangle(cornerRadius: 15)
                         .stroke(Color.white.opacity(0.3), lineWidth: 1)
                 )
-                .padding(.horizontal, 30)
+                .padding(.horizontal, 10)
         }
     }
 }
 
-#Preview 
+#Preview
 {
     StaffMenuView()
 }
+

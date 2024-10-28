@@ -131,7 +131,10 @@ struct IndividualItemView_Previews: PreviewProvider {
             title: "Premium Beef Bulgogi Box",
             description: "Delicious beef bulgogi served with rice, vegetables, and sauce.",
             price: 14.99,
-            imagePath: "PremiumBulgogiBox"  // Replace with a valid image name from your assets
+            imagePath: "PremiumBulgogiBox",  // Replace with a valid image name from your assets
+            category: "PremiumBox",
+            isPopular: false
+            
         )
         
         // Pass the sampleMenuItem to IndividualItemView

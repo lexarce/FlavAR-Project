@@ -40,6 +40,7 @@
 		34DDE90F2CA1FB9F00CB47FC /* FirebaseVertexAI-Preview in Frameworks */ = {isa = PBXBuildFile; productRef = 34DDE90E2CA1FB9F00CB47FC /* FirebaseVertexAI-Preview */; };
 		34DDE9112CA2200C00CB47FC /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE9102CA2200C00CB47FC /* HomePageView.swift */; };
 		34DDE9132CA220EF00CB47FC /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */; };
+		3FC4C1D82CCF736900740A2C /* StaffMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC4C1D72CCF736900740A2C /* StaffMenuView.swift */; };
 		C334A1082CC980DC004BCE94 /* IndividualItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C334A1072CC980D6004BCE94 /* IndividualItemView.swift */; };
 		C3829B682CB4FFBE00001049 /* CustomerMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3829B672CB4FFB500001049 /* CustomerMenuView.swift */; };
 /* End PBXBuildFile section */
@@ -56,8 +57,8 @@
 		34DDE8DF2CA1FB3100CB47FC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		34DDE9102CA2200C00CB47FC /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
 		34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
+		3FC4C1D72CCF736900740A2C /* StaffMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffMenuView.swift; sourceTree = "<group>"; };
 		C334A1072CC980D6004BCE94 /* IndividualItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualItemView.swift; sourceTree = "<group>"; };
-		3F7A0FE92CBB8D85003F0A75 /* StaffMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffMenuView.swift; sourceTree = "<group>"; };
 		C3829B672CB4FFB500001049 /* CustomerMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerMenuView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,31 +90,6 @@
 				34DDE8FF2CA1FB9F00CB47FC /* FirebaseInAppMessaging-Beta in Frameworks */,
 				34DDE90F2CA1FB9F00CB47FC /* FirebaseVertexAI-Preview in Frameworks */,
 				34DDE9092CA1FB9F00CB47FC /* FirebaseRemoteConfig in Frameworks */,
-				3F7A0FE32CBB8BF6003F0A75 /* StoreKit.framework in Frameworks */,
-				3F7A0FE22CBB8B5A003F0A75 /* FirebaseVertexAI-Preview in Frameworks */,
-				3F7A0FCC2CBB8B5A003F0A75 /* FirebaseFirestoreCombine-Community in Frameworks */,
-				3F7A0FCE2CBB8B5A003F0A75 /* FirebaseFunctions in Frameworks */,
-				3F7A0FDA2CBB8B5A003F0A75 /* FirebasePerformance in Frameworks */,
-				3F7A0FE02CBB8B5A003F0A75 /* FirebaseStorageCombine-Community in Frameworks */,
-				3F7A0FDC2CBB8B5A003F0A75 /* FirebaseRemoteConfig in Frameworks */,
-				3F7A0FC62CBB8B5A003F0A75 /* FirebaseDatabase in Frameworks */,
-				3F7A0FC82CBB8B5A003F0A75 /* FirebaseDynamicLinks in Frameworks */,
-				3F7A0FBA2CBB8B5A003F0A75 /* FirebaseAppCheck in Frameworks */,
-				3F7A0FBE2CBB8B5A003F0A75 /* FirebaseAuth in Frameworks */,
-				3F7A0FB42CBB8B5A003F0A75 /* FirebaseAnalytics in Frameworks */,
-				3F7A0FCA2CBB8B5A003F0A75 /* FirebaseFirestore in Frameworks */,
-				3F7A0FD82CBB8B5A003F0A75 /* FirebaseMessaging in Frameworks */,
-				3F7A0FD42CBB8B5A003F0A75 /* FirebaseInstallations in Frameworks */,
-				3F7A0FD02CBB8B5A003F0A75 /* FirebaseFunctionsCombine-Community in Frameworks */,
-				3F7A0FBC2CBB8B5A003F0A75 /* FirebaseAppDistribution-Beta in Frameworks */,
-				3F7A0FB82CBB8B5A003F0A75 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
-				3F7A0FD22CBB8B5A003F0A75 /* FirebaseInAppMessaging-Beta in Frameworks */,
-				3F7A0FC02CBB8B5A003F0A75 /* FirebaseAuthCombine-Community in Frameworks */,
-				3F7A0FC42CBB8B5A003F0A75 /* FirebaseCrashlytics in Frameworks */,
-				3F7A0FD62CBB8B5A003F0A75 /* FirebaseMLModelDownloader in Frameworks */,
-				3F7A0FDE2CBB8B5A003F0A75 /* FirebaseStorage in Frameworks */,
-				3F7A0FC22CBB8B5A003F0A75 /* FirebaseCore in Frameworks */,
-				3F7A0FB62CBB8B5A003F0A75 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,7 +101,6 @@
 			children = (
 				34DDE8CE2CA1C2A900CB47FC /* CapstoneProject */,
 				34DDE8CD2CA1C2A900CB47FC /* Products */,
-				3F7A0FA82CBB83B3003F0A75 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -148,11 +123,11 @@
 				C3829B672CB4FFB500001049 /* CustomerMenuView.swift */,
 				C334A1072CC980D6004BCE94 /* IndividualItemView.swift */,
 				34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */,
+				3FC4C1D72CCF736900740A2C /* StaffMenuView.swift */,
 				3447890F2CC879E8006543A4 /* UserPermissions.swift */,
 				34DDE9102CA2200C00CB47FC /* HomePageView.swift */,
 				34B4123A2CBA3FAD00ED5BAF /* ImageDownloader.swift */,
 				34B412362CB9FFBD00ED5BAF /* MenuItemService.swift */,
-				3F7A0FE92CBB8D85003F0A75 /* StaffMenuView.swift */,
 			);
 			path = CapstoneProject;
 			sourceTree = "<group>";
@@ -270,9 +245,9 @@
 				344789102CC879E8006543A4 /* UserPermissions.swift in Sources */,
 				34DDE9112CA2200C00CB47FC /* HomePageView.swift in Sources */,
 				C334A1082CC980DC004BCE94 /* IndividualItemView.swift in Sources */,
-				3F7A0FEA2CBB8D85003F0A75 /* StaffMenuView.swift in Sources */,
 				34DDE8D02CA1C2A900CB47FC /* CapstoneProjectApp.swift in Sources */,
 				34DDE9132CA220EF00CB47FC /* CreateAccountView.swift in Sources */,
+				3FC4C1D82CCF736900740A2C /* StaffMenuView.swift in Sources */,
 				34B412372CB9FFBD00ED5BAF /* MenuItemService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,6 +389,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -443,6 +419,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
