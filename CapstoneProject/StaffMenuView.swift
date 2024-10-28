@@ -68,7 +68,7 @@ struct StaffMenuView: View
                     
                     // stack for item categories
                     // TODO: center
-                    HStack(spacing: 10) {
+                    HStack(spacing: 12) {
                         CategoryItemView(imageName: "PremiumBoxesIcon", categoryName: "Premium Jin's Box")
                         CategoryItemView(imageName: "KoreanFoodIcon", categoryName: "Korean Food")
                         CategoryItemView(imageName: "PopularIcon", categoryName: "Popular")
@@ -200,13 +200,11 @@ struct CategoryItemView: View
 }
 
 // background image of page
-struct BackgroundView: View
-{
-    var imageName: String
-    
-    var body: some View
-    {
-        Image("StaffMenuViewBG")
+struct BackgroundView: View {
+    var imageName: String // image passed as parameter
+
+    var body: some View {
+        Image(imageName) // use the passed image name
             .resizable()
             .scaledToFill()
             .edgesIgnoringSafeArea(.all)

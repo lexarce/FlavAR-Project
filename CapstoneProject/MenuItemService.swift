@@ -59,4 +59,15 @@ struct MenuItem: Identifiable {
     var imagePath: String
     var category: String
     var isPopular: Bool
+    
+    // initializer with default values
+    init(id: String = UUID().uuidString, title: String = "Item Name", description: String = "Enter description", price: Double = 0.0, imagePath: String = "defaultImage", category: String = "Enter Category", isPopular: Bool = false) {
+        self.id = id
+        self.title = title
+        self.description = description
+        self.price = price
+        self.imagePath = imagePath
+        self.category = category
+        self.isPopular = isPopular
+    }
 }
