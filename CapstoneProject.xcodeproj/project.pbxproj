@@ -40,6 +40,8 @@
 		34DDE90F2CA1FB9F00CB47FC /* FirebaseVertexAI-Preview in Frameworks */ = {isa = PBXBuildFile; productRef = 34DDE90E2CA1FB9F00CB47FC /* FirebaseVertexAI-Preview */; };
 		34DDE9112CA2200C00CB47FC /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE9102CA2200C00CB47FC /* HomePageView.swift */; };
 		34DDE9132CA220EF00CB47FC /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */; };
+		3F594EDE2CCF9E3700327514 /* StaffIndividualMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F594EDD2CCF9E3700327514 /* StaffIndividualMenuView.swift */; };
+		3F594EE02CCFA00100327514 /* CreateMenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F594EDF2CCFA00100327514 /* CreateMenuItemView.swift */; };
 		3FC4C1D82CCF736900740A2C /* StaffMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC4C1D72CCF736900740A2C /* StaffMenuView.swift */; };
 		C334A1082CC980DC004BCE94 /* IndividualItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C334A1072CC980D6004BCE94 /* IndividualItemView.swift */; };
 		C3829B682CB4FFBE00001049 /* CustomerMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3829B672CB4FFB500001049 /* CustomerMenuView.swift */; };
@@ -57,6 +59,8 @@
 		34DDE8DF2CA1FB3100CB47FC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		34DDE9102CA2200C00CB47FC /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
 		34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
+		3F594EDD2CCF9E3700327514 /* StaffIndividualMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffIndividualMenuView.swift; sourceTree = "<group>"; };
+		3F594EDF2CCFA00100327514 /* CreateMenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMenuItemView.swift; sourceTree = "<group>"; };
 		3FC4C1D72CCF736900740A2C /* StaffMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffMenuView.swift; sourceTree = "<group>"; };
 		C334A1072CC980D6004BCE94 /* IndividualItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualItemView.swift; sourceTree = "<group>"; };
 		C3829B672CB4FFB500001049 /* CustomerMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerMenuView.swift; sourceTree = "<group>"; };
@@ -123,7 +127,9 @@
 				C3829B672CB4FFB500001049 /* CustomerMenuView.swift */,
 				C334A1072CC980D6004BCE94 /* IndividualItemView.swift */,
 				34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */,
+				3F594EDD2CCF9E3700327514 /* StaffIndividualMenuView.swift */,
 				3FC4C1D72CCF736900740A2C /* StaffMenuView.swift */,
+				3F594EDF2CCFA00100327514 /* CreateMenuItemView.swift */,
 				3447890F2CC879E8006543A4 /* UserPermissions.swift */,
 				34DDE9102CA2200C00CB47FC /* HomePageView.swift */,
 				34B4123A2CBA3FAD00ED5BAF /* ImageDownloader.swift */,
@@ -239,11 +245,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F594EDE2CCF9E3700327514 /* StaffIndividualMenuView.swift in Sources */,
 				C3829B682CB4FFBE00001049 /* CustomerMenuView.swift in Sources */,
 				34B4123B2CBA3FAD00ED5BAF /* ImageDownloader.swift in Sources */,
 				34DDE8DE2CA1C2D800CB47FC /* LoginView.swift in Sources */,
 				344789102CC879E8006543A4 /* UserPermissions.swift in Sources */,
 				34DDE9112CA2200C00CB47FC /* HomePageView.swift in Sources */,
+				3F594EE02CCFA00100327514 /* CreateMenuItemView.swift in Sources */,
 				C334A1082CC980DC004BCE94 /* IndividualItemView.swift in Sources */,
 				34DDE8D02CA1C2A900CB47FC /* CapstoneProjectApp.swift in Sources */,
 				34DDE9132CA220EF00CB47FC /* CreateAccountView.swift in Sources */,
