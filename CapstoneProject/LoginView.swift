@@ -153,6 +153,7 @@ struct LoginView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity) // Make the background color cover the full screen
             .background(Color("AppColor1")) // Set your desired color here
             .edgesIgnoringSafeArea(.all)
+            
 
         }//End of Navigation Stack
 

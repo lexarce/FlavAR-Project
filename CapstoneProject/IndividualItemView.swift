@@ -105,6 +105,7 @@ struct IndividualItemView: View {
                 }
                 .padding(.bottom)
             }
+            
         }
         .onAppear {
             loadImage()  // Download the image when the view appears
