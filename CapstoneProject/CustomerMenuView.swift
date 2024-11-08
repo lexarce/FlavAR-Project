@@ -52,7 +52,7 @@ struct CustomerMenuView: View {
                     Spacer()
                     
                     // Navigation Bar
-                    Image("NavBar")
+                    Image("NavigationBar")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 60)

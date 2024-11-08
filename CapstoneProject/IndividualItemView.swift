@@ -10,8 +10,6 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 
-import SwiftUI
-
 struct IndividualItemView: View {
     var menuItem: MenuItem  // Pass the MenuItem
     
@@ -138,6 +136,6 @@ struct IndividualItemView_Previews: PreviewProvider {
         // Pass the sampleMenuItem to IndividualItemView
         return IndividualItemView(menuItem: sampleMenuItem)
             .previewLayout(.sizeThatFits)
-            .background(Color.black)  // Optional: Add a background for preview visibility
+            .background(Color.black)
     }
 }
