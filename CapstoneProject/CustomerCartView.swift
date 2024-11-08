@@ -9,3 +9,24 @@ import SwiftUI
 import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
+
+struct CustomerCartView: View {
+    
+    var body: some View {
+        NavigationView {    // Wrap the view in a NavigationView
+            ZStack {
+                Image("PlainBG")
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+            }
+        }
+    }
+}
+
+// Preview
+struct CustomerCartView_Previews: PreviewProvider {
+    static var previews: some View {
+        CustomerCartView()
+    }
+}

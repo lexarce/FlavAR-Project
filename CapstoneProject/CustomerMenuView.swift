@@ -24,9 +24,31 @@ struct CustomerMenuView: View {
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack {
+                    // Top bar with back button & cart button
+                    HStack {
+                        // Back button to navigate to HomePageView
+                        NavigationLink(destination: HomePageView()) {
+                            Image("BackButton")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                                .padding()
+                        }
+                        Spacer()
+                        
+                        // Cart button to navigate to CustomerCartView
+                        NavigationLink(destination: CustomerCartView()) {
+                            Image("CartButton")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                                .padding()
+                        }
+                    }
+                    .padding(.horizontal)
+                    .padding(.top, 10)
+                    
                     ScrollView {
                         VStack(alignment: .leading, spacing: 10) {
-                            Spacer().frame(height: 150)
+                            Spacer().frame(height: 70)
                             
                             Text("Premium Jin's Box")
                                 .font(.title2)
