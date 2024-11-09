@@ -34,8 +34,10 @@ class MenuItemService {
                     let description = data["description"] as? String ?? ""
                     let price = data["price"] as? Double ?? 0.0
                     let imagePath = data["imagepath"] as? String ?? ""
+                    let category = data["category"] as? String ?? ""
+                    let isPopular = data["isPopular"] as? Bool ?? false
                     
-                    let menuItem = MenuItem(id: document.documentID, title: title, description: description, price: price, imagePath: imagePath)
+                    let menuItem = MenuItem(id: document.documentID, title: title, description: description, price: price, imagePath: imagePath, category: category, isPopular: isPopular)
                     items.append(menuItem)
                 }
                 
@@ -55,4 +57,17 @@ struct MenuItem: Identifiable {
     var description: String
     var price: Double
     var imagePath: String
+    var category: String
+    var isPopular: Bool
+    
+    // initializer with default values
+    init(id: String = UUID().uuidString, title: String = "Item Name", description: String = "Enter description", price: Double = 0.0, imagePath: String = "defaultImage", category: String = "Enter Category", isPopular: Bool = false) {
+        self.id = id
+        self.title = title
+        self.description = description
+        self.price = price
+        self.imagePath = imagePath
+        self.category = category
+        self.isPopular = isPopular
+    }
 }

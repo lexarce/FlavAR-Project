@@ -43,6 +43,9 @@
 		34DDE9112CA2200C00CB47FC /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE9102CA2200C00CB47FC /* HomePageView.swift */; };
 		34DDE9132CA220EF00CB47FC /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */; };
 		34F645342CDB0509006E840E /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F645332CDB0509006E840E /* NavigationBar.swift */; };
+		3FFDCF502CDFF8CE00D3313D /* StaffMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFDCF4F2CDFF8CE00D3313D /* StaffMenuView.swift */; };
+		3FFDCF522CDFF8F400D3313D /* StaffIndividualMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFDCF512CDFF8F400D3313D /* StaffIndividualMenuView.swift */; };
+		3FFDCF542CDFF91500D3313D /* CreateMenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFDCF532CDFF91500D3313D /* CreateMenuItemView.swift */; };
 		C334A1082CC980DC004BCE94 /* IndividualItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C334A1072CC980D6004BCE94 /* IndividualItemView.swift */; };
 		C34978A72CDDE49900966CAC /* CustomerCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34978A62CDDE48C00966CAC /* CustomerCartView.swift */; };
 		C34978A92CDDE4A300966CAC /* CustomerCheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34978A82CDDE4A000966CAC /* CustomerCheckoutView.swift */; };
@@ -53,7 +56,7 @@
 		3447890F2CC879E8006543A4 /* UserPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPermissions.swift; sourceTree = "<group>"; };
 		3499031B2CDEBB240087B403 /* ARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; };
 		3499031D2CDEBBC70087B403 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		3499031E2CDEBCB30087B403 /* shoe.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = shoe.usdz; sourceTree = "<group>"; };
+		3499031E2CDEBCB30087B403 /* shoe.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = shoe.usdz; sourceTree = "<group>"; };
 		34B412362CB9FFBD00ED5BAF /* MenuItemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemService.swift; sourceTree = "<group>"; };
 		34B4123A2CBA3FAD00ED5BAF /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		34DDE8CC2CA1C2A900CB47FC /* CapstoneProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CapstoneProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +68,9 @@
 		34DDE9102CA2200C00CB47FC /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
 		34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		34F645332CDB0509006E840E /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		3FFDCF4F2CDFF8CE00D3313D /* StaffMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffMenuView.swift; sourceTree = "<group>"; };
+		3FFDCF512CDFF8F400D3313D /* StaffIndividualMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffIndividualMenuView.swift; sourceTree = "<group>"; };
+		3FFDCF532CDFF91500D3313D /* CreateMenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMenuItemView.swift; sourceTree = "<group>"; };
 		C334A1072CC980D6004BCE94 /* IndividualItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualItemView.swift; sourceTree = "<group>"; };
 		C34978A62CDDE48C00966CAC /* CustomerCartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerCartView.swift; sourceTree = "<group>"; };
 		C34978A82CDDE4A000966CAC /* CustomerCheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerCheckoutView.swift; sourceTree = "<group>"; };
@@ -142,6 +148,9 @@
 				34B4123A2CBA3FAD00ED5BAF /* ImageDownloader.swift */,
 				34B412362CB9FFBD00ED5BAF /* MenuItemService.swift */,
 				3499031B2CDEBB240087B403 /* ARView.swift */,
+				3FFDCF4F2CDFF8CE00D3313D /* StaffMenuView.swift */,
+				3FFDCF512CDFF8F400D3313D /* StaffIndividualMenuView.swift */,
+				3FFDCF532CDFF91500D3313D /* CreateMenuItemView.swift */,
 			);
 			path = CapstoneProject;
 			sourceTree = "<group>";
@@ -256,9 +265,12 @@
 			files = (
 				C3829B682CB4FFBE00001049 /* CustomerMenuView.swift in Sources */,
 				3499031C2CDEBB240087B403 /* ARView.swift in Sources */,
+				3FFDCF502CDFF8CE00D3313D /* StaffMenuView.swift in Sources */,
 				34B4123B2CBA3FAD00ED5BAF /* ImageDownloader.swift in Sources */,
 				34DDE8DE2CA1C2D800CB47FC /* LoginView.swift in Sources */,
 				344789102CC879E8006543A4 /* UserPermissions.swift in Sources */,
+				3FFDCF542CDFF91500D3313D /* CreateMenuItemView.swift in Sources */,
+				3FFDCF522CDFF8F400D3313D /* StaffIndividualMenuView.swift in Sources */,
 				34DDE9112CA2200C00CB47FC /* HomePageView.swift in Sources */,
 				34F645342CDB0509006E840E /* NavigationBar.swift in Sources */,
 				C334A1082CC980DC004BCE94 /* IndividualItemView.swift in Sources */,
@@ -410,6 +422,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -443,6 +456,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
