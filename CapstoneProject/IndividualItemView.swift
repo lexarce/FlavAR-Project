@@ -91,19 +91,22 @@ struct IndividualItemView: View {
                 Spacer()
 
                 // Add to Cart button
-                Button(action: {
-                    // Action for "Add to Cart"
-                }) {
-                    Image("AddToCartButton")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 60)
-                        .padding(.horizontal)
-                        .shadow(radius: 10)
+                NavigationLink(destination: CustomerCartView()) {
+                    Text("ADD TO CART")
+                        .bold()
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(
+                            RoundedRectangle(cornerRadius: 30)
+                                .fill(Color("AppColor4"))
+                        )
                 }
-                .padding(.bottom)
+                .padding(.leading, 20)
+                .padding(.trailing, 20)
+                .offset(y: -100)
+                .shadow(radius: 10)
             }
-            
         }
         .onAppear {
             loadImage()  // Download the image when the view appears
