@@ -44,6 +44,8 @@
 		34DDE9132CA220EF00CB47FC /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */; };
 		34F645342CDB0509006E840E /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F645332CDB0509006E840E /* NavigationBar.swift */; };
 		C334A1082CC980DC004BCE94 /* IndividualItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C334A1072CC980D6004BCE94 /* IndividualItemView.swift */; };
+		C34798312CDFDC1300CCDAC0 /* OrderConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34798302CDFDC0E00CCDAC0 /* OrderConfirmationView.swift */; };
+		C34798332CDFDFE800CCDAC0 /* CustomerOrderHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34798322CDFDFDE00CCDAC0 /* CustomerOrderHistory.swift */; };
 		C34978A72CDDE49900966CAC /* CustomerCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34978A62CDDE48C00966CAC /* CustomerCartView.swift */; };
 		C34978A92CDDE4A300966CAC /* CustomerCheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34978A82CDDE4A000966CAC /* CustomerCheckoutView.swift */; };
 		C3829B682CB4FFBE00001049 /* CustomerMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3829B672CB4FFB500001049 /* CustomerMenuView.swift */; };
@@ -66,6 +68,8 @@
 		34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		34F645332CDB0509006E840E /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		C334A1072CC980D6004BCE94 /* IndividualItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualItemView.swift; sourceTree = "<group>"; };
+		C34798302CDFDC0E00CCDAC0 /* OrderConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmationView.swift; sourceTree = "<group>"; };
+		C34798322CDFDFDE00CCDAC0 /* CustomerOrderHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerOrderHistory.swift; sourceTree = "<group>"; };
 		C34978A62CDDE48C00966CAC /* CustomerCartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerCartView.swift; sourceTree = "<group>"; };
 		C34978A82CDDE4A000966CAC /* CustomerCheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerCheckoutView.swift; sourceTree = "<group>"; };
 		C3829B672CB4FFB500001049 /* CustomerMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerMenuView.swift; sourceTree = "<group>"; };
@@ -132,8 +136,10 @@
 				34DDE8D52CA1C2AB00CB47FC /* Preview Content */,
 				34DDE8DD2CA1C2D800CB47FC /* LoginView.swift */,
 				C3829B672CB4FFB500001049 /* CustomerMenuView.swift */,
+				C34798322CDFDFDE00CCDAC0 /* CustomerOrderHistory.swift */,
 				C34978A62CDDE48C00966CAC /* CustomerCartView.swift */,
 				C34978A82CDDE4A000966CAC /* CustomerCheckoutView.swift */,
+				C34798302CDFDC0E00CCDAC0 /* OrderConfirmationView.swift */,
 				34F645332CDB0509006E840E /* NavigationBar.swift */,
 				C334A1072CC980D6004BCE94 /* IndividualItemView.swift */,
 				34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */,
@@ -256,9 +262,11 @@
 			files = (
 				C3829B682CB4FFBE00001049 /* CustomerMenuView.swift in Sources */,
 				3499031C2CDEBB240087B403 /* ARView.swift in Sources */,
+				C34798312CDFDC1300CCDAC0 /* OrderConfirmationView.swift in Sources */,
 				34B4123B2CBA3FAD00ED5BAF /* ImageDownloader.swift in Sources */,
 				34DDE8DE2CA1C2D800CB47FC /* LoginView.swift in Sources */,
 				344789102CC879E8006543A4 /* UserPermissions.swift in Sources */,
+				C34798332CDFDFE800CCDAC0 /* CustomerOrderHistory.swift in Sources */,
 				34DDE9112CA2200C00CB47FC /* HomePageView.swift in Sources */,
 				34F645342CDB0509006E840E /* NavigationBar.swift in Sources */,
 				C334A1082CC980DC004BCE94 /* IndividualItemView.swift in Sources */,
