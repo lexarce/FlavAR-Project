@@ -44,6 +44,7 @@ struct StaffMenuView: View
                         .scaledToFit()
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 5)
+                        .padding(.horizontal,10)
                     
                     // search bar for items
                     SearchBar(searchText: $searchText)
@@ -55,6 +56,7 @@ struct StaffMenuView: View
                         .scaledToFit()
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 5)
+                        .padding(.horizontal,10)
                     
                     // ------- Categories -----------
                     // header
@@ -83,6 +85,7 @@ struct StaffMenuView: View
                         .scaledToFit()
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 5)
+                        .padding(.horizontal,10)
                     
                     // button for adding an item
                     ButtonGroupView()
@@ -142,6 +145,7 @@ struct MenuItemList: View {
             .scaledToFit()
             .frame(maxWidth: .infinity)
             .padding(.vertical, 5)
+            .padding(.horizontal,10)
         
         Text("Premium Jin's Box")
             .font(.system(size: 24, weight: .bold))
@@ -156,6 +160,7 @@ struct MenuItemList: View {
             .scaledToFit()
             .frame(maxWidth: .infinity)
             .padding(.vertical, 5)
+            .padding(.horizontal,10)
         
         Text("Korean Food")
             .font(.system(size: 24, weight: .bold))
@@ -170,6 +175,7 @@ struct MenuItemList: View {
             .scaledToFit()
             .frame(maxWidth: .infinity)
             .padding(.vertical, 5)
+            .padding(.horizontal,10)
     }
 }
 

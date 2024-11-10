@@ -1,23 +1,14 @@
 //
-//  HomePageView.swift
+//  StaffHomePageView.swift
 //  CapstoneProject
 //
-//  Created by Kaleb on 9/23/24.
+//  Created by kimi on 11/9/24.
 //
 
 import SwiftUI
-import FirebaseCore
-import FirebaseFirestore
 import FirebaseAuth
-import FirebaseStorage
-import UIKit
 
-let storage = Storage.storage()
-
-
-
-//A Placeholder for the HomePageView
-struct HomePageView: View {
+struct StaffHomePageView: View {
     @State private var image: UIImage? = nil
     @State private var userName: String = "User"  // Default name if the user is not found
     
@@ -42,7 +33,7 @@ struct HomePageView: View {
                     .padding(.horizontal, 20)
                 
                 // Scrollable image gallery
-                CustomerGalleryImageView(images: galleryImages)
+                GalleryImageView(images: galleryImages)
                     .background(Color.black)
                     .cornerRadius(25)
                     .padding()
@@ -52,8 +43,28 @@ struct HomePageView: View {
     }
 }
 
+// Header that greets the user
+struct GreetUser: View {
+    @Binding var userName: String
+
+    var body: some View {
+        Text("Hi \(userName)!")
+            .font(.largeTitle)
+            .foregroundColor(.white)
+            .bold()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 20)  // Add left padding
+            .onAppear {
+                // Fetch user name from Firebase when the view appears
+                if let user = Auth.auth().currentUser {
+                    userName = user.displayName ?? "User" // Set to displayName if available, otherwise fallback to "User"
+                }
+            }
+    }
+}
+
 // Gallery view for images
-struct CustomerGalleryImageView: View {
+struct GalleryImageView: View {
     var images: [String]  // Array of image names or paths
 
     var body: some View {
@@ -79,30 +90,25 @@ struct CustomerGalleryImageView: View {
                 .padding()
                 .multilineTextAlignment(.leading)
             
-            HStack{
-                // "Order Now" button
                 Button(action: {
-                    // Action to navigate to the menu or whatever is required for ordering
-                    print("Order Now button tapped!")
+                    // action to edit gallery images and text
                 }) {
-                    Text("Order Now")
-                        .font(.caption)
-                        .padding(.vertical, 6)
-                        .padding(.horizontal, 12)
-                        .background(Color.orange)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+                    Image("DarkEditButton") // used to edit the image and upload a picture
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 35, height: 35)
+                        .padding(5)
                 }
-            }
-            .padding(.top, 2)
-            .padding(.bottom, 15)
-            .padding(.leading, -168)
+                .cornerRadius(18)
+                .padding(.leading, 300)
+                .padding(.bottom, 10)
 
         }
     }
 }
 
 
+
 #Preview {
-    HomePageView()
+    StaffHomePageView()
 }
