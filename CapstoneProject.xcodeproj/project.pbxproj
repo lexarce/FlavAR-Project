@@ -152,7 +152,6 @@
 				C334A1072CC980D6004BCE94 /* IndividualItemView.swift */,
 				34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */,
 				3447890F2CC879E8006543A4 /* UserPermissions.swift */,
-				34DDE9102CA2200C00CB47FC /* HomePageView.swift */,
 				34B4123A2CBA3FAD00ED5BAF /* ImageDownloader.swift */,
 				34B412362CB9FFBD00ED5BAF /* MenuItemService.swift */,
 				3499031B2CDEBB240087B403 /* ARView.swift */,
@@ -160,6 +159,7 @@
 				3FFDCF512CDFF8F400D3313D /* StaffIndividualMenuView.swift */,
 				3FFDCF532CDFF91500D3313D /* CreateMenuItemView.swift */,
 				3F4906F22CE01DAB00360F78 /* StaffHomePageView.swift */,
+				34DDE9102CA2200C00CB47FC /* HomePageView.swift */,
 			);
 			path = CapstoneProject;
 			sourceTree = "<group>";
