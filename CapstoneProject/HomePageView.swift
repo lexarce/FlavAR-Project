@@ -30,6 +30,8 @@ struct HomePageView: View {
             BackgroundView(imageName: "Bright_Red_Gradient_BG")
             
             VStack {
+                
+                Spacer(minLength: 90)
                 // Fetch the user's name from Firebase Authentication when the view appears
                 GreetUser(userName: $userName)
                 
@@ -41,11 +43,31 @@ struct HomePageView: View {
                     .padding(.vertical, 5)
                     .padding(.horizontal, 20)
                 
-                // Scrollable image gallery
-                CustomerGalleryImageView(images: galleryImages)
-                    .background(Color.black)
-                    .cornerRadius(25)
-                    .padding()
+                ScrollView {
+                    VStack {
+                        // Scrollable image gallery
+                        CustomerGalleryImageView(images: galleryImages)
+                            .background(Color.black)
+                            .cornerRadius(25)
+                            .padding()
+                        
+                        // header for promo codes
+                        Text("Deals of the Day!")
+                            .font(.title2)
+                            .foregroundColor(.white)
+                            .bold()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading, 20)  // Add left padding
+                        
+                        // Line to separate
+                        Image("Line")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 5)
+                            .padding(.horizontal, 20)
+                    }
+                }
             }
             .padding(.top, 10)
         }

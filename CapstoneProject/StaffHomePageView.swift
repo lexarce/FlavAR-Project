@@ -21,6 +21,9 @@ struct StaffHomePageView: View {
             BackgroundView(imageName: "Bright_Red_Gradient_BG")
             
             VStack {
+                
+                Spacer(minLength: 90)
+                
                 // Fetch the user's name from Firebase Authentication when the view appears
                 GreetUser(userName: $userName)
                 
@@ -32,11 +35,26 @@ struct StaffHomePageView: View {
                     .padding(.vertical, 5)
                     .padding(.horizontal, 20)
                 
-                // Scrollable image gallery
-                GalleryImageView(images: galleryImages)
-                    .background(Color.black)
-                    .cornerRadius(25)
-                    .padding()
+                ScrollView{
+                    VStack {
+                        // Scrollable image gallery
+                        GalleryImageView(images: galleryImages)
+                            .background(Color.black)
+                            .cornerRadius(25)
+                            .padding()
+                        
+                        // header for promo codes
+                        DealsHeadline()
+                        
+                        // Line to separate
+                        Image("Line")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 5)
+                            .padding(.horizontal, 20)
+                    }
+                }
             }
             .padding(.top, 10)
         }
@@ -60,6 +78,33 @@ struct GreetUser: View {
                     userName = user.displayName ?? "User" // Set to displayName if available, otherwise fallback to "User"
                 }
             }
+    }
+}
+
+struct DealsHeadline: View {
+    
+    var body: some View {
+        HStack {
+            
+            // header for promo codes
+            Text("Deals of the Day!")
+                .font(.title2)
+                .foregroundColor(.white)
+                .bold()
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            // add button
+            Button(action: {
+
+            }) {
+                Image("AddItemCustomizationButton")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 35, height: 35)
+                    .padding(.trailing, 35)
+            }
+        }
+        .padding(.leading, 20)  // Add left padding
     }
 }
 
