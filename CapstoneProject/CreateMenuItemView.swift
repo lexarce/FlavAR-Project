@@ -37,23 +37,26 @@ struct CreateMenuItemView: View {
                 
                 BackgroundView(imageName: "EditMenuItemBG")
                 
-                ScrollView {
-                    VStack(spacing: 0) {
-                        Spacer().frame(height: 50)
-                        
-                        EditableImageView(imageName: "DefaultFoodImage") { // get the default image
-                            // action for editing or uploading a new image
-                            print("Edit Image Button Pressed")
-                            // add image upload functionality here
-                        }
-                        
-                        MenuItemName(title: $title, isEditingTitle: $isEditingTitle)
-                        Spacer()
-                        PriceView(price: $price, isEditingPrice: $isEditingPrice)
-                        DescriptionView(description: $description, isEditingDescription: $isEditingDescription)
-                        AddCustomizationView(price: $price)
-                        
+                VStack(spacing: 0) {
+                    Spacer().frame(height: 50)
+                    
+                    EditableImageView(imageName: "DefaultFoodImage") { // get the default image
+                        // action for editing or uploading a new image
+                        print("Edit Image Button Pressed")
+                        // add image upload functionality here
                     }
+                    
+                    MenuItemName(title: $title, isEditingTitle: $isEditingTitle)
+                    
+                    Spacer()
+                    
+                    ScrollView {
+                        PriceView(price: $price, isEditingPrice: $isEditingPrice)
+                        DescriptionView(description: $description, isEditingDescription:$isEditingDescription)
+                        AddCustomizationView(price: $price)
+                        EditCustomizationView(price: $price)
+                    }
+                        
                 }
             }
         }
@@ -219,7 +222,7 @@ struct DescriptionView: View {
     }
 }
 
-// item customization
+// add item customization
 struct AddCustomizationView: View {
     @Binding var price: String // bind to the price value
     //@Binding var isEditingPrice: Bool
@@ -251,6 +254,60 @@ struct AddCustomizationView: View {
                             //isEditingPrice.toggle()
                         }) {
                             Image("AddItemCustomizationButton")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 40, height: 40)
+                                .padding(5)
+                        }
+                    }
+                    .padding(.trailing, 4)
+                }
+                .frame(height: 50) // adjust the height as needed
+                Spacer()
+        }
+        .padding(.leading, 10)
+        .padding(.horizontal)
+    }
+}
+
+// edit existing item customization
+struct EditCustomizationView: View {
+    @Binding var price: String // bind to the price value
+    //@Binding var isEditingPrice: Bool
+
+    var body: some View {
+        VStack(alignment: .leading) {
+                ZStack {
+                    // background for the TextField
+                    LinearGradient(gradient: Gradient(colors: [Color(hex: "C41D21"), Color(hex: "F2A69E")]), startPoint: .leading, endPoint: .trailing)
+                        .cornerRadius(10)
+                        .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2) // subtle drop shadow
+                    HStack{
+                        // TODO: change binding variable
+                        // textField for entering customization (set to price temporarily bc we need to update database)
+                        TextField("Item Customization", text: $price)
+                            .keyboardType(.decimalPad)
+                            .padding()
+                            .background(Color.clear) // Set the TextField background to clear
+                        
+                        // edit button
+                        Button(action: {
+                            // toggle editing state
+                            //isEditingPrice.toggle()
+                        }) {
+                            Image("EditButton")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 40, height: 40)
+                                .padding(5)
+                        }
+                        
+                        // trash button
+                        Button(action: {
+                            // toggle editing state
+                            //isEditingPrice.toggle()
+                        }) {
+                            Image("Trash Button")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 40, height: 40)
