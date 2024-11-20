@@ -12,6 +12,8 @@ import FirebaseAuth
 
 struct IndividualItemView: View {
     var menuItem: MenuItem  // Pass the MenuItem
+    @State private var isARViewPresented: Bool = false
+    
     
     @State private var downloadedImage: UIImage? = nil  // Holds the downloaded image
     
@@ -67,6 +69,22 @@ struct IndividualItemView: View {
                             .fill(Color.gray)
                             .frame(width: 300, height: 200)
                             .cornerRadius(20)
+                    }
+                    
+                    Button(action: {
+                        // Add the action you want to perform here
+                        print("Button tapped!")
+                        isARViewPresented.toggle()
+                    }) {
+                        Text("Tap Me")
+                            .font(.headline)
+                            .foregroundColor(.white) // Change text color
+                            .padding()
+                            .background(Color("AppColor4")) // Add background color
+                            .cornerRadius(10) // Make the button's edges rounded
+                    }
+                    .sheet(isPresented: $isARViewPresented) {
+                        SheetView(isPresented: $isARViewPresented, modelName: menuItem.ARModelPath)
                     }
                     
                     // Item Title

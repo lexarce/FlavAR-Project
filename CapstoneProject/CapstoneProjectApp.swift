@@ -27,9 +27,11 @@ struct CapstoneProjectApp: App {
             //Change this line to change where the simulator opens from.
             //It must be a view file
             
+            //HomePageView()
             //LoginView()
-            ContentView()
+            //ContentView()
             //CustomerMenuView()
+            CustomerMenuView()
         }
     }
 }

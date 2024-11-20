@@ -37,7 +37,10 @@ class MenuItemService {
                     let category = data["category"] as? String ?? ""
                     let isPopular = data["isPopular"] as? Bool ?? false
                     
-                    let menuItem = MenuItem(id: document.documentID, title: title, description: description, price: price, imagePath: imagePath, category: category, isPopular: isPopular)
+                    //Test for AR View (A hardcoded path to an stl file
+                    let ARModelPath = "shoe"
+                    
+                    let menuItem = MenuItem(id: document.documentID, title: title, description: description, price: price, imagePath: imagePath, category: category, isPopular: isPopular, ARModelPath: ARModelPath)
                     items.append(menuItem)
                 }
                 
@@ -59,9 +62,10 @@ struct MenuItem: Identifiable {
     var imagePath: String
     var category: String
     var isPopular: Bool
+    var ARModelPath: String
     
     // initializer with default values
-    init(id: String = UUID().uuidString, title: String = "Item Name", description: String = "Enter description", price: Double = 0.0, imagePath: String = "defaultImage", category: String = "Enter Category", isPopular: Bool = false) {
+    init(id: String = UUID().uuidString, title: String = "Item Name", description: String = "Enter description", price: Double = 0.0, imagePath: String = "defaultImage", category: String = "Enter Category", isPopular: Bool = false, ARModelPath: String = "AR Model Path") {
         self.id = id
         self.title = title
         self.description = description
@@ -69,5 +73,6 @@ struct MenuItem: Identifiable {
         self.imagePath = imagePath
         self.category = category
         self.isPopular = isPopular
+        self.ARModelPath = ARModelPath
     }
 }

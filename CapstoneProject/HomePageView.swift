@@ -71,6 +71,13 @@ struct HomePageView: View {
                     }
                 }
                 .padding(.top, 10)
+                .overlay(
+                    NavigationBar()
+                        .frame(maxWidth: .infinity) // Ensures the bar stretches across the full width
+                        .padding(.bottom, 35)
+                        , alignment: .bottom // Positions the navigation bar at the bottom of the screen
+                    )
+                    .edgesIgnoringSafeArea(.bottom)
             }
         }
     }
