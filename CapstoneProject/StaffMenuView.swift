@@ -4,6 +4,9 @@
 //
 //  Created by kimi on 10/12/24.
 //
+// NOTE: This file only exists so we can easily see how the staff view would look like. The
+//       MenuView.swift will automatically check whether a user is an admin or not, and adjust
+//       the UI.
 
 import SwiftUI
 import Firebase
@@ -13,6 +16,7 @@ struct StaffMenuView: View
 {
     @State private var searchText: String = ""
     @State private var menuItems: [MenuItem] = []  // menu items from firebase
+    @State private var isAdmin: Bool = false
 
     let menuItemService = MenuItemService()
     
@@ -27,6 +31,9 @@ struct StaffMenuView: View
                 
                 VStack(alignment: .leading, spacing: 1)
                 {
+                    Spacer()
+                        .frame(height: 80)
+                    
                     // Jin BBQ Logo
                     HStack {
                         Image("JinBBQTakeout")
@@ -61,6 +68,7 @@ struct StaffMenuView: View
                     // ------- Categories -----------
                     // header
                     // TODO: change font
+                    
                     Text("Categories")
                         .font(.system(size: 24, weight: .bold))
                         .foregroundColor(.white)
@@ -69,15 +77,38 @@ struct StaffMenuView: View
                         .padding(.top, 10)
                     
                     // stack for item categories
-                    // TODO: center
-                    HStack(spacing: 12) {
-                        CategoryItemView(imageName: "PremiumBoxesIcon", categoryName: "Premium Jin's Box")
-                        CategoryItemView(imageName: "KoreanFoodIcon", categoryName: "Korean Food")
-                        CategoryItemView(imageName: "PopularIcon", categoryName: "Popular")
+                    // Use ScrollViewReader to allow scrolling to specific sections
+                    ScrollViewReader { proxy in
+                        // Stack for item categories
+                        HStack(spacing: 12) {
+                            Button(action: {
+                                withAnimation {
+                                    proxy.scrollTo("Premium Jin's Box", anchor: .top)
+                                }
+                            }) {
+                                CategoryItemView(imageName: "PremiumBoxesIcon", categoryName: "Premium Jin's Box")
+                            }
+
+                            Button(action: {
+                                withAnimation {
+                                    proxy.scrollTo("Korean Food", anchor: .top)
+                                }
+                            }) {
+                                CategoryItemView(imageName: "KoreanFoodIcon", categoryName: "Korean Food")
+                            }
+
+                            Button(action: {
+                                withAnimation {
+                                    proxy.scrollTo("Popular", anchor: .top)
+                                }
+                            }) {
+                                CategoryItemView(imageName: "PopularIcon", categoryName: "Popular")
+                            }
+                        }
+                        .frame(maxWidth: .infinity, alignment: .center) // center the HStack
+                        .padding(.horizontal)
+                        .padding(.bottom, 10)
                     }
-                    .frame(maxWidth: .infinity, alignment: .center) // center the hstack
-                    .padding(.horizontal)
-                    .padding(.bottom, 10)
                     
                     // line to separate
                     Image("Line")
@@ -87,8 +118,15 @@ struct StaffMenuView: View
                         .padding(.vertical, 5)
                         .padding(.horizontal,10)
                     
+                    if isAdmin{
+                        // button for adding an item
+                        AddButtonView()
+                            .padding(.top, 2)
+                            .padding(.bottom, 2)
+                    }
+                    
                     // button for adding an item
-                    ButtonGroupView()
+                    AddButtonView()
                         .padding(.top, 2)
                         .padding(.bottom, 2)
                     
@@ -101,156 +139,18 @@ struct StaffMenuView: View
                 
             }
         }
-    }
-}
-
-// add item button
-struct ButtonGroupView: View
-{
-    var body: some View
-    {
-        HStack(spacing: 20)
-        {
-            Spacer() // push button to the right
-
-            Button(action: {
-                // write action here
-            }) {
-                Image("PlusButton")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 60, height: 10)
-                    .padding(.top, 15)
+        .onAppear {
+            // Fetch the admin status when the view appears
+            checkUserAdminStatus { (isAdminStatus, error) in
+                if let error = error {
+                    print("Error: \(error.localizedDescription)")
+                } else {
+                    // Update the admin status on the main thread
+                    DispatchQueue.main.async {
+                        self.isAdmin = isAdminStatus ?? false
+                    }
+                }
             }
-        }
-        .padding(.horizontal)
-    }
-}
-
-struct MenuItemList: View {
-    var body: some View {
-        // ------- Categories -----------
-        // header
-        // TODO: change font
-        Text("Popular")
-            .font(.system(size: 24, weight: .bold))
-            .foregroundColor(.white)
-            .padding(.leading, 5)
-            .padding(.bottom, 10)
-            .padding(.top, 10)
-        
-        // line to separate
-        Image("Line")
-            .resizable()
-            .scaledToFit()
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 5)
-            .padding(.horizontal,10)
-        
-        Text("Premium Jin's Box")
-            .font(.system(size: 24, weight: .bold))
-            .foregroundColor(.white)
-            .padding(.leading, 5)
-            .padding(.bottom, 10)
-            .padding(.top, 10)
-        
-        // line to separate
-        Image("Line")
-            .resizable()
-            .scaledToFit()
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 5)
-            .padding(.horizontal,10)
-        
-        Text("Korean Food")
-            .font(.system(size: 24, weight: .bold))
-            .foregroundColor(.white)
-            .padding(.leading, 5)
-            .padding(.bottom, 10)
-            .padding(.top, 10)
-        
-        // line to separate
-        Image("Line")
-            .resizable()
-            .scaledToFit()
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 5)
-            .padding(.horizontal,10)
-    }
-}
-
-// food item categories
-struct CategoryItemView: View
-{
-    let imageName: String
-    let categoryName: String
-    
-    var body: some View
-    {
-        VStack
-        {
-            // category icon
-            Image(imageName)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 100, height: 100)
-                .cornerRadius(10)
-            
-            // category name
-            Text(categoryName)
-                .font(.caption)
-                .foregroundColor(.white)
-                .multilineTextAlignment(.center)
-        }
-    }
-}
-
-// background image of page
-struct BackgroundView: View {
-    var imageName: String // image passed as parameter
-
-    var body: some View {
-        Image(imageName) // use the passed image name
-            .resizable()
-            .scaledToFill()
-            .edgesIgnoringSafeArea(.all)
-    }
-}
-
-// search bar for menu items
-struct SearchBar: View
-{
-    @Binding var searchText: String
-    
-    var body: some View
-    {
-        ZStack(alignment: .leading)
-        {
-            // placeholder text
-            if searchText.isEmpty
-            {
-                Text("Your order?")
-                    .foregroundColor(.white)
-                    .padding(.leading, 40)
-            }
-            
-            // actual textfield
-            TextField("", text: $searchText)
-                .padding()
-                .foregroundColor(.white)
-                .background(
-                    LinearGradient(gradient: Gradient(colors: [
-                        Color.black.opacity(0.3),
-                        Color.white.opacity(0.1),
-                        Color.black.opacity(0.3)
-                    ]), startPoint: .leading, endPoint: .trailing)
-                )
-                .cornerRadius(15)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 15)
-                        .stroke(Color.white.opacity(0.3), lineWidth: 1)
-                )
-                .padding(.horizontal, 10)
         }
     }
 }

@@ -4,6 +4,9 @@
 //
 //  Created by kimi on 11/9/24.
 //
+// NOTE: This file only exists so we can easily see how the staff view would look like. The
+//       HomePageView.swift will automatically check whether a user is an admin or not, and adjust
+//       the UI.
 
 import SwiftUI
 import FirebaseAuth
@@ -11,6 +14,7 @@ import FirebaseAuth
 struct StaffHomePageView: View {
     @State private var image: UIImage? = nil
     @State private var userName: String = "User"  // Default name if the user is not found
+    @State private var isAdmin: Bool = false // Track if user is an admin or not
     
     // Dynamic array for images
     let galleryImages: [String] = ["JinGalleryPic1", "JinGalleryPic2", "JinGalleryPic3"]  // Updated with your image names
@@ -38,13 +42,13 @@ struct StaffHomePageView: View {
                 ScrollView{
                     VStack {
                         // Scrollable image gallery
-                        GalleryImageView(images: galleryImages)
+                        CustomerGalleryImageView(images: galleryImages, isAdmin: true)
                             .background(Color.black)
                             .cornerRadius(25)
                             .padding()
                         
                         // header for promo codes
-                        DealsHeadline()
+                        DealsHeadline(isAdmin: true)
                         
                         // Line to separate
                         Image("Line")
@@ -57,56 +61,23 @@ struct StaffHomePageView: View {
                 }
             }
             .padding(.top, 10)
-        }
-    }
-}
-
-// Header that greets the user
-struct GreetUser: View {
-    @Binding var userName: String
-
-    var body: some View {
-        Text("Hi \(userName)!")
-            .font(.largeTitle)
-            .foregroundColor(.white)
-            .bold()
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading, 20)  // Add left padding
             .onAppear {
-                // Fetch user name from Firebase when the view appears
-                if let user = Auth.auth().currentUser {
-                    userName = user.displayName ?? "User" // Set to displayName if available, otherwise fallback to "User"
+                // Fetch the admin status when the view appears
+                checkUserAdminStatus { (isAdminStatus, error) in
+                    if let error = error {
+                        print("Error: \(error.localizedDescription)")
+                    } else {
+                        // Update the admin status on the main thread
+                        DispatchQueue.main.async {
+                            self.isAdmin = isAdminStatus ?? false
+                        }
+                    }
                 }
             }
-    }
-}
-
-struct DealsHeadline: View {
-    
-    var body: some View {
-        HStack {
-            
-            // header for promo codes
-            Text("Deals of the Day!")
-                .font(.title2)
-                .foregroundColor(.white)
-                .bold()
-                .frame(maxWidth: .infinity, alignment: .leading)
-            
-            // add button
-            Button(action: {
-
-            }) {
-                Image("AddItemCustomizationButton")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 35, height: 35)
-                    .padding(.trailing, 35)
-            }
         }
-        .padding(.leading, 20)  // Add left padding
     }
 }
+
 
 // Gallery view for images
 struct GalleryImageView: View {

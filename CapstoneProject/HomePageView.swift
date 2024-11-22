@@ -20,9 +20,11 @@ let storage = Storage.storage()
 struct HomePageView: View {
     @State private var image: UIImage? = nil
     @State private var userName: String = "User"  // Default name if the user is not found
+    @State private var isAdmin: Bool = false // Track if user is an admin or not
     
     // Dynamic array for images
     let galleryImages: [String] = ["JinGalleryPic1", "JinGalleryPic2", "JinGalleryPic3"]  // Updated with your image names
+    
 
     var body: some View {
         NavigationView {
@@ -47,18 +49,14 @@ struct HomePageView: View {
                     ScrollView {
                         VStack {
                             // Scrollable image gallery
-                            CustomerGalleryImageView(images: galleryImages)
+                            CustomerGalleryImageView(images: galleryImages, isAdmin: isAdmin)
                                 .background(Color.black)
                                 .cornerRadius(25)
                                 .padding()
                             
                             // header for promo codes
-                            Text("Deals of the Day!")
-                                .font(.title2)
-                                .foregroundColor(.white)
-                                .bold()
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.leading, 20)  // Add left padding
+                            DealsHeadline(isAdmin: isAdmin)
+                            
                             
                             // Line to separate
                             Image("Line")
@@ -71,21 +69,77 @@ struct HomePageView: View {
                     }
                 }
                 .padding(.top, 10)
-                .overlay(
-                    NavigationBar()
-                        .frame(maxWidth: .infinity) // Ensures the bar stretches across the full width
-                        .padding(.bottom, 35)
-                        , alignment: .bottom // Positions the navigation bar at the bottom of the screen
-                    )
-                    .edgesIgnoringSafeArea(.bottom)
+                .onAppear {
+                    // Fetch the admin status when the view appears
+                    checkUserAdminStatus { (isAdminStatus, error) in
+                        if let error = error {
+                            print("Error: \(error.localizedDescription)")
+                        } else {
+                            // Update the admin status on the main thread
+                            DispatchQueue.main.async {
+                                self.isAdmin = isAdminStatus ?? false
+                            }
+                        }
+                    }
+                }
             }
         }
+    }
+}
+
+// Header that greets the user
+struct GreetUser: View {
+    @Binding var userName: String
+
+    var body: some View {
+        Text("Hi \(userName)!")
+            .font(.largeTitle)
+            .foregroundColor(.white)
+            .bold()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 20)  // Add left padding
+            .onAppear {
+                // Fetch user name from Firebase when the view appears
+                if let user = Auth.auth().currentUser {
+                    userName = user.displayName ?? "User" // Set to displayName if available, otherwise fallback to "User"
+                }
+            }
+    }
+}
+
+struct DealsHeadline: View {
+    var isAdmin: Bool
+    var body: some View {
+        HStack {
+            
+            // header for promo codes
+            Text("Deals of the Day!")
+                .font(.title2)
+                .foregroundColor(.white)
+                .bold()
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            if isAdmin {
+                // add button
+                Button(action: {
+
+                }) {
+                    Image("AddItemCustomizationButton")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 35, height: 35)
+                        .padding(.trailing, 35)
+                }
+            }
+        }
+        .padding(.leading, 20)  // Add left padding
     }
 }
 
 // Gallery view for images
 struct CustomerGalleryImageView: View {
     var images: [String]  // Array of image names or paths
+    var isAdmin: Bool
 
     var body: some View {
         VStack{
@@ -110,23 +164,39 @@ struct CustomerGalleryImageView: View {
                 .padding()
                 .multilineTextAlignment(.leading)
             
-            HStack{
-                // "Order Now" button
-                 NavigationLink(destination: CustomerMenuView()) {  // Link to the MenuView
-                     Text("Order Now")
-                         .font(.caption)
-                         .padding(.vertical, 10)
-                         .padding(.horizontal, 20)
-                         .background(Color.orange)
-                         .foregroundColor(.white)
-                         .cornerRadius(10)
-                 }
-                 .padding(.leading, 1)
-                 .padding(.bottom, 2)
+            if isAdmin {
+                Button(action: {
+                    // action to edit gallery images and text
+                }) {
+                    Image("DarkEditButton") // used to edit the image and upload a picture
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 35, height: 35)
+                        .padding(5)
+                }
+                .cornerRadius(18)
+                .padding(.leading, 300)
+                .padding(.bottom, 10)
             }
-            .padding(.top, 2)
-            .padding(.bottom, 15)
-            .padding(.leading, -168)
+            else {
+                HStack{
+                    // "Order Now" button
+                     NavigationLink(destination: CustomerMenuView()) {  // Link to the MenuView
+                         Text("Order Now")
+                             .font(.caption)
+                             .padding(.vertical, 10)
+                             .padding(.horizontal, 20)
+                             .background(Color.orange)
+                             .foregroundColor(.white)
+                             .cornerRadius(10)
+                     }
+                     .padding(.leading, 1)
+                     .padding(.bottom, 2)
+                }
+                .padding(.top, 2)
+                .padding(.bottom, 15)
+                .padding(.leading, -168)
+            }
 
         }
     }
