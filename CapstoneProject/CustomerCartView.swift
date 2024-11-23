@@ -60,11 +60,11 @@ struct CustomerCartView: View {
                     Spacer(minLength: 1) // Adds space above Cart title
 
                     // Cart Title
-                    Text("Cart")
+                    Text("CART")
                         .font(.title)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
-                        .padding(.top, 20)
+                        .padding(.top, 5)
                     
                     // Item List
                     ScrollView {
@@ -144,12 +144,27 @@ struct CustomerCartView: View {
                             }
                         }
                     }
-                    .padding(.top, 20) // Add space above the item list
+                    .padding(.top, 5) // Add space above the item list
 
                     Spacer() // Add spacer to push the content up from the bottom
                     
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        // Add Items Button
+                        NavigationLink(destination: CustomerMenuView()) {
+                            Image("AddItemButtonClear")
+                                .resizable()
+                                .frame(width: 100, height: 50)
+                                .padding(.bottom, -10)
+                                .padding(.top, -10)
+                        }
+                    }
+                    
+                    Spacer()
+                    
                     // Subtotal, Tax, and Total
                     VStack(alignment: .leading, spacing: 8) {
+                        
                         HStack {
                             Text("Subtotal")
                                 .foregroundColor(.white)  // Label color
@@ -178,12 +193,11 @@ struct CustomerCartView: View {
                     .background(Color.white.opacity(0.1))
                     .cornerRadius(10)
                     .padding(.horizontal)
-                    .padding(.bottom, 70)
+                    .padding(.bottom, 60)
                     
                     // Checkout Button
-                    Button(action: {
+                    NavigationLink(destination: CustomerCheckoutView()) {
                         // Handle checkout action
-                    }) {
                         Text("CHECK OUT")
                             .bold()
                             .foregroundStyle(.white)
@@ -195,8 +209,8 @@ struct CustomerCartView: View {
                             )
                     }
                     .padding(.horizontal, 20)
-                    .padding(.bottom, 20)
-                    .offset(y: -80)
+                    .padding(.bottom,20)
+                    .offset(y: -60)
                 }
                 .onAppear {
                     loadCartItems()

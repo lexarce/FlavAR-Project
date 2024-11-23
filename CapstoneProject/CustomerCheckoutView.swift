@@ -14,19 +14,18 @@ struct CustomerCheckoutView: View {
     @State private var selectedTime: Date? = nil // Pickup time
     @State private var asSoonAsPossible = true // Default to "As soon as possible"
     @State private var validTimeSlots: [Date] = [] // Dynamically generated time slots
+    @State private var selectedTip: Double = 0.0 // Track tip amount
+    @State private var customTip: String = "" // For custom tip input
     
-    // Need to connect this subtotal to the Cart to update dynamically
-    private var subtotal: Double = 25.00 // Example subtotal
+    @State private var subtotal: Double = 25.00 // Example subtotal
     private var tax: Double {
         subtotal * 0.083 // 8.3% Mesa, AZ combined sales tax
     }
     private var total: Double {
-        subtotal + tax
+        subtotal + tax + selectedTip
     }
     
-    /* Static restaurant hours for now
-     Need to add the restaurant hours & last call times to Firebase
-     This should update dynamically depending on the current date and time */
+    // Placeholder for now, need to add to Firebase
     private let restaurantHours: [String: (start: String, end: String, lastCall: String)] = [
         "Monday": ("17:00", "23:00", "22:00"),
         "Tuesday": ("17:00", "23:00", "22:00"),
@@ -54,155 +53,241 @@ struct CustomerCheckoutView: View {
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
                 
-                VStack(spacing: 20) {
+                VStack{
+                    // Top bar with back button & cart button
+                    HStack {
+                        // Back button to navigate to CustomerMenuView
+                        NavigationLink(destination: CustomerCartView()) {
+                            Image("BackButton")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                                .padding()
+                        }
+                        Spacer()
+                        
+                        // Exit button to navigate to HomePageView
+                        NavigationLink(destination: HomePageView()) {
+                            Image("ExitButton")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                                .padding()
+                        }
+                    }
+                    .padding(.horizontal)
+                    .padding(.top, 5)
+                    Spacer(minLength: 1) // Adds space above Checkout title
+                    
                     // Checkout Title
-                    Text("Checkout")
+                    Text("CHECKOUT")
                         .font(.title)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
-                        .padding(.top, 60)
-                    
-                    // Choose Time for Pickup
-                    VStack(alignment: .leading) {
-                        Text("Choose Time for Pickup")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                        
-                        // Radio Buttons
-                        HStack {
-                            Button(action: {
-                                asSoonAsPossible = true
-                                selectedTime = validTimeSlots.first
-                            }) {
-                                HStack {
-                                    Image(systemName: asSoonAsPossible ? "largecircle.fill.circle" : "circle")
-                                        .foregroundColor(asSoonAsPossible ? .yellow : .gray)
-                                    Text("As Soon As Possible")
-                                        .foregroundColor(.white)
-                                }
-                            }
-                            Spacer()
-                        }
-                        .padding(.vertical, 8)
-                        
-                        HStack {
-                            Button(action: {
-                                asSoonAsPossible = false
-                                selectedTime = nil
-                            }) {
-                                HStack {
-                                    Image(systemName: !asSoonAsPossible ? "largecircle.fill.circle" : "circle")
-                                        .foregroundColor(!asSoonAsPossible ? .yellow : .gray)
-                                    Text("Select a Later Time")
-                                        .foregroundColor(.white)
-                                }
-                            }
-                            Spacer()
-                        }
-                        .padding(.vertical, 8)
-                        
-                        if !asSoonAsPossible {
-                            // Dropdown for Valid Time Slots
-                            Picker("Select Pickup Time", selection: $selectedTime) {
-                                ForEach(validTimeSlots, id: \.self) { time in
-                                    Text(formatDate(time)).tag(time as Date?)
-                                }
-                            }
-                            .pickerStyle(WheelPickerStyle())
-                            .labelsHidden()
-                            .background(Color.white.opacity(0.1))
-                            .cornerRadius(10)
-                            .padding(.horizontal)
-                        }
-                    }
-                    .padding(.horizontal)
-                    .onAppear {
-                        generateValidTimeSlots()
-                    }
-                    
-                    // Payment Methods Section
-                    VStack(alignment: .leading) {
-                        Text("Payment Method")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                        
-                        ForEach(PaymentMethod.allCases, id: \.self) { method in
-                            HStack {
-                                Image(systemName: selectedPaymentMethod == method ? "largecircle.fill.circle" : "circle")
-                                    .foregroundColor(selectedPaymentMethod == method ? .yellow : .gray)
-                                    .onTapGesture {
-                                        selectedPaymentMethod = method
+                        .padding(.top, 5)
+                
+                ScrollView {
+                    // Choose Time for Pickup Section
+                    VStack(alignment: .leading, spacing: 15) {
+                            Text("Choose Time for Pickup")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                            
+                            VStack(spacing: 10) {
+                                Button(action: {
+                                    asSoonAsPossible = true
+                                    selectedTime = validTimeSlots.first
+                                }) {
+                                    HStack {
+                                        Image(systemName: asSoonAsPossible ? "largecircle.fill.circle" : "circle")
+                                            .foregroundColor(asSoonAsPossible ? .yellow : .gray)
+                                        Text("As Soon As Possible")
+                                            .foregroundColor(.white)
                                     }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                }
                                 
-                                Text(method.rawValue)
-                                    .font(.subheadline)
-                                    .foregroundColor(.white)
-                                
-                                Spacer()
+                                Button(action: {
+                                    asSoonAsPossible = false
+                                    selectedTime = nil
+                                }) {
+                                    HStack {
+                                        Image(systemName: !asSoonAsPossible ? "largecircle.fill.circle" : "circle")
+                                            .foregroundColor(!asSoonAsPossible ? .yellow : .gray)
+                                        Text("Select a Later Time")
+                                            .foregroundColor(.white)
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                }
                             }
-                            .padding(.vertical, 8)
+                            
+                            if !asSoonAsPossible {
+                                Picker("Select Pickup Time", selection: $selectedTime) {
+                                    ForEach(validTimeSlots, id: \.self) { time in
+                                        Text(formatDate(time)).tag(time as Date?)
+                                    }
+                                }
+                                .pickerStyle(WheelPickerStyle())
+                                .labelsHidden()
+                                .frame(maxWidth: .infinity)
+                                .background(Color.white.opacity(0.1))
+                                .cornerRadius(10)
+                            }
                         }
-                    }
-                    .padding(.horizontal)
-                    
-                    // Subtotal, Tax, and Total Section
-                    VStack(alignment: .leading, spacing: 8) {
-                        HStack {
-                            Text("Subtotal")
+                        .padding()
+                        .background(Color.white.opacity(0.1))
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+                        
+                        // Payment Methods Section
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text("Payment Method")
+                                .font(.headline)
                                 .foregroundColor(.white)
-                            Spacer()
-                            Text("$\(subtotal, specifier: "%.2f")")
-                                .foregroundColor(.white)
+                            
+                            ForEach(PaymentMethod.allCases, id: \.self) { method in
+                                Button(action: {
+                                    selectedPaymentMethod = method
+                                }) {
+                                    HStack {
+                                        Image(systemName: selectedPaymentMethod == method ? "largecircle.fill.circle" : "circle")
+                                            .foregroundColor(selectedPaymentMethod == method ? .yellow : .gray)
+                                        Text(method.rawValue)
+                                            .foregroundColor(.white)
+                                    }
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            }
                         }
-                        HStack {
-                            Text("Tax")
+                        .padding()
+                        .background(Color.white.opacity(0.1))
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+                        
+                        // Cart Summary Section
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Cart Summary")
+                                .font(.headline)
                                 .foregroundColor(.white)
-                            Spacer()
-                            Text("$\(tax, specifier: "%.2f")")
-                                .foregroundColor(.white)
+                            
+                            VStack(alignment: .leading, spacing: 5) {
+                                HStack {
+                                    Text("2 x Premium Bulgogi")
+                                        .foregroundColor(.white)
+                                    Spacer()
+                                    Text("$29.98")
+                                        .foregroundColor(.white)
+                                }
+                                HStack {
+                                    Text("1 x Japchae")
+                                        .foregroundColor(.white)
+                                    Spacer()
+                                    Text("$14.99")
+                                        .foregroundColor(.white)
+                                }
+                            }
                         }
-                        HStack {
-                            Text("Total")
-                                .fontWeight(.bold)
+                        .padding()
+                        .background(Color.white.opacity(0.1))
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+                        
+                        // Add Tip Section
+                        VStack(alignment: .leading) {
+                            Text("Add a Tip")
+                                .font(.headline)
                                 .foregroundColor(.white)
-                            Spacer()
-                            Text("$\(total, specifier: "%.2f")")
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
+                            
+                            HStack(spacing: 10) {
+                                ForEach([10, 15, 20], id: \.self) { percent in
+                                    Button(action: {
+                                        selectedTip = subtotal * Double(percent) / 100.0
+                                        customTip = ""
+                                    }) {
+                                        Text("\(percent)%")
+                                            .bold()
+                                            .foregroundColor(.white)
+                                            .padding()
+                                            .frame(width: 70, height: 40)
+                                            .background(
+                                                RoundedRectangle(cornerRadius: 10)
+                                                    .fill(selectedTip == subtotal * Double(percent) / 100.0 ? Color("AppColor4") : Color.gray)
+                                            )
+                                    }
+                                }
+                                
+                                Button(action: {
+                                    // Show custom tip input
+                                }) {
+                                    Text("Custom")
+                                        .bold()
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .frame(width: 100, height: 40)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .fill(Color.gray)
+                                        )
+                                }
+                            }
                         }
-                    }
-                    .padding()
-                    .background(Color.white.opacity(0.1))
-                    .cornerRadius(10)
-                    .padding(.horizontal)
-                    
-                    Spacer()
-                    
-                    // Place Order Button
-                    Button {
-                        // Handle place order action
-                    } label: {
-                        NavigationLink(destination: OrderConfirmationView()) {
+                        .padding()
+                        .background(Color.white.opacity(0.1))
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+                        
+                        // Subtotal, Tax, and Total Section
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack {
+                                Text("Subtotal")
+                                    .foregroundColor(.white)
+                                Spacer()
+                                Text("$\(subtotal, specifier: "%.2f")")
+                                    .foregroundColor(.white)
+                            }
+                            HStack {
+                                Text("Tax")
+                                    .foregroundColor(.white)
+                                Spacer()
+                                Text("$\(tax, specifier: "%.2f")")
+                                    .foregroundColor(.white)
+                            }
+                            HStack {
+                                Text("Tip")
+                                    .foregroundColor(.white)
+                                Spacer()
+                                Text("$\(selectedTip, specifier: "%.2f")")
+                                    .foregroundColor(.white)
+                            }
+                            HStack {
+                                Text("Total")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                Spacer()
+                                Text("$\(total, specifier: "%.2f")")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            }
+                        }
+                        .padding()
+                        .background(Color.white.opacity(0.1))
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+                        
+                        // Place Order Button
+                    NavigationLink(destination: OrderConfirmationView()) {
                             Text("PLACE ORDER >")
                                 .bold()
-                                .foregroundStyle(Color("AppColor1"))
+                                .foregroundStyle(.white)
                                 .padding()
                                 .frame(maxWidth: .infinity)
                                 .background(
                                     RoundedRectangle(cornerRadius: 30)
-                                        .fill(
-                                            LinearGradient(
-                                                gradient: Gradient(colors: [Color("AppColor3"), Color.white, Color("AppColor3")]),
-                                                startPoint: .leading,
-                                                endPoint: .trailing
-                                            )
-                                        )
+                                        .fill(Color("AppColor4"))
                                 )
                         }
+                        .padding(.horizontal, 20)
+                        .padding(.bottom, 80)
+                        .offset(y: 20)
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 20)
-                    .offset(y: -60)
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
@@ -211,10 +296,8 @@ struct CustomerCheckoutView: View {
     }
     
     // MARK: - Helper Functions
-    
-    /// Generate valid time slots for the current day
     private func generateValidTimeSlots() {
-        validTimeSlots = [] // Clear existing slots
+        validTimeSlots = []
         let currentDay = getCurrentDay()
         
         guard let hours = restaurantHours[currentDay],
@@ -230,29 +313,23 @@ struct CustomerCheckoutView: View {
         }
     }
     
-    /// Get the current day of the week
     private func getCurrentDay() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEEE"
         return formatter.string(from: Date())
     }
     
-    /// Parse a time string (e.g., "17:00") into a Date object
     private func parseTime(_ time: String) -> Date? {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         guard let date = formatter.date(from: time) else { return nil }
-        
-        // Combine with today's date
         return Calendar.current.date(
             bySettingHour: Calendar.current.component(.hour, from: date),
             minute: Calendar.current.component(.minute, from: date),
-            second: 0,
-            of: Date()
+            second: 0, of: Date()
         )
     }
     
-    /// Format a Date into a readable time string
     private func formatDate(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
@@ -266,3 +343,4 @@ struct CustomerCheckoutView_Previews: PreviewProvider {
         CustomerCheckoutView()
     }
 }
+
