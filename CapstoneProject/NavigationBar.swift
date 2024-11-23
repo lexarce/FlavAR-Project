@@ -46,7 +46,7 @@ struct NavigationBar: View {
                     Spacer()
                     
                     // Button: Menu Page
-                    NavigationLink(destination: CustomerMenuView()) {
+                    NavigationLink(destination: MenuView()) {
                         Rectangle()
                             .stroke(Color.clear, lineWidth: 2) // Black outline
                             .frame(width: 70, height: 52)
@@ -56,7 +56,7 @@ struct NavigationBar: View {
                     Spacer()
                     
                     // Button: Store Page
-                    NavigationLink(destination: HomePageView()) {
+                    NavigationLink(destination: StoreView()) {
                         Rectangle()
                             .stroke(Color.clear, lineWidth: 2) // Black outline
                             .frame(width: 70, height: 52)

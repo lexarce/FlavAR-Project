@@ -151,21 +151,23 @@ struct AddButtonView: View
 {
     var body: some View
     {
-        HStack(spacing: 20)
-        {
-            Spacer() // push button to the right
+        // Add item button wrapped in NavigationLink
+        NavigationLink(destination: CreateMenuItemView()) {
+            HStack(spacing: 20) {
+                Spacer() // push button to the right
 
-            Button(action: {
-                // write action here
-            }) {
-                Image("PlusButton")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 60, height: 10)
-                    .padding(.top, 15)
+                Button(action: {
+                    // You can put additional action code here if needed
+                }) {
+                    Image("PlusButton")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 60, height: 10)
+                        .padding(.top, 15)
+                }
             }
+            .padding(.horizontal)
         }
-        .padding(.horizontal)
     }
 }
 

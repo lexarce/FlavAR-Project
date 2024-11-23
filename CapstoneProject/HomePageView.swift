@@ -181,7 +181,7 @@ struct CustomerGalleryImageView: View {
             else {
                 HStack{
                     // "Order Now" button
-                     NavigationLink(destination: CustomerMenuView()) {  // Link to the MenuView
+                     NavigationLink(destination: MenuView()) {  // Link to the MenuView
                          Text("Order Now")
                              .font(.caption)
                              .padding(.vertical, 10)

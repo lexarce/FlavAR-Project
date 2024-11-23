@@ -78,53 +78,6 @@ struct StaffHomePageView: View {
     }
 }
 
-
-// Gallery view for images
-struct GalleryImageView: View {
-    var images: [String]  // Array of image names or paths
-
-    var body: some View {
-        VStack{
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 15) {
-                    ForEach(images, id: \.self) { imageName in
-                        Image(imageName)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 250, height: 250)
-                            .clipped()
-                            .cornerRadius(10)
-                    }
-                }
-                .padding()
-            }
-            
-            // Description or sentence below the images
-            Text("Indulge in the best of authentic Korean cuisine right here in Arizona. From sizzling BBQ to savory stews, experience the flavors that bring Korea to your table.")
-                .font(.body)
-                .foregroundColor(.white)
-                .padding()
-                .multilineTextAlignment(.leading)
-            
-                Button(action: {
-                    // action to edit gallery images and text
-                }) {
-                    Image("DarkEditButton") // used to edit the image and upload a picture
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 35, height: 35)
-                        .padding(5)
-                }
-                .cornerRadius(18)
-                .padding(.leading, 300)
-                .padding(.bottom, 10)
-
-        }
-    }
-}
-
-
-
 #Preview {
     StaffHomePageView()
 }

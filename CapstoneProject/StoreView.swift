@@ -202,6 +202,7 @@ struct StoreView: View {
                                         .font(.system(size: 18))
                                         .foregroundColor(.white)
                                 }
+                                .padding(.vertical, 10)
                                 .padding(.horizontal, 10)
                                 .padding(.bottom, 20)
                             }
