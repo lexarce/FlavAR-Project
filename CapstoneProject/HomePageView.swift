@@ -67,6 +67,7 @@ struct HomePageView: View {
                                 .padding(.horizontal, 20)
                         }
                     }
+                    
                 }
                 .padding(.top, 10)
                 .onAppear {
@@ -82,7 +83,9 @@ struct HomePageView: View {
                         }
                     }
                 }
+                
             }
+            
         }
     }
 }

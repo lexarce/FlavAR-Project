@@ -10,326 +10,184 @@ import FirebaseAuth
 import FirebaseFirestore
 
 struct CreateAccountView: View {
-    
-    //Variables to be observed in real time
-    @State var firstName: String = ""
-    @State var lastName: String = ""
-    @State var fullName: String = ""
-    @State var phoneNumber: String = ""
-    @State var emailAddress: String = ""
-    @State var password: String = ""
-    @State var confirmedPassword: String = ""
+    @State private var firstName = ""
+    @State private var lastName = ""
+    @State private var emailAddress = ""
+    @State private var phoneNumber = ""
+    @State private var password = ""
+    @State private var confirmedPassword = ""
     @State private var errorMessage = ""
     @State private var isAccountCreated = false
     @State private var toLoginPage = false
-    @State private var id = ""
-    
-    
-    var body: some View {
-        VStack {
-            
-            Image("logo2") // Refers to the image called "logo2" in your Assets folder
-                .resizable() // Makes the image resizable
-                .aspectRatio(contentMode: .fit) // Preserves the aspect ratio and fits the image
-                .frame(width: 80, height: 80)
-                .offset(y: -40)
-            
-            Text("Sign Up")
-                .bold()
-                .foregroundStyle(.white)
-                .padding()
-                .font(.system(size: 40, weight: .bold, design: .default))
-                .offset(y: -70)
-            
-            //A HStack stacks objects within it horizontally
-            HStack {
-                //A normal text field
-                TextField("First Name", text: $firstName)
-                    .padding()
-                    .background {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(.white)
-                            .frame(height: 50)
-                    }
-                    .padding(.leading, 16)
-                    .padding(.trailing, 16)
-                    .autocorrectionDisabled(true)
-                
-                TextField("Last Name", text: $lastName)
-                    .padding()
-                    .background {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(.white)
-                            .frame(height: 50)
-                    }
-                    .padding(.leading, 16)
-                    .padding(.trailing, 16)
-                    .autocorrectionDisabled(true)
-                
-            }//End of HStack
-            .offset(y: -50)
-            
-            //Text field for the user to enter email address
-            TextField("Email Address", text: $emailAddress)
-                .padding()
-                .background {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(.white)
-                        .frame(height: 50)
-                }
-                .padding(.leading, 16)
-                .padding(.trailing, 16)
-                .autocorrectionDisabled(true)
-                .offset(y: -40)
-            
-            //Phone Number Text Field
-            TextField("Phone Number", text: $phoneNumber)
-                .padding()
-                .background {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(.white)
-                        .frame(height: 50)
-                }
-                .padding(.leading, 16)
-                .padding(.trailing, 16)
-                .autocorrectionDisabled(true)
-                .offset(y: -30)
-            
-            Text("Minimum 10 characters")
-                .bold()
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .offset(y: -10)
-                .padding(.leading, 20)
-                .padding(.trailing, 20)
-                .foregroundStyle(.white)
-            
-            
-            //Password text field
-            SecureField("Password", text: $password)
-                .padding()
-                .background {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(.white)
-                        .frame(height: 50)
-                }
-                .padding(.leading, 16)
-                .padding(.trailing, 16)
-                .textContentType(.none)
-                .keyboardType(.default)
-                .autocorrectionDisabled(true)
-                .autocapitalization(.none)
-                .disableAutocorrection(true) // This is also important
-            
-            //Confirm password text field
-            SecureField("Confirm Password", text: $confirmedPassword)
-                .padding()
-                .background {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(.white)
-                        .frame(height: 50)
-                }
-                .padding(.leading, 16)
-                .padding(.trailing, 16)
-                .textContentType(.none)
-                .keyboardType(.default)
-                .autocorrectionDisabled(true)
-                .disableAutocorrection(true)
-                .autocapitalization(.none)
-                .offset(y: 10)
-            
-            
-            //The sign in button
-            Button {
-                //If the input is formatted correctly, try to create the account
-                if checkInput() == true {
-                    createAccount(emailAddress: emailAddress, password: password) { success in
-                        if success {//The account was created
-                            isAccountCreated = true
-                            print("Account created successfully!")
-                            
-                            //Will cause the navigator to switch to LoginView
-                            toLoginPage = true
-                            
-                        } else {//This means that the email was incorrect or improperly formatted
-                            print("Failed to create account")
-                            
-                            errorMessage = "Email Address is not formatted correctly or Email Address is already used for another account. Example: coolname@gmail.com"
 
+    var body: some View {
+        ZStack {
+            // Background Image
+            Image("createaccountbg")
+                .resizable()
+                .scaledToFill()
+                .aspectRatio(contentMode: .fill)
+                .edgesIgnoringSafeArea(.all)
+
+            ScrollView { // Wrap the form in a ScrollView
+                VStack {
+                    HeaderView() // Header with Sign Up Title
+
+                    VStack(spacing: 16) {
+                        HStack {
+                            CustomTextField(placeholder: "First Name", text: $firstName)
+                            CustomTextField(placeholder: "Last Name", text: $lastName)
                         }
+                        CustomTextField(placeholder: "Email Address", text: $emailAddress)
+                        CustomTextField(placeholder: "Phone Number", text: $phoneNumber)
+                        CustomTextField(placeholder: "Password", text: $password, isSecureField: true)
+                        CustomTextField(placeholder: "Confirm Password", text: $confirmedPassword, isSecureField: true)
                     }
-                }
-            } label: {//This is the physical button
-                Text("REGISTER  >")
-                    .bold()
-                    .foregroundStyle(.white)
                     .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(
-                        RoundedRectangle(cornerRadius: 30)
-                            .fill(Color("AppColor4"))
-                    )
+
+                    ErrorMessageView(message: errorMessage)
+                        .opacity(errorMessage.isEmpty ? 0 : 1)
+
+                    Spacer()
+
+                    Button(action: handleRegister) {
+                        Text("REGISTER  >")
+                            .bold()
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 30).fill(Color("AppColor4"))) 
+                            .foregroundColor(.white)
+                    }
+                    .padding(.horizontal)
+
+                    NavigationLink(destination: LoginView(), isActive: $toLoginPage) {
+                        EmptyView()
+                    }
+                    .hidden()
+
+                    Text("Upon successful account creation, you will be redirected to the login page")
+                        .bold()
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.white)
+                        .padding()
+                }
+                .padding()
+                .padding(.top, 150)
             }
-            .padding(.leading, 20)
-            .padding(.trailing, 20)
-            .offset(y: 50)
-            
-            //To display all the error messages from invalid input
-            Text(errorMessage)
-                .bold()
-                .frame(maxWidth: .infinity, alignment: .center)
-                .offset(y: 80)
-                .foregroundStyle(.white)
-                .padding(.leading, 20)
-                .padding(.trailing, 20)
-            
-            
-            // NavigationLink to HomePageView
-            NavigationLink(destination: LoginView(), isActive: $toLoginPage) {
-                EmptyView()
+        }
+    }
+
+    private func handleRegister() {
+        guard checkInput() else { return }
+        createAccount(emailAddress: emailAddress, password: password) { success in
+            if success {
+                isAccountCreated = true
+                toLoginPage = true
+            } else {
+                errorMessage = "Unable to create account. Please try again."
             }
-            .hidden() // Hides the EmptyView
-            
-            Text("Upon successful account creation, you will be redirected to the login page")
-                .bold()
-                .frame(maxWidth: .infinity, alignment: .center)
-                .offset(y: 180)
-                .padding(.leading, 20)
-                .padding(.trailing, 20)
-                .foregroundStyle(.white)
-            
-        }//End of VStack
-        .frame(maxWidth: .infinity, maxHeight: .infinity) // Make the VStack fill the entire screen
-        //This is how the page background gradually changes between 2 colors
-        .background(
-                    LinearGradient(
-                        gradient: Gradient(colors: [Color("AppColor2"), Color("AppColor1")]),  // Colors for the gradient
-                        startPoint: .top,                             // Starting from the top
-                        endPoint: .bottom                             // Transition to the bottom
-                    )
-                )
+        }
     }
     
-    //Creates the document that holds the user information in firebase
-//    func createDocument() {
-//        // Add a new document with a generated ID
-//        do {
-//            let db = Firestore.firestore()
-//            fullName = firstName + lastName
-//            
-//            //The name of the document is the first and last name of the user
-//            let documentID = fullName.replacingOccurrences(of: " ", with: "_")
-//            
-//            db.document("users/\(documentID)").setData([
-//            "firstName": firstName,
-//            "lastName": lastName,
-//            "emailAddress": emailAddress,
-//            "phoneNumber": phoneNumber
-//            
-//          ])
-//        }
-//    }
-    
-    //Checks for invalid input from the user
-    func checkInput() -> Bool {
-        
-        if firstName.count == 0 && lastName.count == 0 && emailAddress.count == 0 && phoneNumber.count == 0 && password.count == 0 && confirmedPassword.count == 0
-        {
+    private func checkInput() -> Bool {
+        if firstName.isEmpty || lastName.isEmpty || emailAddress.isEmpty || phoneNumber.isEmpty || password.isEmpty || confirmedPassword.isEmpty {
             errorMessage = "Please fill out all fields"
             return false
         }
-        
-        else if firstName.contains(" ") || lastName.contains(" ") || emailAddress.contains(" ") || phoneNumber.contains(" ") {
-            errorMessage = "Name, email address, and phone number cannot contain spaces"
+        if firstName.count > 50 {
+            errorMessage = "First name cannot exceed 50 characters"
             return false
         }
-        else if firstName.count > 50 {
-            errorMessage = "First name character limit is 40"
+        if lastName.count > 50 {
+            errorMessage = "Last name cannot exceed 50 characters"
             return false
         }
-        else if lastName.count > 50 {
-            errorMessage = "Last name character limit is 40"
+        if phoneNumber.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) != nil {
+            errorMessage = "Phone number must contain only digits"
             return false
         }
-        
-        let nonNumericCharacters = CharacterSet.decimalDigits.inverted
-        let containsNonNumeric = phoneNumber.rangeOfCharacter(from: nonNumericCharacters) != nil
-        
-        if containsNonNumeric {
-            errorMessage = "Phone number must contain only numbers"
+        if phoneNumber.count < 7 || phoneNumber.count > 15 {
+            errorMessage = "Phone number must be between 7 and 15 digits"
             return false
         }
-        
-        if phoneNumber.count < 7 {
-            errorMessage = "Phone Number is too short"
+        if password.count < 10 || password.count > 30 {
+            errorMessage = "Password must be between 10 and 30 characters"
             return false
         }
-        else if phoneNumber.count > 15 {
-            errorMessage = "Phone Number is too long"
-            return false
-        }
-        
-        if password.count < 10 {
-            errorMessage = "Password is too short"
-            return false
-        }
-        else if password.count > 30 {
-            errorMessage = "Password is too long"
-            return false
-        }
-        
         if password != confirmedPassword {
             errorMessage = "Passwords do not match"
             return false
         }
-        
         return true
     }
     
-    //Function that creates the user account and stores the username and password for authentication in firebase. A document with all user info is also stored. This allows user logins to be authenticated in LoginView
-    func createAccount(emailAddress: String, password: String, completion: @escaping (Bool) -> Void) {
+    private func createAccount(emailAddress: String, password: String, completion: @escaping (Bool) -> Void) {
         Auth.auth().createUser(withEmail: emailAddress, password: password) { authResult, error in
             if let error = error {
-                // Handle error
                 errorMessage = error.localizedDescription
-                completion(false) // Return false if there was an error
-            } else if let user = authResult?.user{
-                // Successfully created the account
-                
-                //create the document for the user
-                do {
-                    let db = Firestore.firestore()
-                    
-                    //The name of the document is the first and last name of the user
-                    let documentID = fullName.replacingOccurrences(of: " ", with: "_")
-                    
-                    db.document("users/\(user.uid)").setData([
-                    "firstName": firstName,
-                    "lastName": lastName,
-                    "emailAddress": emailAddress,
-                    "phoneNumber": phoneNumber,
-                    "isAdmin" : false
-                    
-                  ])
+                completion(false)
+                return
+            }
+            guard let user = authResult?.user else {
+                completion(false)
+                return
+            }
+            let db = Firestore.firestore()
+            db.document("users/\(user.uid)").setData([
+                "firstName": firstName,
+                "lastName": lastName,
+                "emailAddress": emailAddress,
+                "phoneNumber": phoneNumber,
+                "isAdmin": false
+            ]) { error in
+                if let error = error {
+                    errorMessage = error.localizedDescription
+                    completion(false)
+                } else {
+                    sendEmailVerification(user: user)
+                    completion(true)
                 }
-                
-                //perform the email verification
-                sendEmailVerification(user: user)
-                
-                //return true
-                completion(true) // Return true if the account was created
             }
         }
     }
     
-    //for sending email verification
-    func sendEmailVerification(user: User) {
-            user.sendEmailVerification { error in
-                if let error = error {
-                    errorMessage = error.localizedDescription
-                }
+    private func sendEmailVerification(user: User) {
+        user.sendEmailVerification { error in
+            if let error = error {
+                errorMessage = error.localizedDescription
             }
+        }
     }
+}
+
+// MARK: - Header View
+struct HeaderView: View {
+    var body: some View {
+        VStack {
+            Text("Sign Up")
+                .font(.system(size: 40, weight: .bold))
+                .foregroundColor(.white)
+        }
+        .padding(.bottom, 16)
+    }
+}
+
+// MARK: - Error Message View
+struct ErrorMessageView: View {
+    var message: String
     
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color.red.opacity(0.8))
+            Text(message)
+                .foregroundColor(.white)
+                .multilineTextAlignment(.center)
+                .padding()
+        }
+        .frame(maxWidth: .infinity, maxHeight: 50)
+        .padding(.horizontal)
+    }
 }
 
 #Preview {

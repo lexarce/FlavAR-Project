@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		344789102CC879E8006543A4 /* UserPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3447890F2CC879E8006543A4 /* UserPermissions.swift */; };
+		3474FC2E2D4704B6001AF91D /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3474FC2D2D4704B1001AF91D /* CustomTextField.swift */; };
 		3499031C2CDEBB240087B403 /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3499031B2CDEBB240087B403 /* ARView.swift */; };
 		3499031F2CDEBCB30087B403 /* shoe.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 3499031E2CDEBCB30087B403 /* shoe.usdz */; };
 		34B412372CB9FFBD00ED5BAF /* MenuItemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B412362CB9FFBD00ED5BAF /* MenuItemService.swift */; };
@@ -58,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		3447890F2CC879E8006543A4 /* UserPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPermissions.swift; sourceTree = "<group>"; };
+		3474FC2D2D4704B1001AF91D /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		3499031B2CDEBB240087B403 /* ARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; };
 		3499031D2CDEBBC70087B403 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3499031E2CDEBCB30087B403 /* shoe.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = shoe.usdz; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				34F645332CDB0509006E840E /* NavigationBar.swift */,
 				C334A1072CC980D6004BCE94 /* IndividualItemView.swift */,
 				34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */,
+				3474FC2D2D4704B1001AF91D /* CustomTextField.swift */,
 				3447890F2CC879E8006543A4 /* UserPermissions.swift */,
 				34B4123A2CBA3FAD00ED5BAF /* ImageDownloader.swift */,
 				34B412362CB9FFBD00ED5BAF /* MenuItemService.swift */,
@@ -282,6 +285,7 @@
 				3FFDCF502CDFF8CE00D3313D /* StaffMenuView.swift in Sources */,
 				3FFDCF542CDFF91500D3313D /* CreateMenuItemView.swift in Sources */,
 				C34798312CDFDC1300CCDAC0 /* OrderConfirmationView.swift in Sources */,
+				3474FC2E2D4704B6001AF91D /* CustomTextField.swift in Sources */,
 				34B4123B2CBA3FAD00ED5BAF /* ImageDownloader.swift in Sources */,
 				34DDE8DE2CA1C2D800CB47FC /* LoginView.swift in Sources */,
 				344789102CC879E8006543A4 /* UserPermissions.swift in Sources */,

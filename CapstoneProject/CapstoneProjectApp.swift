@@ -28,10 +28,10 @@ struct CapstoneProjectApp: App {
             //It must be a view file
             
             //HomePageView()
-            //LoginView()
+            LoginView()
             //ContentView()
             //CustomerMenuView()
-            CustomerMenuView()
+            //CustomerMenuView()
         }
     }
 }
