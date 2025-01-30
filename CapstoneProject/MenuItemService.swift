@@ -63,9 +63,18 @@ struct MenuItem: Identifiable {
     var category: String
     var isPopular: Bool
     var ARModelPath: String
+    var quantity: Int   // Added quantity for CartManager
     
     // initializer with default values
-    init(id: String = UUID().uuidString, title: String = "Item Name", description: String = "Enter description", price: Double = 0.0, imagePath: String = "defaultImage", category: String = "Enter Category", isPopular: Bool = false, ARModelPath: String = "AR Model Path") {
+    init(id: String = UUID().uuidString,
+         title: String = "Item Name",
+         description: String = "Enter description",
+         price: Double = 0.0,
+         imagePath: String = "defaultImage",
+         category: String = "Enter Category",
+         isPopular: Bool = false,
+         ARModelPath: String = "AR Model Path",
+         quantity: Int = 1) {
         self.id = id
         self.title = title
         self.description = description
@@ -74,5 +83,6 @@ struct MenuItem: Identifiable {
         self.category = category
         self.isPopular = isPopular
         self.ARModelPath = ARModelPath
+        self.quantity = quantity
     }
 }

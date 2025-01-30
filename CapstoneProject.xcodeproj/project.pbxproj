@@ -54,6 +54,7 @@
 		C34798332CDFDFE800CCDAC0 /* CustomerOrderHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34798322CDFDFDE00CCDAC0 /* CustomerOrderHistory.swift */; };
 		C34978A72CDDE49900966CAC /* CustomerCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34978A62CDDE48C00966CAC /* CustomerCartView.swift */; };
 		C34978A92CDDE4A300966CAC /* CustomerCheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34978A82CDDE4A000966CAC /* CustomerCheckoutView.swift */; };
+		C37D8B2B2D4B0EE7000DC6A3 /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37D8B2A2D4B0EE7000DC6A3 /* CartManager.swift */; };
 		C3829B682CB4FFBE00001049 /* CustomerMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3829B672CB4FFB500001049 /* CustomerMenuView.swift */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,7 @@
 		C34798322CDFDFDE00CCDAC0 /* CustomerOrderHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerOrderHistory.swift; sourceTree = "<group>"; };
 		C34978A62CDDE48C00966CAC /* CustomerCartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerCartView.swift; sourceTree = "<group>"; };
 		C34978A82CDDE4A000966CAC /* CustomerCheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerCheckoutView.swift; sourceTree = "<group>"; };
+		C37D8B2A2D4B0EE7000DC6A3 /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
 		C3829B672CB4FFB500001049 /* CustomerMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerMenuView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,6 +152,7 @@
 				C3829B672CB4FFB500001049 /* CustomerMenuView.swift */,
 				C34798322CDFDFDE00CCDAC0 /* CustomerOrderHistory.swift */,
 				C34978A62CDDE48C00966CAC /* CustomerCartView.swift */,
+				C37D8B2A2D4B0EE7000DC6A3 /* CartManager.swift */,
 				C34978A82CDDE4A000966CAC /* CustomerCheckoutView.swift */,
 				C34798302CDFDC0E00CCDAC0 /* OrderConfirmationView.swift */,
 				34F645332CDB0509006E840E /* NavigationBar.swift */,
@@ -281,6 +284,7 @@
 				3F4906F32CE01DAB00360F78 /* StaffHomePageView.swift in Sources */,
 				C3829B682CB4FFBE00001049 /* CustomerMenuView.swift in Sources */,
 				3499031C2CDEBB240087B403 /* ARView.swift in Sources */,
+				C37D8B2B2D4B0EE7000DC6A3 /* CartManager.swift in Sources */,
 				3F6C5A722CF12DDE00EF90DA /* MenuView.swift in Sources */,
 				3FFDCF502CDFF8CE00D3313D /* StaffMenuView.swift in Sources */,
 				3FFDCF542CDFF91500D3313D /* CreateMenuItemView.swift in Sources */,

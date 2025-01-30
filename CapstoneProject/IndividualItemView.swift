@@ -11,13 +11,11 @@ import FirebaseFirestore
 import FirebaseAuth
 
 struct IndividualItemView: View {
-    var menuItem: MenuItem  // Pass the MenuItem
+    var menuItem: MenuItem
     @State private var isARViewPresented: Bool = false
-    
-    
-    @State private var downloadedImage: UIImage? = nil  // Holds the downloaded image
-    
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>  // Used to dismiss the view
+    @State private var downloadedImage: UIImage? = nil
+    @EnvironmentObject var cartManager: CartManager
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         ZStack {
@@ -27,11 +25,9 @@ struct IndividualItemView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                // Top bar with back button and cart button
                 HStack {
-                    // Back button to dismiss the view
                     Button(action: {
-                        presentationMode.wrappedValue.dismiss()  // Dismiss the view to go back
+                        presentationMode.wrappedValue.dismiss()
                     }) {
                         Image("BackButton")
                             .resizable()
@@ -39,11 +35,7 @@ struct IndividualItemView: View {
                             .padding()
                     }
                     Spacer()
-                    
-                    // Cart button (implementing later)
-                    Button(action: {
-                        // Action for cart button
-                    }) {
+                    NavigationLink(destination: CustomerCartView().environmentObject(cartManager)) {
                         Image("CartButton")
                             .resizable()
                             .frame(width: 40, height: 40)
@@ -52,11 +44,9 @@ struct IndividualItemView: View {
                 }
                 .padding(.horizontal)
                 
-                Spacer()
-
-                // Display the selected item's details
+                Divider()
+                
                 VStack {
-                    // Item Image: Load image from Firebase
                     if let image = downloadedImage {
                         Image(uiImage: image)
                             .resizable()
@@ -64,7 +54,6 @@ struct IndividualItemView: View {
                             .frame(width: 300, height: 200)
                             .cornerRadius(20)
                     } else {
-                        // Placeholder image while loading
                         Rectangle()
                             .fill(Color.gray)
                             .frame(width: 300, height: 200)
@@ -72,44 +61,40 @@ struct IndividualItemView: View {
                     }
                     
                     Button(action: {
-                        // Add the action you want to perform here
-                        print("Button tapped!")
                         isARViewPresented.toggle()
                     }) {
-                        Text("Tap Me")
+                        Text("View in AR")
                             .font(.headline)
-                            .foregroundColor(.white) // Change text color
+                            .foregroundColor(.white)
                             .padding()
-                            .background(Color("AppColor4")) // Add background color
-                            .cornerRadius(10) // Make the button's edges rounded
+                            .background(Color("AppColor4"))
+                            .cornerRadius(10)
                     }
                     .sheet(isPresented: $isARViewPresented) {
                         SheetView(isPresented: $isARViewPresented, modelName: menuItem.ARModelPath)
                     }
                     
-                    // Item Title
                     Text(menuItem.title)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                     
-                    // Item Description
                     Text(menuItem.description)
                         .font(.body)
                         .foregroundColor(.white)
                         .padding()
                     
-                    // Item Price
                     Text("$\(menuItem.price, specifier: "%.2f")")
                         .font(.title)
                         .foregroundColor(.yellow)
-                        .padding(.bottom)
+                        .padding()
                 }
                 
-                Spacer()
-
-                // Add to Cart button
-                NavigationLink(destination: CustomerCartView()) {
+                Divider()
+                
+                Button(action: {
+                    cartManager.addToCart(menuItem)
+                }) {
                     Text("ADD TO CART")
                         .bold()
                         .foregroundColor(.white)
@@ -120,42 +105,37 @@ struct IndividualItemView: View {
                                 .fill(Color("AppColor4"))
                         )
                 }
-                .padding(.leading, 20)
-                .padding(.trailing, 20)
-                .offset(y: -100)
+                .padding(.horizontal, 20)
                 .shadow(radius: 10)
             }
         }
         .onAppear {
-            loadImage()  // Download the image when the view appears
+            loadImage()
         }
     }
-
-    // Function to download the image from Firebase Storage
+    
     func loadImage() {
         let imageDownloader = ImageDownloader()
         imageDownloader.downloadImage(from: menuItem.imagePath) { uiImage in
             DispatchQueue.main.async {
-                self.downloadedImage = uiImage  // Update the image state when loaded
+                self.downloadedImage = uiImage
             }
         }
     }
 }
 
-// Preview for IndividualItemView
 struct IndividualItemView_Previews: PreviewProvider {
     static var previews: some View {
-        // Sample MenuItem to use for preview
         let sampleMenuItem = MenuItem(
             id: "1",
             title: "Premium Beef Bulgogi Box",
             description: "Delicious beef bulgogi served with rice, vegetables, and sauce.",
             price: 14.99,
-            imagePath: "PremiumBulgogiBox"  // Replace with a valid image name from your assets
+            imagePath: "PremiumBulgogiBox"
         )
         
-        // Pass the sampleMenuItem to IndividualItemView
         return IndividualItemView(menuItem: sampleMenuItem)
+            .environmentObject(CartManager())
             .previewLayout(.sizeThatFits)
             .background(Color.black)
     }

@@ -16,7 +16,7 @@ struct CustomerMenuView: View {
     @State private var menuItems: [MenuItem] = []
     
     var body: some View {
-        NavigationView {    // Wrap the view in a NavigationView
+        NavigationStack {
             ZStack {
                 Image("CustomerOrderMenuBG")
                     .resizable()
@@ -73,11 +73,8 @@ struct CustomerMenuView: View {
                     
                     Spacer()
                     
-                    // Navigation Bar
-                    Image("NavigationBar")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 60)
+                    // Use NavigationBar component
+                    NavigationBar()
                     
                     Spacer().frame(height: 40)
                 }
@@ -93,7 +90,7 @@ struct CustomerMenuView: View {
         return String(format: "$%.2f", price)
     }
     
-    // Loads all the menu items from the Firebase collection into an array.
+    // Loads all the menu items from the Firebase collection into an array
     // Each MenuItem has its own title, description, price, and imagePath
     func loadMenuItems() {
         let menuItemService = MenuItemService()

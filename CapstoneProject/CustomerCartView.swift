@@ -11,12 +11,10 @@ import FirebaseFirestore
 import FirebaseAuth
 
 struct CustomerCartView: View {
-    @State private var cartItems: [MenuItem] = []
-    @State private var quantities: [String: Int] = [:] // Track quantities by item ID
-    @State private var showDetails: [String: Bool] = [:] // Track show/hide state for item details
+    @EnvironmentObject var cartManager: CartManager
     
     private var subtotal: Double {
-        cartItems.reduce(0) { $0 + ($1.price * Double(quantities[$1.id] ?? 1)) }
+        cartManager.cartItems.reduce(0) { $0 + ($1.price * Double($1.quantity)) }
     }
     
     private var tax: Double {
@@ -28,7 +26,7 @@ struct CustomerCartView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Image("PlainBG")
                     .resizable()
@@ -36,10 +34,8 @@ struct CustomerCartView: View {
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack {
-                    // Top bar with back button & cart button
                     HStack {
-                        // Back button to navigate to CustomerMenuView
-                        NavigationLink(destination: CustomerMenuView()) {
+                        NavigationLink(destination: CustomerMenuView().environmentObject(cartManager)) {
                             Image("BackButton")
                                 .resizable()
                                 .frame(width: 40, height: 40)
@@ -47,8 +43,7 @@ struct CustomerCartView: View {
                         }
                         Spacer()
                         
-                        // Exit button to navigate to HomePageView
-                        NavigationLink(destination: HomePageView()) {
+                        NavigationLink(destination: HomePageView().environmentObject(cartManager)) {
                             Image("ExitButton")
                                 .resizable()
                                 .frame(width: 40, height: 40)
@@ -57,19 +52,16 @@ struct CustomerCartView: View {
                     }
                     .padding(.horizontal)
                     .padding(.top, 5)
-                    Spacer(minLength: 1) // Adds space above Cart title
-
-                    // Cart Title
+                    
                     Text("CART")
                         .font(.title)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                         .padding(.top, 5)
                     
-                    // Item List
                     ScrollView {
                         VStack(spacing: 20) {
-                            ForEach(cartItems) { item in
+                            ForEach(cartManager.cartItems) { item in
                                 VStack(alignment: .leading, spacing: 8) {
                                     HStack {
                                         if let image = UIImage(named: item.imagePath) {
@@ -87,120 +79,78 @@ struct CustomerCartView: View {
                                         VStack(alignment: .leading) {
                                             Text(item.title)
                                                 .font(.headline)
-                                                .foregroundColor(.white)  // Title color
+                                                .foregroundColor(.white)
                                             
                                             Text("$\(item.price, specifier: "%.2f")")
                                                 .font(.subheadline)
-                                                .foregroundColor(.yellow)  // Price color
+                                                .foregroundColor(.yellow)
                                         }
                                         
                                         Spacer()
                                         
                                         HStack(spacing: 10) {
                                             Button(action: {
-                                                if let currentQuantity = quantities[item.id], currentQuantity > 1 {
-                                                    quantities[item.id] = currentQuantity - 1
-                                                }
+                                                cartManager.removeFromCart(item)
                                             }) {
                                                 Image(systemName: "minus.circle.fill")
-                                                    .foregroundColor(.yellow) // Updated to yellow
+                                                    .foregroundColor(.yellow)
                                             }
                                             
-                                            Text("\(quantities[item.id] ?? 1)")
+                                            Text("\(item.quantity)")
                                                 .font(.subheadline)
-                                                .foregroundColor(.white)  // Quantity color
+                                                .foregroundColor(.white)
                                             
                                             Button(action: {
-                                                quantities[item.id, default: 1] += 1
+                                                cartManager.addToCart(item)
                                             }) {
                                                 Image(systemName: "plus.circle.fill")
-                                                    .foregroundColor(.yellow) // Updated to yellow
+                                                    .foregroundColor(.yellow)
                                             }
                                         }
                                     }
-                                    
-                                    // View Details Button
-                                    Button(action: {
-                                        withAnimation {
-                                            showDetails[item.id] = !(showDetails[item.id] ?? false)
-                                        }
-                                    }) {
-                                        Text(showDetails[item.id] == true ? "Hide Details" : "View Details")
-                                            .font(.subheadline)
-                                            .foregroundColor(.gray) // Set to gray
-                                    }
-                                    
-                                    // Item Details
-                                    if showDetails[item.id] == true {
-                                        Text(item.description)
-                                            .font(.caption)
-                                            .foregroundColor(.gray)
-                                            .padding(.top, 4)
-                                    }
-                                    
                                     Divider()
                                 }
                                 .padding(.horizontal)
                             }
                         }
                     }
-                    .padding(.top, 5) // Add space above the item list
-
-                    Spacer() // Add spacer to push the content up from the bottom
-                    
+                    .padding(.top, 5)
                     
                     VStack(alignment: .leading, spacing: 8) {
-                        // Add Items Button
-                        NavigationLink(destination: CustomerMenuView()) {
-                            Image("AddItemButtonClear")
-                                .resizable()
-                                .frame(width: 100, height: 50)
-                                .padding(.bottom, -10)
-                                .padding(.top, -10)
-                        }
-                    }
-                    
-                    Spacer()
-                    
-                    // Subtotal, Tax, and Total
-                    VStack(alignment: .leading, spacing: 8) {
-                        
                         HStack {
                             Text("Subtotal")
-                                .foregroundColor(.white)  // Label color
+                                .foregroundColor(.white)
                             Spacer()
                             Text("$\(subtotal, specifier: "%.2f")")
-                                .foregroundColor(.white)  // Value color
+                                .foregroundColor(.white)
                         }
                         HStack {
                             Text("Tax")
-                                .foregroundColor(.white)  // Label color
+                                .foregroundColor(.white)
                             Spacer()
                             Text("$\(tax, specifier: "%.2f")")
-                                .foregroundColor(.white)  // Value color
+                                .foregroundColor(.white)
                         }
                         HStack {
                             Text("Total")
                                 .fontWeight(.bold)
-                                .foregroundColor(.white)  // Label color
+                                .foregroundColor(.white)
                             Spacer()
                             Text("$\(total, specifier: "%.2f")")
                                 .fontWeight(.bold)
-                                .foregroundColor(.white)  // Value color
+                                .foregroundColor(.white)
                         }
                     }
                     .padding()
                     .background(Color.white.opacity(0.1))
                     .cornerRadius(10)
                     .padding(.horizontal)
-                    .padding(.bottom, 60)
+                    .padding(.bottom, 10)
                     
-                    // Checkout Button
-                    NavigationLink(destination: CustomerCheckoutView()) {
-                        // Handle checkout action
+                    NavigationLink(destination: CustomerCheckoutView().environmentObject(cartManager)) {
                         Text("CHECK OUT")
                             .bold()
-                            .foregroundStyle(.white)
+                            .foregroundColor(.white)
                             .padding()
                             .frame(maxWidth: .infinity)
                             .background(
@@ -209,37 +159,19 @@ struct CustomerCartView: View {
                             )
                     }
                     .padding(.horizontal, 20)
-                    .padding(.bottom,20)
-                    .offset(y: -60)
-                }
-                .onAppear {
-                    loadCartItems()
-                }
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationBarHidden(true)
-            }
-        }
-    }
-    
-    // Load cart items from Firebase
-    func loadCartItems() {
-        let menuItemService = MenuItemService()
-        menuItemService.fetchMenuItems { items in
-            DispatchQueue.main.async {
-                self.cartItems = items
-                // Initialize quantities and showDetails dictionaries for each item
-                for item in items {
-                    self.quantities[item.id] = 1 // Default quantity
-                    self.showDetails[item.id] = false // Default details hidden
+                    .padding(.bottom, 10)
+                    
+                    NavigationBar()
+                    Spacer().frame(height: 40)
                 }
             }
         }
     }
 }
 
-// Preview
 struct CustomerCartView_Previews: PreviewProvider {
     static var previews: some View {
         CustomerCartView()
+            .environmentObject(CartManager())
     }
 }
