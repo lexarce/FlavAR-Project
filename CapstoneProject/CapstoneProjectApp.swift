@@ -17,6 +17,9 @@ struct CapstoneProjectApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
+    //Object for keeping track of which view the app is in
+    @StateObject private var navigationManager = NavigationManager.shared
+    
     init() {
         FirebaseApp.configure()
     }
@@ -32,6 +35,7 @@ struct CapstoneProjectApp: App {
             //ContentView()
             //CustomerMenuView()
             //CustomerMenuView()
+                .environmentObject(navigationManager)
         }
     }
 }

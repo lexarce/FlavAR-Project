@@ -11,6 +11,7 @@
 		3474FC2E2D4704B6001AF91D /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3474FC2D2D4704B1001AF91D /* CustomTextField.swift */; };
 		3499031C2CDEBB240087B403 /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3499031B2CDEBB240087B403 /* ARView.swift */; };
 		3499031F2CDEBCB30087B403 /* shoe.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 3499031E2CDEBCB30087B403 /* shoe.usdz */; };
+		34ABCFE12D50025200E325A1 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ABCFE02D50024D00E325A1 /* NavigationManager.swift */; };
 		34B412372CB9FFBD00ED5BAF /* MenuItemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B412362CB9FFBD00ED5BAF /* MenuItemService.swift */; };
 		34B4123B2CBA3FAD00ED5BAF /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B4123A2CBA3FAD00ED5BAF /* ImageDownloader.swift */; };
 		34DDE8D02CA1C2A900CB47FC /* CapstoneProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE8CF2CA1C2A900CB47FC /* CapstoneProjectApp.swift */; };
@@ -64,6 +65,7 @@
 		3499031B2CDEBB240087B403 /* ARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; };
 		3499031D2CDEBBC70087B403 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3499031E2CDEBCB30087B403 /* shoe.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = shoe.usdz; sourceTree = "<group>"; };
+		34ABCFE02D50024D00E325A1 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		34B412362CB9FFBD00ED5BAF /* MenuItemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemService.swift; sourceTree = "<group>"; };
 		34B4123A2CBA3FAD00ED5BAF /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		34DDE8CC2CA1C2A900CB47FC /* CapstoneProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CapstoneProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,6 +158,7 @@
 				C34978A82CDDE4A000966CAC /* CustomerCheckoutView.swift */,
 				C34798302CDFDC0E00CCDAC0 /* OrderConfirmationView.swift */,
 				34F645332CDB0509006E840E /* NavigationBar.swift */,
+				34ABCFE02D50024D00E325A1 /* NavigationManager.swift */,
 				C334A1072CC980D6004BCE94 /* IndividualItemView.swift */,
 				34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */,
 				3474FC2D2D4704B1001AF91D /* CustomTextField.swift */,
@@ -290,6 +293,7 @@
 				3FFDCF542CDFF91500D3313D /* CreateMenuItemView.swift in Sources */,
 				C34798312CDFDC1300CCDAC0 /* OrderConfirmationView.swift in Sources */,
 				3474FC2E2D4704B6001AF91D /* CustomTextField.swift in Sources */,
+				34ABCFE12D50025200E325A1 /* NavigationManager.swift in Sources */,
 				34B4123B2CBA3FAD00ED5BAF /* ImageDownloader.swift in Sources */,
 				34DDE8DE2CA1C2D800CB47FC /* LoginView.swift in Sources */,
 				344789102CC879E8006543A4 /* UserPermissions.swift in Sources */,

@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct NavigationBar: View {
-    let buttons: [(destination: AnyView, offset: CGFloat)] = [
-        (destination: AnyView(HomePageView()), offset: -6),
-        (destination: AnyView(HomePageView()), offset: -3),
-        (destination: AnyView(MenuView()), offset: 0),
-        (destination: AnyView(StoreView()), offset: 5),
-        (destination: AnyView(HomePageView()), offset: 10)
+    @EnvironmentObject var navigationManager: NavigationManager
+    
+    let buttons: [(destination: AnyView, viewID: String, offset: CGFloat)] = [
+        (destination: AnyView(HomePageView()), viewID: "HomePageView", offset: -6),
+        (destination: AnyView(HomePageView()), viewID: "HomePageView", offset: -3),//change to some order view
+        (destination: AnyView(MenuView()), viewID: "MenuView", offset: 0),
+        (destination: AnyView(StoreView()), viewID: "StoreView", offset: 5),
+        (destination: AnyView(HomePageView()), viewID: "HomePageView", offset: 10)//change to profileview
     ]
     
     var body: some View {
@@ -30,9 +32,22 @@ struct NavigationBar: View {
                     
                     //Defines all 5 rectangle buttons
                     ForEach(0..<buttons.count, id: \.self) { index in
-                        NavigationLink(destination: buttons[index].destination) {
+                        // check if current view is the same as destination
+                        if buttons[index].viewID != navigationManager.currentView {
+                            NavigationLink(destination: buttons[index].destination) {
+                                Rectangle()
+                                    .stroke(Color.clear, lineWidth: 2)
+                                    .frame(width: 70, height: 52)
+                                    .offset(x: buttons[index].offset, y: -5)
+                                    .onTapGesture {
+                                        //update view
+                                        navigationManager.currentView = buttons[index].viewID
+                                    }
+                                }
+                        } else {
+                            //dummy button if already on destination view
                             Rectangle()
-                                .stroke(Color.clear, lineWidth: 2) // Black outline
+                                .stroke(Color.clear, lineWidth: 2)
                                 .frame(width: 70, height: 52)
                                 .offset(x: buttons[index].offset, y: -5)
                         }
@@ -45,4 +60,5 @@ struct NavigationBar: View {
 }
 #Preview {
     NavigationBar()
+        .environmentObject(NavigationManager.shared)
 }

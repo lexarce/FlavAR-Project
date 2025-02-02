@@ -11,6 +11,8 @@ import FirebaseFirestore
 
 struct MenuView: View
 {
+    @EnvironmentObject var navigationManager: NavigationManager //For navigating views
+    
     @State private var searchText: String = ""
     @State private var menuItems: [MenuItem] = []  // menu items from firebase
     @State private var isAdmin: Bool = false
@@ -19,7 +21,7 @@ struct MenuView: View
     
     var body: some View
     {
-        NavigationView
+        NavigationStack
         {
             ZStack
             {
@@ -126,9 +128,16 @@ struct MenuView: View
                     
                 }
                 .padding()
+                .navigationBarBackButtonHidden(true)
                 
-                
+                //Nav Bar
+                VStack {
+                    Spacer()
+                    NavigationBar()
+                }
+
             }
+            
         }
         .onAppear {
             // Fetch the admin status when the view appears
@@ -142,6 +151,9 @@ struct MenuView: View
                     }
                 }
             }
+            
+            //Update the current view
+            navigationManager.currentView = "MenuView"
         }
     }
 }
@@ -407,5 +419,6 @@ struct SearchBar: View
 #Preview
 {
     MenuView()
+        .environmentObject(NavigationManager.shared)
 }
 

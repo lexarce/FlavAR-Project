@@ -11,7 +11,7 @@ import FirebaseFirestore
 import FirebaseAuth
 
 struct CustomerMenuView: View {
-    
+    @EnvironmentObject var navigationManager: NavigationManager
     // Observed array to hold menu items
     @State private var menuItems: [MenuItem] = []
     
@@ -81,6 +81,8 @@ struct CustomerMenuView: View {
             }
             .onAppear {
                 loadMenuItems()
+                
+                navigationManager.currentView = "CustomerMenuView"
             }
         }
     }
@@ -168,5 +170,6 @@ struct MenuItemView: View {
 struct CustomerMenuView_Previews: PreviewProvider {
     static var previews: some View {
         CustomerMenuView()
+            .environmentObject(NavigationManager.shared)
     }
 }

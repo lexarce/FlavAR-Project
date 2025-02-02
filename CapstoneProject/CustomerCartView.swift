@@ -11,6 +11,7 @@ import FirebaseFirestore
 import FirebaseAuth
 
 struct CustomerCartView: View {
+    @EnvironmentObject var navigationManager: NavigationManager
     @EnvironmentObject var cartManager: CartManager
     
     private var subtotal: Double {
@@ -164,6 +165,9 @@ struct CustomerCartView: View {
                     NavigationBar()
                     Spacer().frame(height: 40)
                 }
+                .onAppear {
+                    navigationManager.currentView = "CustomerCartView"
+                }
             }
         }
     }
@@ -173,5 +177,6 @@ struct CustomerCartView_Previews: PreviewProvider {
     static var previews: some View {
         CustomerCartView()
             .environmentObject(CartManager())
+            .environmentObject(NavigationManager.shared)
     }
 }
