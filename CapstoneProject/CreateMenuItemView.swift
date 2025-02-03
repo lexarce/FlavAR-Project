@@ -5,6 +5,32 @@
 //  Created by kimi on 10/28/24.
 //
 import SwiftUI
+import PhotosUI
+
+@MainActor
+final class PhotoPickerViewModel: ObservableObject {
+    
+    @Published var selectedImage: UIImage? = nil
+    @Published var imageSelection: PhotosPickerItem? = nil {
+        didSet {
+            setImage(from: imageSelection)
+        }
+    }
+    
+    private func setImage(from selection: PhotosPickerItem?) {
+        guard let selection else { return }
+        
+        Task {
+            if let data = try? await selection.loadTransferable(type: Data.self) {
+                if let uiImage = UIImage(data: data) {
+                    selectedImage = uiImage
+                    return
+                }
+            }
+        }
+        
+    }
+}
 
 struct CreateMenuItemView: View {
     
@@ -67,26 +93,34 @@ struct CreateMenuItemView: View {
 struct EditableImageView: View {
     var imageName: String // name of image
     var onEdit: () -> Void // closure for edit button action
+    @StateObject private var viewModel = PhotoPickerViewModel()
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            Image(imageName)
-                .resizable()
-                .scaledToFill()
-                .frame(height: 320)
-                .clipped() // makes image stay in its bounds
-
-            Button(action: {
-                onEdit() // call function when button is pressed
-            }) {
+            
+            if let image = viewModel.selectedImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 320)
+                    .clipped()
+            }
+            else {
+                Image(imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 320)
+                    .clipped()
+            }
+            
+            PhotosPicker(selection: $viewModel.imageSelection, matching: .images) {
                 Image("DarkEditButton") // used to edit the image and upload a picture
                     .resizable()
                     .scaledToFit()
                     .frame(width: 45, height: 45)
                     .padding(5)
+                    .padding()
             }
-            .cornerRadius(18)
-            .padding()
         }
     }
 }
