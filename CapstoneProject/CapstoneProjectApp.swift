@@ -19,6 +19,7 @@ struct CapstoneProjectApp: App {
     
     //Object for keeping track of which view the app is in
     @StateObject private var navigationManager = NavigationManager.shared
+    @StateObject var userManager = UserInfoManager()
     
     init() {
         FirebaseApp.configure()
@@ -36,6 +37,7 @@ struct CapstoneProjectApp: App {
             //CustomerMenuView()
             //CustomerMenuView()
                 .environmentObject(navigationManager)
+                .environmentObject(userManager)
         }
     }
 }

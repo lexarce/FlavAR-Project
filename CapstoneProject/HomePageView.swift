@@ -22,7 +22,7 @@ struct HomePageView: View {
     @State private var image: UIImage? = nil
     @State private var userName: String = "User"  // Default name if the user is not found
     @State private var isAdmin: Bool = false // Track if user is an admin or not
-    @State private var userInfo: UserInfo?
+    @EnvironmentObject var userManager: UserInfoManager
     
     let galleryImages: [String] = ["JinGalleryPic1", "JinGalleryPic2", "JinGalleryPic3"]
 
@@ -80,10 +80,13 @@ struct HomePageView: View {
                     navigationManager.currentView = "HomePageView"
                     
                     //Get user info
-                    fetchUserInfo { fetchedUser, error in
-                        if let fetchedUser = fetchedUser {
-                            self.userInfo = fetchedUser
-                        }
+                    userManager.fetchUserInfo()
+                }
+                .onReceive(userManager.$userInfo) { userInfo in
+                    if let userInfo = userInfo {
+                        print("User First Name: \(userInfo.firstName)")
+                    } else {
+                        print("User info is nil")
                     }
                 }
                 
