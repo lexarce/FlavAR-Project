@@ -14,6 +14,7 @@ import FirebaseAuth
 //This is where the program starts
 @main
 struct CapstoneProjectApp: App {
+    @StateObject var cartManager = CartManager()
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
@@ -38,6 +39,10 @@ struct CapstoneProjectApp: App {
             //CustomerMenuView()
                 .environmentObject(navigationManager)
                 .environmentObject(userManager)
+            
+            //CustomerMenuView()
+               // .environmentObject(cartManager)
+                //.environmentObject(navigationManager)
         }
     }
 }

@@ -43,7 +43,6 @@
 		34DDE9092CA1FB9F00CB47FC /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 34DDE9082CA1FB9F00CB47FC /* FirebaseRemoteConfig */; };
 		34DDE90B2CA1FB9F00CB47FC /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 34DDE90A2CA1FB9F00CB47FC /* FirebaseStorage */; };
 		34DDE90D2CA1FB9F00CB47FC /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 34DDE90C2CA1FB9F00CB47FC /* FirebaseStorageCombine-Community */; };
-		34DDE90F2CA1FB9F00CB47FC /* FirebaseVertexAI-Preview in Frameworks */ = {isa = PBXBuildFile; productRef = 34DDE90E2CA1FB9F00CB47FC /* FirebaseVertexAI-Preview */; };
 		34DDE9112CA2200C00CB47FC /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE9102CA2200C00CB47FC /* HomePageView.swift */; };
 		34DDE9132CA220EF00CB47FC /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */; };
 		34F645342CDB0509006E840E /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F645332CDB0509006E840E /* NavigationBar.swift */; };
@@ -55,6 +54,9 @@
 		C334A1082CC980DC004BCE94 /* IndividualItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C334A1072CC980D6004BCE94 /* IndividualItemView.swift */; };
 		C34798312CDFDC1300CCDAC0 /* OrderConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34798302CDFDC0E00CCDAC0 /* OrderConfirmationView.swift */; };
 		C34798332CDFDFE800CCDAC0 /* CustomerOrderHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34798322CDFDFDE00CCDAC0 /* CustomerOrderHistory.swift */; };
+		C34968962D6328FA009DC4F7 /* PremiumJinsBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34968952D6328F6009DC4F7 /* PremiumJinsBox.swift */; };
+		C34968982D632905009DC4F7 /* KoreanFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34968972D632902009DC4F7 /* KoreanFood.swift */; };
+		C349689A2D63290E009DC4F7 /* PopularItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34968992D632909009DC4F7 /* PopularItems.swift */; };
 		C34978A72CDDE49900966CAC /* CustomerCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34978A62CDDE48C00966CAC /* CustomerCartView.swift */; };
 		C34978A92CDDE4A300966CAC /* CustomerCheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34978A82CDDE4A000966CAC /* CustomerCheckoutView.swift */; };
 		C37D8B2B2D4B0EE7000DC6A3 /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37D8B2A2D4B0EE7000DC6A3 /* CartManager.swift */; };
@@ -89,6 +91,9 @@
 		C334A1072CC980D6004BCE94 /* IndividualItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualItemView.swift; sourceTree = "<group>"; };
 		C34798302CDFDC0E00CCDAC0 /* OrderConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmationView.swift; sourceTree = "<group>"; };
 		C34798322CDFDFDE00CCDAC0 /* CustomerOrderHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerOrderHistory.swift; sourceTree = "<group>"; };
+		C34968952D6328F6009DC4F7 /* PremiumJinsBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumJinsBox.swift; sourceTree = "<group>"; };
+		C34968972D632902009DC4F7 /* KoreanFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanFood.swift; sourceTree = "<group>"; };
+		C34968992D632909009DC4F7 /* PopularItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularItems.swift; sourceTree = "<group>"; };
 		C34978A62CDDE48C00966CAC /* CustomerCartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerCartView.swift; sourceTree = "<group>"; };
 		C34978A82CDDE4A000966CAC /* CustomerCheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerCheckoutView.swift; sourceTree = "<group>"; };
 		C37D8B2A2D4B0EE7000DC6A3 /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
@@ -131,7 +136,6 @@
 				34DDE8F72CA1FB9F00CB47FC /* FirebaseFirestore in Frameworks */,
 				34DDE8F52CA1FB9F00CB47FC /* FirebaseDynamicLinks in Frameworks */,
 				34DDE8FF2CA1FB9F00CB47FC /* FirebaseInAppMessaging-Beta in Frameworks */,
-				34DDE90F2CA1FB9F00CB47FC /* FirebaseVertexAI-Preview in Frameworks */,
 				34DDE9092CA1FB9F00CB47FC /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -177,7 +181,10 @@
 				C34978A62CDDE48C00966CAC /* CustomerCartView.swift */,
 				341850202D628B05008C7242 /* Menu */,
 				C34798302CDFDC0E00CCDAC0 /* OrderConfirmationView.swift */,
-				C3829B672CB4FFB500001049 /* CustomerMenuView.swift */,
+				3F6C5A712CF12DDB00EF90DA /* MenuView.swift */,
+				C34968952D6328F6009DC4F7 /* PremiumJinsBox.swift */,
+				C34968972D632902009DC4F7 /* KoreanFood.swift */,
+				C34968992D632909009DC4F7 /* PopularItems.swift */,
 				341850212D628B0F008C7242 /* Orders */,
 				34ABCFE02D50024D00E325A1 /* NavigationManager.swift */,
 				C334A1072CC980D6004BCE94 /* IndividualItemView.swift */,
@@ -190,11 +197,11 @@
 				34B412362CB9FFBD00ED5BAF /* MenuItemService.swift */,
 				3499031B2CDEBB240087B403 /* ARView.swift */,
 				3FFDCF4F2CDFF8CE00D3313D /* StaffMenuView.swift */,
-				3F6C5A712CF12DDB00EF90DA /* MenuView.swift */,
 				3FFDCF532CDFF91500D3313D /* CreateMenuItemView.swift */,
 				3F4906F22CE01DAB00360F78 /* StaffHomePageView.swift */,
 				34DDE9102CA2200C00CB47FC /* HomePageView.swift */,
 				3F6C5A772CF140F400EF90DA /* StoreView.swift */,
+				C3829B672CB4FFB500001049 /* CustomerMenuView.swift */,
 			);
 			path = CapstoneProject;
 			sourceTree = "<group>";
@@ -255,7 +262,6 @@
 				34DDE9082CA1FB9F00CB47FC /* FirebaseRemoteConfig */,
 				34DDE90A2CA1FB9F00CB47FC /* FirebaseStorage */,
 				34DDE90C2CA1FB9F00CB47FC /* FirebaseStorageCombine-Community */,
-				34DDE90E2CA1FB9F00CB47FC /* FirebaseVertexAI-Preview */,
 			);
 			productName = CapstoneProject;
 			productReference = 34DDE8CC2CA1C2A900CB47FC /* CapstoneProject.app */;
@@ -328,11 +334,14 @@
 				3474FC2E2D4704B6001AF91D /* CustomTextField.swift in Sources */,
 				34ABCFE12D50025200E325A1 /* NavigationManager.swift in Sources */,
 				34B4123B2CBA3FAD00ED5BAF /* ImageDownloader.swift in Sources */,
+				C34968982D632905009DC4F7 /* KoreanFood.swift in Sources */,
 				34DDE8DE2CA1C2D800CB47FC /* LoginView.swift in Sources */,
+				C349689A2D63290E009DC4F7 /* PopularItems.swift in Sources */,
 				344789102CC879E8006543A4 /* UserPermissions.swift in Sources */,
 				C34798332CDFDFE800CCDAC0 /* CustomerOrderHistory.swift in Sources */,
 				34DDE9112CA2200C00CB47FC /* HomePageView.swift in Sources */,
 				34F645342CDB0509006E840E /* NavigationBar.swift in Sources */,
+				C34968962D6328FA009DC4F7 /* PremiumJinsBox.swift in Sources */,
 				C334A1082CC980DC004BCE94 /* IndividualItemView.swift in Sources */,
 				3418502A2D62C9DB008C7242 /* PasswordStrength.swift in Sources */,
 				34DDE8D02CA1C2A900CB47FC /* CapstoneProjectApp.swift in Sources */,
@@ -678,11 +687,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 34DDE8E12CA1FB9F00CB47FC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
-		};
-		34DDE90E2CA1FB9F00CB47FC /* FirebaseVertexAI-Preview */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 34DDE8E12CA1FB9F00CB47FC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseVertexAI-Preview";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

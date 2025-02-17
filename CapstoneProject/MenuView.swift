@@ -3,6 +3,7 @@
 //  CapstoneProject
 //
 //  Created by kimi on 11/22/24.
+//  Modified by Alexis Arce on 02/17/25
 //
 
 import SwiftUI
@@ -79,27 +80,18 @@ struct MenuView: View
                     ScrollViewReader { proxy in
                         // Stack for item categories
                         HStack(spacing: 12) {
-                            Button(action: {
-                                withAnimation {
-                                    proxy.scrollTo("Premium Jin's Box", anchor: .top)
-                                }
-                            }) {
+                            // Premium Jin's Box Navigation
+                            NavigationLink(destination: PremiumJinsBox()) {
                                 CategoryItemView(imageName: "PremiumBoxesIcon", categoryName: "Premium Jin's Box")
                             }
-
-                            Button(action: {
-                                withAnimation {
-                                    proxy.scrollTo("Korean Food", anchor: .top)
-                                }
-                            }) {
+                            
+                            // Korean Food Navigiation
+                            NavigationLink(destination: KoreanFood()) {
                                 CategoryItemView(imageName: "KoreanFoodIcon", categoryName: "Korean Food")
                             }
-
-                            Button(action: {
-                                withAnimation {
-                                    proxy.scrollTo("Popular", anchor: .top)
-                                }
-                            }) {
+                            
+                            // Naviation to Popular Item Page
+                            NavigationLink(destination: PopularItems()) {
                                 CategoryItemView(imageName: "PopularIcon", categoryName: "Popular")
                             }
                         }
@@ -390,7 +382,7 @@ struct SearchBar: View
             // placeholder text
             if searchText.isEmpty
             {
-                Text("Your order?")
+                Text("Search")
                     .foregroundColor(.white)
                     .padding(.leading, 40)
             }
