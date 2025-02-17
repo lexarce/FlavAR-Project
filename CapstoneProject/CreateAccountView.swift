@@ -110,8 +110,12 @@ struct CreateAccountView: View {
             errorMessage = "Phone number must be between 7 and 15 digits"
             return false
         }
-        if password.count < 10 || password.count > 30 {
-            errorMessage = "Password must be between 10 and 30 characters"
+        if password.count < 8 || password.count > 30 {
+            errorMessage = "Password must be between 8 and 30 characters"
+            return false
+        }
+        if !isPasswordStrong(password) {
+            errorMessage = "Password too weak. Include uppercase, lowercase, number, and special characters"
             return false
         }
         if password != confirmedPassword {
@@ -185,7 +189,7 @@ struct ErrorMessageView: View {
                 .multilineTextAlignment(.center)
                 .padding()
         }
-        .frame(maxWidth: .infinity, maxHeight: 50)
+        .frame(maxWidth: .infinity, maxHeight: 100)
         .padding(.horizontal)
     }
 }

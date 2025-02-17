@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		341850282D62B3DB008C7242 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341850272D62B3D2008C7242 /* UserInfo.swift */; };
+		3418502A2D62C9DB008C7242 /* PasswordStrength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341850292D62C9CF008C7242 /* PasswordStrength.swift */; };
 		344789102CC879E8006543A4 /* UserPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3447890F2CC879E8006543A4 /* UserPermissions.swift */; };
 		3474FC2E2D4704B6001AF91D /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3474FC2D2D4704B1001AF91D /* CustomTextField.swift */; };
 		3499031C2CDEBB240087B403 /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3499031B2CDEBB240087B403 /* ARView.swift */; };
@@ -62,6 +63,7 @@
 
 /* Begin PBXFileReference section */
 		341850272D62B3D2008C7242 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		341850292D62C9CF008C7242 /* PasswordStrength.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordStrength.swift; sourceTree = "<group>"; };
 		3447890F2CC879E8006543A4 /* UserPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPermissions.swift; sourceTree = "<group>"; };
 		3474FC2D2D4704B1001AF91D /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		3499031B2CDEBB240087B403 /* ARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				3418501E2D628AB5008C7242 /* Login */,
 				C37D8B2A2D4B0EE7000DC6A3 /* CartManager.swift */,
 				341850272D62B3D2008C7242 /* UserInfo.swift */,
+				341850292D62C9CF008C7242 /* PasswordStrength.swift */,
 				C34978A82CDDE4A000966CAC /* CustomerCheckoutView.swift */,
 				3418501F2D628AFE008C7242 /* Account Creation */,
 				C34798322CDFDFDE00CCDAC0 /* CustomerOrderHistory.swift */,
@@ -331,6 +334,7 @@
 				34DDE9112CA2200C00CB47FC /* HomePageView.swift in Sources */,
 				34F645342CDB0509006E840E /* NavigationBar.swift in Sources */,
 				C334A1082CC980DC004BCE94 /* IndividualItemView.swift in Sources */,
+				3418502A2D62C9DB008C7242 /* PasswordStrength.swift in Sources */,
 				34DDE8D02CA1C2A900CB47FC /* CapstoneProjectApp.swift in Sources */,
 				C34978A92CDDE4A300966CAC /* CustomerCheckoutView.swift in Sources */,
 				34DDE9132CA220EF00CB47FC /* CreateAccountView.swift in Sources */,
