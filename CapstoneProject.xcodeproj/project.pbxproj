@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		341850282D62B3DB008C7242 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341850272D62B3D2008C7242 /* UserInfo.swift */; };
 		344789102CC879E8006543A4 /* UserPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3447890F2CC879E8006543A4 /* UserPermissions.swift */; };
 		3474FC2E2D4704B6001AF91D /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3474FC2D2D4704B1001AF91D /* CustomTextField.swift */; };
 		3499031C2CDEBB240087B403 /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3499031B2CDEBB240087B403 /* ARView.swift */; };
@@ -60,6 +61,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		341850272D62B3D2008C7242 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		3447890F2CC879E8006543A4 /* UserPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPermissions.swift; sourceTree = "<group>"; };
 		3474FC2D2D4704B1001AF91D /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		3499031B2CDEBB240087B403 /* ARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; };
@@ -90,6 +92,16 @@
 		C37D8B2A2D4B0EE7000DC6A3 /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
 		C3829B672CB4FFB500001049 /* CustomerMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerMenuView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		3418501E2D628AB5008C7242 /* Login */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Login; sourceTree = "<group>"; };
+		3418501F2D628AFE008C7242 /* Account Creation */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Account Creation"; sourceTree = "<group>"; };
+		341850202D628B05008C7242 /* Menu */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Menu; sourceTree = "<group>"; };
+		341850212D628B0F008C7242 /* Orders */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Orders; sourceTree = "<group>"; };
+		341850222D628B2D008C7242 /* Security */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Security; sourceTree = "<group>"; };
+		341850232D628B36008C7242 /* Payment */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Payment; sourceTree = "<group>"; };
+		341850242D628B3E008C7242 /* AR */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = AR; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		34DDE8C92CA1C2A900CB47FC /* Frameworks */ = {
@@ -150,17 +162,25 @@
 				34DDE8DF2CA1FB3100CB47FC /* GoogleService-Info.plist */,
 				34DDE8D32CA1C2AB00CB47FC /* Assets.xcassets */,
 				34DDE8D52CA1C2AB00CB47FC /* Preview Content */,
-				34DDE8DD2CA1C2D800CB47FC /* LoginView.swift */,
-				C3829B672CB4FFB500001049 /* CustomerMenuView.swift */,
-				C34798322CDFDFDE00CCDAC0 /* CustomerOrderHistory.swift */,
-				C34978A62CDDE48C00966CAC /* CustomerCartView.swift */,
+				3418501E2D628AB5008C7242 /* Login */,
 				C37D8B2A2D4B0EE7000DC6A3 /* CartManager.swift */,
+				341850272D62B3D2008C7242 /* UserInfo.swift */,
 				C34978A82CDDE4A000966CAC /* CustomerCheckoutView.swift */,
-				C34798302CDFDC0E00CCDAC0 /* OrderConfirmationView.swift */,
+				3418501F2D628AFE008C7242 /* Account Creation */,
+				C34798322CDFDFDE00CCDAC0 /* CustomerOrderHistory.swift */,
 				34F645332CDB0509006E840E /* NavigationBar.swift */,
+				34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */,
+				34DDE8DD2CA1C2D800CB47FC /* LoginView.swift */,
+				C34978A62CDDE48C00966CAC /* CustomerCartView.swift */,
+				341850202D628B05008C7242 /* Menu */,
+				C34798302CDFDC0E00CCDAC0 /* OrderConfirmationView.swift */,
+				C3829B672CB4FFB500001049 /* CustomerMenuView.swift */,
+				341850212D628B0F008C7242 /* Orders */,
 				34ABCFE02D50024D00E325A1 /* NavigationManager.swift */,
 				C334A1072CC980D6004BCE94 /* IndividualItemView.swift */,
-				34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */,
+				341850242D628B3E008C7242 /* AR */,
+				341850232D628B36008C7242 /* Payment */,
+				341850222D628B2D008C7242 /* Security */,
 				3474FC2D2D4704B1001AF91D /* CustomTextField.swift */,
 				3447890F2CC879E8006543A4 /* UserPermissions.swift */,
 				34B4123A2CBA3FAD00ED5BAF /* ImageDownloader.swift */,
@@ -198,6 +218,15 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				3418501E2D628AB5008C7242 /* Login */,
+				3418501F2D628AFE008C7242 /* Account Creation */,
+				341850202D628B05008C7242 /* Menu */,
+				341850212D628B0F008C7242 /* Orders */,
+				341850222D628B2D008C7242 /* Security */,
+				341850232D628B36008C7242 /* Payment */,
+				341850242D628B3E008C7242 /* AR */,
 			);
 			name = CapstoneProject;
 			packageProductDependencies = (
@@ -288,6 +317,7 @@
 				C3829B682CB4FFBE00001049 /* CustomerMenuView.swift in Sources */,
 				3499031C2CDEBB240087B403 /* ARView.swift in Sources */,
 				C37D8B2B2D4B0EE7000DC6A3 /* CartManager.swift in Sources */,
+				341850282D62B3DB008C7242 /* UserInfo.swift in Sources */,
 				3F6C5A722CF12DDE00EF90DA /* MenuView.swift in Sources */,
 				3FFDCF502CDFF8CE00D3313D /* StaffMenuView.swift in Sources */,
 				3FFDCF542CDFF91500D3313D /* CreateMenuItemView.swift in Sources */,

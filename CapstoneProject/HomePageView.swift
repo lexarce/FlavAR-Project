@@ -22,6 +22,7 @@ struct HomePageView: View {
     @State private var image: UIImage? = nil
     @State private var userName: String = "User"  // Default name if the user is not found
     @State private var isAdmin: Bool = false // Track if user is an admin or not
+    @State private var userInfo: UserInfo?
     
     let galleryImages: [String] = ["JinGalleryPic1", "JinGalleryPic2", "JinGalleryPic3"]
 
@@ -77,6 +78,13 @@ struct HomePageView: View {
                     
                     //updating view
                     navigationManager.currentView = "HomePageView"
+                    
+                    //Get user info
+                    fetchUserInfo { fetchedUser, error in
+                        if let fetchedUser = fetchedUser {
+                            self.userInfo = fetchedUser
+                        }
+                    }
                 }
                 
                 VStack {
