@@ -114,8 +114,13 @@ struct CreateMenuItemView: View {
                         PriceView(price: $price, isEditingPrice: $isEditingPrice, onPriceChange: { newPrice in
                             self.price = newPrice // update price when editing stops
                         })
-                        DescriptionView(description: $description, isEditingDescription: $isEditingDescription)
+                        
+                        DescriptionView(description: $description, isEditingDescription: $isEditingDescription, onDescriptionChange: { newDescription in
+                            self.description = newDescription // update description when editing stops
+                        })
+                        
                         AddCustomizationView(newCustomization: $newCustomization)
+                        
                         EditCustomizationView(price: $price)
                         
                         // error message if validation fails
@@ -378,60 +383,75 @@ struct PriceView: View {
 struct DescriptionView: View {
     @Binding var description: String // bind to the description value
     @Binding var isEditingDescription: Bool // bind to track editing state
+    var onDescriptionChange: (String) -> Void // closure to update description in parent view
 
     var body: some View {
         VStack(alignment: .leading) {
-            // Ensure the Description label is visible
+            // Label for description
             Text("Description")
                 .font(.headline)
-                .foregroundColor(.white) // Make sure it's visible
-                .padding(.top, 15) // Adds space above the label
-                ZStack {
-                    // background for the TextEditor
-                    LinearGradient(gradient: Gradient(colors: [Color(hex: "C41D21"), Color(hex: "F2A69E")]), startPoint: .leading, endPoint: .trailing)
-                        .cornerRadius(10)
-                        .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2) // subtle drop shadow
-                    
-                    HStack {
-                        ZStack(alignment: .bottomTrailing) { // Align the button at the bottom-right
-                            // TextEditor for entering description
-                            TextEditor(text: $description)
-                                .frame(height: 100) // adjust height as needed
-                                .padding()
-                                .scrollContentBackground(.hidden) // hides the white background of the text editor
-                                .background(Color.clear) // set the TextEditor background to clear
-                                .disabled(!isEditingDescription)
+                .foregroundColor(.white)
+                .padding(.top, 15)
 
-                            // edit button at the bottom-right of the ZStack
-                            Button(action: {
-                                // toggle editing state
-                                isEditingDescription.toggle()
-                            }) {
-                                Image("EditButton")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 40, height: 40)
-                                    .padding(5)
-                                    .background(
-                                        Circle()
-                                            .fill(Color.clear)
-                                            .overlay(
-                                                Circle()
-                                                    .stroke(Color.white.opacity(isEditingDescription ? 1 : 0), lineWidth: 6)
-                                                    .blur(radius: 6) // Creates a soft glow
-                                            )
-                                    )
+            ZStack {
+                // background with gradient styling
+                LinearGradient(gradient: Gradient(colors: [Color(hex: "C41D21"), Color(hex: "F2A69E")]),
+                               startPoint: .leading, endPoint: .trailing)
+                    .cornerRadius(10)
+                    .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
+
+                HStack {
+                    ZStack(alignment: .bottomTrailing) { // align the button at the bottom-right
+                        // description Input Field
+                        TextEditor(text: $description)
+                            .frame(height: 100)
+                            .padding()
+                            .scrollContentBackground(.hidden) // hides the white background of TextEditor
+                            .background(Color.clear)
+                            .disabled(!isEditingDescription)
+                            .onSubmit {
+                                formatAndSaveDescription()
                             }
-                            .padding(.bottom,0) // Adds padding to position the button towards the bottom
+                            .onDisappear {
+                                formatAndSaveDescription()
+                            }
+
+                        // edit Button with Glow Effect
+                        Button(action: {
+                            isEditingDescription.toggle()
+                            if !isEditingDescription { // when toggled off, format description
+                                formatAndSaveDescription()
+                            }
+                        }) {
+                            Image("EditButton")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 40, height: 40)
+                                .padding(5)
+                                .background(
+                                    Circle()
+                                        .fill(Color.clear)
+                                        .overlay(
+                                            Circle()
+                                                .stroke(Color.white.opacity(isEditingDescription ? 1 : 0), lineWidth: 6)
+                                                .blur(radius: 6) // creates a soft glow
+                                        )
+                                )
                         }
+                        .padding(.bottom, 0) // adjust button position
                     }
-                    .padding(.trailing, 4)
                 }
-                
+                .padding(.trailing, 4)
+            }
         }
         .padding(.leading, 10)
         .padding(.horizontal)
-        
+    }
+
+    // formats description
+    private func formatAndSaveDescription() {
+        description = description.trimmingCharacters(in: .whitespacesAndNewlines) // remove trailing spaces
+        onDescriptionChange(description) // send the updated description to the parent
     }
 }
 
@@ -462,8 +482,7 @@ struct AddCustomizationView: View {
                         
                         // add button
                         Button(action: {
-                            // toggle editing state
-                            //isEditingPrice.toggle()
+
                         }) {
                             Image("AddItemCustomizationButton")
                                 .resizable()
