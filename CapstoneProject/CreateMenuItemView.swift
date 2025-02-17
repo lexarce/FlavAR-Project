@@ -2,10 +2,11 @@
 //  CreateMenuItemView.swift
 //  CapstoneProject
 //
-//  Created by kimi on 10/28/24.
 //
 import SwiftUI
 import PhotosUI
+import FirebaseFirestore
+
 
 @MainActor
 final class PhotoPickerViewModel: ObservableObject {
@@ -34,19 +35,25 @@ final class PhotoPickerViewModel: ObservableObject {
 
 struct CreateMenuItemView: View {
     
-    var menuItem: MenuItem // menu item being created
+    var menuItem: MenuItem
 
     @State private var title: String
     @State private var description: String
     @State private var price: String
+    @State private var customizations: [String] = []
+    @State private var newCustomization: String = ""
+    
     @State private var isPopular: Bool
     @State private var category: String
-    @State private var isEditingTitle: Bool = false // track if the title is being edited
-    @State private var isEditingPrice: Bool = false // track if price is being edited
-    @State private var isEditingDescription: Bool = false // track if description is being edited
     
+    @State private var isEditingTitle: Bool = false
+    @State private var isEditingPrice: Bool = false
+    @State private var isEditingDescription: Bool = false
     
-    // intializer for state variables
+    @State private var errorMessage: String? // to show error message if any field is empty
+    
+    let db = Firestore.firestore()
+
     init(menuItem: MenuItem = MenuItem()) {
         self.menuItem = menuItem
         _title = State(initialValue: menuItem.title)
@@ -57,37 +64,32 @@ struct CreateMenuItemView: View {
     }
     
     var body: some View {
-        
         NavigationView {
-            ZStack{
-                
+            ZStack {
                 BackgroundView(imageName: "EditMenuItemBG")
-                
                 VStack(spacing: 0) {
                     Spacer().frame(height: 50)
-                    
-                    EditableImageView(imageName: "DefaultFoodImage") { // get the default image
-                        // action for editing or uploading a new image
+
+                    EditableImageView(imageName: "DefaultFoodImage") {
                         print("Edit Image Button Pressed")
-                        // add image upload functionality here
                     }
-                    
+
                     MenuItemName(title: $title, isEditingTitle: $isEditingTitle)
-                    
+
                     Spacer()
-                    
+
                     ScrollView {
                         PriceView(price: $price, isEditingPrice: $isEditingPrice)
-                        DescriptionView(description: $description, isEditingDescription:$isEditingDescription)
+                        DescriptionView(description: $description, isEditingDescription: $isEditingDescription)
                         AddCustomizationView(price: $price)
                         EditCustomizationView(price: $price)
                     }
-                        
                 }
             }
         }
     }
 }
+
 
 // view of the image
 struct EditableImageView: View {
@@ -120,6 +122,7 @@ struct EditableImageView: View {
                     .frame(width: 45, height: 45)
                     .padding(5)
                     .padding()
+                
             }
         }
     }
@@ -141,6 +144,7 @@ struct MenuItemName: View {
             .background(Color.clear)
             .cornerRadius(0)
             .padding(.leading, 10)
+            .disabled(!isEditingTitle)
             
             Spacer()
 
@@ -153,6 +157,15 @@ struct MenuItemName: View {
                     .scaledToFit()
                     .frame(width: 40, height: 40)
                     .padding(5)
+                    .background(
+                        Circle()
+                            .fill(Color.clear)
+                            .overlay(
+                                Circle()
+                                    .stroke(Color.white.opacity(isEditingTitle ? 1 : 0), lineWidth: 6)
+                                    .blur(radius: 6) // Creates a soft glow
+                            )
+                    )
             }
         }
         .padding(.top, 20)
@@ -183,6 +196,7 @@ struct PriceView: View {
                             .keyboardType(.decimalPad)
                             .padding()
                             .background(Color.clear) // Set the TextField background to clear
+                            .disabled(!isEditingPrice)
                         
                         // edit button
                         Button(action: {
@@ -194,6 +208,15 @@ struct PriceView: View {
                                 .scaledToFit()
                                 .frame(width: 40, height: 40)
                                 .padding(5)
+                                .background(
+                                    Circle()
+                                        .fill(Color.clear)
+                                        .overlay(
+                                            Circle()
+                                                .stroke(Color.white.opacity(isEditingPrice ? 1 : 0), lineWidth: 6)
+                                                .blur(radius: 6) // Creates a soft glow
+                                        )
+                                )
                         }
                     }
                     .padding(.trailing, 4)
@@ -231,6 +254,7 @@ struct DescriptionView: View {
                                 .padding()
                                 .scrollContentBackground(.hidden) // hides the white background of the text editor
                                 .background(Color.clear) // set the TextEditor background to clear
+                                .disabled(!isEditingDescription)
 
                             // edit button at the bottom-right of the ZStack
                             Button(action: {
@@ -242,6 +266,15 @@ struct DescriptionView: View {
                                     .scaledToFit()
                                     .frame(width: 40, height: 40)
                                     .padding(5)
+                                    .background(
+                                        Circle()
+                                            .fill(Color.clear)
+                                            .overlay(
+                                                Circle()
+                                                    .stroke(Color.white.opacity(isEditingDescription ? 1 : 0), lineWidth: 6)
+                                                    .blur(radius: 6) // Creates a soft glow
+                                            )
+                                    )
                             }
                             .padding(.bottom,0) // Adds padding to position the button towards the bottom
                         }
