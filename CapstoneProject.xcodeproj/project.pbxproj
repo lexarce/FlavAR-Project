@@ -7,11 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		341850282D62B3DB008C7242 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341850272D62B3D2008C7242 /* UserInfo.swift */; };
-		3418502A2D62C9DB008C7242 /* PasswordStrength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341850292D62C9CF008C7242 /* PasswordStrength.swift */; };
-		344789102CC879E8006543A4 /* UserPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3447890F2CC879E8006543A4 /* UserPermissions.swift */; };
 		3474FC2E2D4704B6001AF91D /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3474FC2D2D4704B1001AF91D /* CustomTextField.swift */; };
-		3499031C2CDEBB240087B403 /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3499031B2CDEBB240087B403 /* ARView.swift */; };
 		3499031F2CDEBCB30087B403 /* shoe.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 3499031E2CDEBCB30087B403 /* shoe.usdz */; };
 		34ABCFE12D50025200E325A1 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ABCFE02D50024D00E325A1 /* NavigationManager.swift */; };
 		34B412372CB9FFBD00ED5BAF /* MenuItemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B412362CB9FFBD00ED5BAF /* MenuItemService.swift */; };
@@ -19,7 +15,6 @@
 		34DDE8D02CA1C2A900CB47FC /* CapstoneProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE8CF2CA1C2A900CB47FC /* CapstoneProjectApp.swift */; };
 		34DDE8D42CA1C2AB00CB47FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34DDE8D32CA1C2AB00CB47FC /* Assets.xcassets */; };
 		34DDE8D72CA1C2AB00CB47FC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34DDE8D62CA1C2AB00CB47FC /* Preview Assets.xcassets */; };
-		34DDE8DE2CA1C2D800CB47FC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE8DD2CA1C2D800CB47FC /* LoginView.swift */; };
 		34DDE8E02CA1FB3100CB47FC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 34DDE8DF2CA1FB3100CB47FC /* GoogleService-Info.plist */; };
 		34DDE8E32CA1FB9F00CB47FC /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 34DDE8E22CA1FB9F00CB47FC /* FirebaseAnalytics */; };
 		34DDE8E52CA1FB9F00CB47FC /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 34DDE8E42CA1FB9F00CB47FC /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -44,10 +39,8 @@
 		34DDE90B2CA1FB9F00CB47FC /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 34DDE90A2CA1FB9F00CB47FC /* FirebaseStorage */; };
 		34DDE90D2CA1FB9F00CB47FC /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 34DDE90C2CA1FB9F00CB47FC /* FirebaseStorageCombine-Community */; };
 		34DDE9112CA2200C00CB47FC /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE9102CA2200C00CB47FC /* HomePageView.swift */; };
-		34DDE9132CA220EF00CB47FC /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */; };
 		34F645342CDB0509006E840E /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F645332CDB0509006E840E /* NavigationBar.swift */; };
 		3F4906F32CE01DAB00360F78 /* StaffHomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4906F22CE01DAB00360F78 /* StaffHomePageView.swift */; };
-		3F6C5A722CF12DDE00EF90DA /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C5A712CF12DDB00EF90DA /* MenuView.swift */; };
 		3F6C5A782CF140F400EF90DA /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C5A772CF140F400EF90DA /* StoreView.swift */; };
 		3FFDCF502CDFF8CE00D3313D /* StaffMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFDCF4F2CDFF8CE00D3313D /* StaffMenuView.swift */; };
 		3FFDCF542CDFF91500D3313D /* CreateMenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFDCF532CDFF91500D3313D /* CreateMenuItemView.swift */; };
@@ -64,11 +57,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		341850272D62B3D2008C7242 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
-		341850292D62C9CF008C7242 /* PasswordStrength.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordStrength.swift; sourceTree = "<group>"; };
-		3447890F2CC879E8006543A4 /* UserPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPermissions.swift; sourceTree = "<group>"; };
 		3474FC2D2D4704B1001AF91D /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
-		3499031B2CDEBB240087B403 /* ARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; };
 		3499031D2CDEBBC70087B403 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3499031E2CDEBCB30087B403 /* shoe.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = shoe.usdz; sourceTree = "<group>"; };
 		34ABCFE02D50024D00E325A1 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
@@ -78,13 +67,10 @@
 		34DDE8CF2CA1C2A900CB47FC /* CapstoneProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapstoneProjectApp.swift; sourceTree = "<group>"; };
 		34DDE8D32CA1C2AB00CB47FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		34DDE8D62CA1C2AB00CB47FC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		34DDE8DD2CA1C2D800CB47FC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		34DDE8DF2CA1FB3100CB47FC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		34DDE9102CA2200C00CB47FC /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
-		34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		34F645332CDB0509006E840E /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		3F4906F22CE01DAB00360F78 /* StaffHomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffHomePageView.swift; sourceTree = "<group>"; };
-		3F6C5A712CF12DDB00EF90DA /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		3F6C5A772CF140F400EF90DA /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 		3FFDCF4F2CDFF8CE00D3313D /* StaffMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffMenuView.swift; sourceTree = "<group>"; };
 		3FFDCF532CDFF91500D3313D /* CreateMenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMenuItemView.swift; sourceTree = "<group>"; };
@@ -170,18 +156,13 @@
 				34DDE8D52CA1C2AB00CB47FC /* Preview Content */,
 				3418501E2D628AB5008C7242 /* Login */,
 				C37D8B2A2D4B0EE7000DC6A3 /* CartManager.swift */,
-				341850272D62B3D2008C7242 /* UserInfo.swift */,
-				341850292D62C9CF008C7242 /* PasswordStrength.swift */,
 				C34978A82CDDE4A000966CAC /* CustomerCheckoutView.swift */,
 				3418501F2D628AFE008C7242 /* Account Creation */,
 				C34798322CDFDFDE00CCDAC0 /* CustomerOrderHistory.swift */,
 				34F645332CDB0509006E840E /* NavigationBar.swift */,
-				34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */,
-				34DDE8DD2CA1C2D800CB47FC /* LoginView.swift */,
 				C34978A62CDDE48C00966CAC /* CustomerCartView.swift */,
 				341850202D628B05008C7242 /* Menu */,
 				C34798302CDFDC0E00CCDAC0 /* OrderConfirmationView.swift */,
-				3F6C5A712CF12DDB00EF90DA /* MenuView.swift */,
 				C34968952D6328F6009DC4F7 /* PremiumJinsBox.swift */,
 				C34968972D632902009DC4F7 /* KoreanFood.swift */,
 				C34968992D632909009DC4F7 /* PopularItems.swift */,
@@ -192,10 +173,8 @@
 				341850232D628B36008C7242 /* Payment */,
 				341850222D628B2D008C7242 /* Security */,
 				3474FC2D2D4704B1001AF91D /* CustomTextField.swift */,
-				3447890F2CC879E8006543A4 /* UserPermissions.swift */,
 				34B4123A2CBA3FAD00ED5BAF /* ImageDownloader.swift */,
 				34B412362CB9FFBD00ED5BAF /* MenuItemService.swift */,
-				3499031B2CDEBB240087B403 /* ARView.swift */,
 				3FFDCF4F2CDFF8CE00D3313D /* StaffMenuView.swift */,
 				3FFDCF532CDFF91500D3313D /* CreateMenuItemView.swift */,
 				3F4906F22CE01DAB00360F78 /* StaffHomePageView.swift */,
@@ -324,10 +303,7 @@
 			files = (
 				3F4906F32CE01DAB00360F78 /* StaffHomePageView.swift in Sources */,
 				C3829B682CB4FFBE00001049 /* CustomerMenuView.swift in Sources */,
-				3499031C2CDEBB240087B403 /* ARView.swift in Sources */,
 				C37D8B2B2D4B0EE7000DC6A3 /* CartManager.swift in Sources */,
-				341850282D62B3DB008C7242 /* UserInfo.swift in Sources */,
-				3F6C5A722CF12DDE00EF90DA /* MenuView.swift in Sources */,
 				3FFDCF502CDFF8CE00D3313D /* StaffMenuView.swift in Sources */,
 				3FFDCF542CDFF91500D3313D /* CreateMenuItemView.swift in Sources */,
 				C34798312CDFDC1300CCDAC0 /* OrderConfirmationView.swift in Sources */,
@@ -335,18 +311,14 @@
 				34ABCFE12D50025200E325A1 /* NavigationManager.swift in Sources */,
 				34B4123B2CBA3FAD00ED5BAF /* ImageDownloader.swift in Sources */,
 				C34968982D632905009DC4F7 /* KoreanFood.swift in Sources */,
-				34DDE8DE2CA1C2D800CB47FC /* LoginView.swift in Sources */,
 				C349689A2D63290E009DC4F7 /* PopularItems.swift in Sources */,
-				344789102CC879E8006543A4 /* UserPermissions.swift in Sources */,
 				C34798332CDFDFE800CCDAC0 /* CustomerOrderHistory.swift in Sources */,
 				34DDE9112CA2200C00CB47FC /* HomePageView.swift in Sources */,
 				34F645342CDB0509006E840E /* NavigationBar.swift in Sources */,
 				C34968962D6328FA009DC4F7 /* PremiumJinsBox.swift in Sources */,
 				C334A1082CC980DC004BCE94 /* IndividualItemView.swift in Sources */,
-				3418502A2D62C9DB008C7242 /* PasswordStrength.swift in Sources */,
 				34DDE8D02CA1C2A900CB47FC /* CapstoneProjectApp.swift in Sources */,
 				C34978A92CDDE4A300966CAC /* CustomerCheckoutView.swift in Sources */,
-				34DDE9132CA220EF00CB47FC /* CreateAccountView.swift in Sources */,
 				C34978A72CDDE49900966CAC /* CustomerCartView.swift in Sources */,
 				3F6C5A782CF140F400EF90DA /* StoreView.swift in Sources */,
 				34B412372CB9FFBD00ED5BAF /* MenuItemService.swift in Sources */,
