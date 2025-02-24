@@ -39,8 +39,8 @@ struct StaffMenuView: View
                         Image("JinBBQTakeout")
                             .resizable()
                             .scaledToFit()
-                            .frame(height: 90)
-                            .padding(.top, 10)
+                            .frame(height: 70)
+                            .padding(.top, -50)
                     }
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.horizontal)

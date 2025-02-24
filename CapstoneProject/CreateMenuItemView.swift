@@ -119,9 +119,12 @@ struct CreateMenuItemView: View {
                             self.description = newDescription // update description when editing stops
                         })
                         
-                        AddCustomizationView(newCustomization: $newCustomization)
+                        AddCustomizationView(newCustomization: $newCustomization, customizations: $customizations)
+
+                        // edit customization view (editing existing items)
+                        EditCustomizationView(customizations: $customizations)
                         
-                        EditCustomizationView(price: $price)
+                        AvailabilityView()
                         
                         // error message if validation fails
                         if let errorMessage = errorMessage {
@@ -457,86 +460,119 @@ struct DescriptionView: View {
 
 // add item customization
 struct AddCustomizationView: View {
-    @Binding var newCustomization: String // bind to the price value
+    @Binding var newCustomization: String // user's input for customization
+    @Binding var customizations: [String] // list of customizations
+    @State private var isEditing: Bool = false
 
     var body: some View {
         VStack(alignment: .leading) {
-            // Ensure the Price label is visible
             Text("Item Customizations")
                 .font(.headline)
-                .foregroundColor(.white) // Make sure it's visible
-                .padding(.top, 15) // Adds space above the label
+                .foregroundColor(.white)
+                .padding(.top, 15)
 
-                ZStack {
-                    // background for the TextField
-                    LinearGradient(gradient: Gradient(colors: [Color(hex: "C41D21"), Color(hex: "F2A69E")]), startPoint: .leading, endPoint: .trailing)
-                        .cornerRadius(10)
-                        .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2) // subtle drop shadow
-                    HStack{
-                        // TODO: change binding variable
-                        // textField for entering customization (set to price temporarily bc we need to update database)
-                        TextField("Item Customization", text: $newCustomization)
-                            .keyboardType(.decimalPad)
-                            .padding()
-                            .background(Color.clear) // Set the TextField background to clear
-                        
-                        // add button
-                        Button(action: {
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [Color(hex: "C41D21"), Color(hex: "F2A69E")]),
+                               startPoint: .leading, endPoint: .trailing)
+                    .cornerRadius(10)
+                    .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
 
-                        }) {
-                            Image("AddItemCustomizationButton")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 40, height: 40)
-                                .padding(5)
-                        }
+                HStack {
+                    // textField for entering a new customization
+                    TextField("Enter Customization", text: $newCustomization)
+                        .padding()
+                        .background(Color.clear)
+                        .disabled(!isEditing)
+
+                    // edit button (for UI purposes)
+                    Button(action: {
+                        isEditing.toggle()
+                        // action here
+                    }) {
+                        Image("EditButton")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+                            .padding(5)
+                            .background(
+                                Circle()
+                                    .fill(Color.clear)
+                                    .overlay(
+                                        Circle()
+                                            .stroke(Color.white.opacity(isEditing ? 1 : 0), lineWidth: 6)
+                                            .blur(radius: 6) // creates a soft glow
+                                    )
+                            )
+
                     }
-                    .padding(.trailing, 4)
+                    
+                    // add button to append customization
+                    Button(action: {
+                        addCustomization()
+                    }) {
+                        Image("AddItemCustomizationButton")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+                            .padding(5)
+                    }
                 }
-                .frame(height: 50) // adjust the height as needed
-                Spacer()
+                .padding(.trailing, 4)
+            }
+            .frame(height: 50)
+
+            Spacer()
         }
         .padding(.leading, 10)
         .padding(.horizontal)
     }
+
+    // Adds new customization and resets input field*
+    private func addCustomization() {
+        let trimmedCustomization = newCustomization.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if !trimmedCustomization.isEmpty, !customizations.contains(trimmedCustomization) {
+            customizations.append(trimmedCustomization) // ✅ Add to list
+            newCustomization = "" // ✅ Reset the input field
+        }
+    }
 }
+
 
 // edit existing item customization
 struct EditCustomizationView: View {
-    @Binding var price: String // bind to the price value
-    //@Binding var isEditingPrice: Bool
+    @Binding var customizations: [String] // ✅ Bind to the list of customizations
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 10) {
+
+            ForEach(customizations.indices, id: \.self) { index in
                 ZStack {
-                    // background for the TextField
-                    LinearGradient(gradient: Gradient(colors: [Color(hex: "C41D21"), Color(hex: "F2A69E")]), startPoint: .leading, endPoint: .trailing)
+                    LinearGradient(gradient: Gradient(colors: [Color(hex: "C41D21"), Color(hex: "F2A69E")]),
+                                   startPoint: .leading, endPoint: .trailing)
                         .cornerRadius(10)
-                        .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2) // subtle drop shadow
-                    HStack{
-                        // TODO: change binding variable
-                        // textField for entering customization (set to price temporarily bc we need to update database)
-                        TextField("Item Customization", text: $price)
-                            .keyboardType(.decimalPad)
+                        .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
+
+                    HStack {
+                        // editable TextField for each customization
+                        TextField("Customization", text: $customizations[index])
                             .padding()
-                            .background(Color.clear) // Set the TextField background to clear
-                        
-                        // edit button
-                        Button(action: {
-                            // toggle editing state
-                            //isEditingPrice.toggle()
+                            .background(Color.clear)
+
+                        // edit button (for UI purposes)
+                        /*Button(action: {
+                            print("Editing customization at index \(index)")
                         }) {
                             Image("EditButton")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 40, height: 40)
                                 .padding(5)
-                        }
-                        
-                        // trash button
+                        }*/
+
+                        // trash button to remove a customization
                         Button(action: {
-                            // toggle editing state
-                            //isEditingPrice.toggle()
+                            removeCustomization(at: index)
                         }) {
                             Image("Trash Button")
                                 .resizable()
@@ -547,13 +583,34 @@ struct EditCustomizationView: View {
                     }
                     .padding(.trailing, 4)
                 }
-                .frame(height: 50) // adjust the height as needed
-                Spacer()
+                .frame(height: 50)
+            }
+
+            Spacer()
         }
         .padding(.leading, 10)
         .padding(.horizontal)
     }
+
+    // removes a customization
+    private func removeCustomization(at index: Int) {
+        customizations.remove(at: index)
+    }
 }
+
+// item name and editing functionality
+struct AvailabilityView: View {
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Availability")
+                .font(.headline)
+                .foregroundColor(.white)
+                .padding(.top, 15)
+        }
+    }
+    
+}
+
 
 // color extension for hex value usage
 extension Color {

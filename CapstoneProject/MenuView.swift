@@ -40,7 +40,7 @@ struct MenuView: View
                             .resizable()
                             .scaledToFit()
                             .frame(height: 90)
-                            .padding(.top, 10)
+                            .padding(.top, -50)
                     }
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.horizontal)
@@ -87,7 +87,7 @@ struct MenuView: View
                             
                             // Korean Food Navigiation
                             NavigationLink(destination: KoreanFood()) {
-                                CategoryItemView(imageName: "KoreanFoodIcon", categoryName: "Korean Food")
+                                CategoryItemView(imageName: "KoreanFoodIcon", categoryName: "Korean Side Dishes")
                             }
                             
                             // Naviation to Popular Item Page

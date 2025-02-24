@@ -35,11 +35,11 @@ struct StoreView: View {
                     
                     // Jin BBQ Logo
                     HStack {
-                        Image("JinBBQTakeout")
+                        Image("WhiteJinBBQLogo")
                             .resizable()
                             .scaledToFit()
                             .frame(height: 90)
-                            .padding(.top, 10)
+                            .padding(.top, -50)
                     }
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.horizontal)
