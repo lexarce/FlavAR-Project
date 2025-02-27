@@ -1,4 +1,4 @@
-//
+/*//
 //  StaffMenuView.swift
 //  CapstoneProject
 //
@@ -160,3 +160,4 @@ struct StaffMenuView: View
     StaffMenuView()
 }
 
+*/

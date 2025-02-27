@@ -1,4 +1,4 @@
-//
+/*//
 //  CustomerMenuView.swift
 //  CapstoneProject
 //
@@ -173,3 +173,4 @@ struct CustomerMenuView_Previews: PreviewProvider {
             .environmentObject(NavigationManager.shared)
     }
 }
+*/

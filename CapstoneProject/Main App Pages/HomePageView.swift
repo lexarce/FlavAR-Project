@@ -105,7 +105,7 @@ struct GreetUser: View {
 
     var body: some View {
         Text("Hi \(userName)!")
-            .font(.largeTitle)
+            .font(.headline)
             .foregroundColor(.white)
             .bold()
             .frame(maxWidth: .infinity, alignment: .leading)

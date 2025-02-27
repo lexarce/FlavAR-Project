@@ -2,7 +2,7 @@
 //  KoreanFood.swift
 //  CapstoneProject
 //
-//  Created by Alexis Arce on 2/17/25.
+//  Created by Alexis Arce on 2/27/25.
 //
 
 import SwiftUI
@@ -15,8 +15,6 @@ struct KoreanFood: View {
     }
 }
 
-struct KoreanFood_Previews: PreviewProvider {
-    static var previews: some View {
-        KoreanFood()
-    }
+#Preview {
+    KoreanFood()
 }

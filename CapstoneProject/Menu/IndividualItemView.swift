@@ -10,6 +10,8 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 
+// Shows pop-up details when an item is tapped
+
 struct IndividualItemView: View {
     var menuItem: MenuItem
     @State private var isARViewPresented: Bool = false
@@ -71,7 +73,7 @@ struct IndividualItemView: View {
                             .cornerRadius(10)
                     }
                     .sheet(isPresented: $isARViewPresented) {
-                        SheetView(isPresented: $isARViewPresented, modelName: menuItem.ARModelPath)
+                        SheetView(isPresented: $isARViewPresented, modelName: menuItem.ARModelPath ?? "shoe")
                     }
                     
                     Text(menuItem.title)
@@ -116,7 +118,7 @@ struct IndividualItemView: View {
     
     func loadImage() {
         let imageDownloader = ImageDownloader()
-        imageDownloader.downloadImage(from: menuItem.imagePath) { uiImage in
+        imageDownloader.downloadImage(from: menuItem.imagepath) { uiImage in
             DispatchQueue.main.async {
                 self.downloadedImage = uiImage
             }
@@ -131,7 +133,9 @@ struct IndividualItemView_Previews: PreviewProvider {
             title: "Premium Beef Bulgogi Box",
             description: "Delicious beef bulgogi served with rice, vegetables, and sauce.",
             price: 14.99,
-            imagePath: "PremiumBulgogiBox"
+            imagepath: "PremiumBulgogiBox",
+            isAvailable: true
+            //ARModelPath: "BeefBulgogiModel"
         )
         
         return IndividualItemView(menuItem: sampleMenuItem)
