@@ -11,7 +11,7 @@ import FirebaseFirestore
 struct PremiumJinsBox: View {
     @StateObject private var menuViewModel = MenuViewModel()
     @EnvironmentObject var navigationManager: NavigationManager
-    @EnvironmentObject var cartManager: CartManager
+    @ObservedObject var cartManager = CartManager.shared
     
     var body: some View {
         NavigationStack {
@@ -90,5 +90,5 @@ struct PremiumJinsBox: View {
 #Preview {
     PremiumJinsBox()
         .environmentObject(NavigationManager.shared)
-        .environmentObject(CartManager())
+        .environmentObject(CartManager.shared)
 }

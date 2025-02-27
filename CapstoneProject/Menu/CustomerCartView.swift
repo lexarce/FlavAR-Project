@@ -12,7 +12,7 @@ import FirebaseAuth
 
 struct CustomerCartView: View {
     @EnvironmentObject var navigationManager: NavigationManager
-    @EnvironmentObject var cartManager: CartManager
+    @ObservedObject var cartManager = CartManager.shared
     
     private var subtotal: Double {
         cartManager.cartItems.reduce(0) { total, cartItem in
@@ -38,7 +38,7 @@ struct CustomerCartView: View {
 
                 VStack {
                     HStack {
-                        NavigationLink(destination: MenuView().environmentObject(cartManager)) {
+                        NavigationLink(destination: MenuView()) {
                             Image(systemName: "arrowshape.backward")
                                 .foregroundColor(.white)
                                 .padding()
@@ -128,7 +128,7 @@ struct CustomerCartView: View {
 
 struct CartItemRow: View {
     var cartItem: CartItem
-    @ObservedObject var cartManager: CartManager
+    @ObservedObject var cartManager = CartManager.shared
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -206,7 +206,7 @@ struct CartItemRow: View {
 
 struct CustomerCartView_Previews: PreviewProvider {
     static var previews: some View {
-        let mockCartManager = CartManager()
+        let mockCartManager = CartManager.shared
         mockCartManager.cartItems = [
             CartItem(id: "1", title: "Premium Bulgogi Box", price: 14.99, imagepath: "MenuItems/PremiumBeefBulgogiBox", quantity: 2),
             CartItem(id: "2", title: "Premium Japchae Box", price: 13.99, imagepath: "MenuItems/PremiumJapchaeBox", quantity: 1)
