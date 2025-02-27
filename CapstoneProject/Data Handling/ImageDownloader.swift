@@ -13,6 +13,8 @@ import FirebaseAuth
 import FirebaseStorage
 import UIKit
 
+// Hands image downloading from Firebase Storage
+
 class ImageDownloader {
     
     // Function to download an image from Firebase Storage given the image path

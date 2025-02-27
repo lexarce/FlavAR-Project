@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+<<<<<<< HEAD
 		341850282D62B3DB008C7242 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341850272D62B3D2008C7242 /* UserInfo.swift */; };
 		3418502A2D62C9DB008C7242 /* PasswordStrength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341850292D62C9CF008C7242 /* PasswordStrength.swift */; };
 		344789102CC879E8006543A4 /* UserPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3447890F2CC879E8006543A4 /* UserPermissions.swift */; };
 		3474FC2E2D4704B6001AF91D /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3474FC2D2D4704B1001AF91D /* CustomTextField.swift */; };
 		3499031C2CDEBB240087B403 /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3499031B2CDEBB240087B403 /* ARView.swift */; };
+=======
+>>>>>>> 377ed3f3a3388f1e33f35f1e32c8b1f2a68e286a
 		3499031F2CDEBCB30087B403 /* shoe.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 3499031E2CDEBCB30087B403 /* shoe.usdz */; };
-		34ABCFE12D50025200E325A1 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ABCFE02D50024D00E325A1 /* NavigationManager.swift */; };
-		34B412372CB9FFBD00ED5BAF /* MenuItemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B412362CB9FFBD00ED5BAF /* MenuItemService.swift */; };
-		34B4123B2CBA3FAD00ED5BAF /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B4123A2CBA3FAD00ED5BAF /* ImageDownloader.swift */; };
 		34DDE8D02CA1C2A900CB47FC /* CapstoneProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE8CF2CA1C2A900CB47FC /* CapstoneProjectApp.swift */; };
 		34DDE8D42CA1C2AB00CB47FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34DDE8D32CA1C2AB00CB47FC /* Assets.xcassets */; };
 		34DDE8D72CA1C2AB00CB47FC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34DDE8D62CA1C2AB00CB47FC /* Preview Assets.xcassets */; };
@@ -43,6 +43,7 @@
 		34DDE9092CA1FB9F00CB47FC /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 34DDE9082CA1FB9F00CB47FC /* FirebaseRemoteConfig */; };
 		34DDE90B2CA1FB9F00CB47FC /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 34DDE90A2CA1FB9F00CB47FC /* FirebaseStorage */; };
 		34DDE90D2CA1FB9F00CB47FC /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 34DDE90C2CA1FB9F00CB47FC /* FirebaseStorageCombine-Community */; };
+<<<<<<< HEAD
 		34DDE9112CA2200C00CB47FC /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE9102CA2200C00CB47FC /* HomePageView.swift */; };
 		34DDE9132CA220EF00CB47FC /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */; };
 		34F645342CDB0509006E840E /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F645332CDB0509006E840E /* NavigationBar.swift */; };
@@ -69,17 +70,20 @@
 		3447890F2CC879E8006543A4 /* UserPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPermissions.swift; sourceTree = "<group>"; };
 		3474FC2D2D4704B1001AF91D /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		3499031B2CDEBB240087B403 /* ARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; };
+=======
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+>>>>>>> 377ed3f3a3388f1e33f35f1e32c8b1f2a68e286a
 		3499031D2CDEBBC70087B403 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3499031E2CDEBCB30087B403 /* shoe.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = shoe.usdz; sourceTree = "<group>"; };
-		34ABCFE02D50024D00E325A1 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
-		34B412362CB9FFBD00ED5BAF /* MenuItemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemService.swift; sourceTree = "<group>"; };
-		34B4123A2CBA3FAD00ED5BAF /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		34DDE8CC2CA1C2A900CB47FC /* CapstoneProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CapstoneProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34DDE8CF2CA1C2A900CB47FC /* CapstoneProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapstoneProjectApp.swift; sourceTree = "<group>"; };
 		34DDE8D32CA1C2AB00CB47FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		34DDE8D62CA1C2AB00CB47FC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		34DDE8DD2CA1C2D800CB47FC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		34DDE8DF2CA1FB3100CB47FC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		34DDE9102CA2200C00CB47FC /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
 		34DDE9122CA220EF00CB47FC /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		34F645332CDB0509006E840E /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
@@ -98,16 +102,23 @@
 		C34978A82CDDE4A000966CAC /* CustomerCheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerCheckoutView.swift; sourceTree = "<group>"; };
 		C37D8B2A2D4B0EE7000DC6A3 /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
 		C3829B672CB4FFB500001049 /* CustomerMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerMenuView.swift; sourceTree = "<group>"; };
+=======
+>>>>>>> 377ed3f3a3388f1e33f35f1e32c8b1f2a68e286a
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3418501E2D628AB5008C7242 /* Login */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Login; sourceTree = "<group>"; };
 		3418501F2D628AFE008C7242 /* Account Creation */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Account Creation"; sourceTree = "<group>"; };
 		341850202D628B05008C7242 /* Menu */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Menu; sourceTree = "<group>"; };
-		341850212D628B0F008C7242 /* Orders */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Orders; sourceTree = "<group>"; };
 		341850222D628B2D008C7242 /* Security */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Security; sourceTree = "<group>"; };
-		341850232D628B36008C7242 /* Payment */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Payment; sourceTree = "<group>"; };
 		341850242D628B3E008C7242 /* AR */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = AR; sourceTree = "<group>"; };
+		C335990D2D70416300917BFB /* Data Handling */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Data Handling"; sourceTree = "<group>"; };
+		C335990E2D70418000917BFB /* UI Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "UI Components"; sourceTree = "<group>"; };
+		C33599342D7055D700917BFB /* Duplicates (IGNORE) */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Duplicates (IGNORE)"; sourceTree = "<group>"; };
+		C33599352D7057AF00917BFB /* Staff Pages */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Staff Pages"; sourceTree = "<group>"; };
+		C33599362D7057E900917BFB /* Main App Pages */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Main App Pages"; sourceTree = "<group>"; };
+		C33599372D70583600917BFB /* Orders */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Orders; sourceTree = "<group>"; };
+		C335993A2D70586C00917BFB /* Payment */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Payment; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +180,7 @@
 				34DDE8D32CA1C2AB00CB47FC /* Assets.xcassets */,
 				34DDE8D52CA1C2AB00CB47FC /* Preview Content */,
 				3418501E2D628AB5008C7242 /* Login */,
+<<<<<<< HEAD
 				C37D8B2A2D4B0EE7000DC6A3 /* CartManager.swift */,
 				341850272D62B3D2008C7242 /* UserInfo.swift */,
 				341850292D62C9CF008C7242 /* PasswordStrength.swift */,
@@ -188,9 +200,19 @@
 				341850212D628B0F008C7242 /* Orders */,
 				34ABCFE02D50024D00E325A1 /* NavigationManager.swift */,
 				C334A1072CC980D6004BCE94 /* IndividualItemView.swift */,
+=======
+				3418501F2D628AFE008C7242 /* Account Creation */,
+				C33599362D7057E900917BFB /* Main App Pages */,
+				341850202D628B05008C7242 /* Menu */,
+				C33599372D70583600917BFB /* Orders */,
+				C33599352D7057AF00917BFB /* Staff Pages */,
+				C335993A2D70586C00917BFB /* Payment */,
+				C335990E2D70418000917BFB /* UI Components */,
+				C335990D2D70416300917BFB /* Data Handling */,
+>>>>>>> 377ed3f3a3388f1e33f35f1e32c8b1f2a68e286a
 				341850242D628B3E008C7242 /* AR */,
-				341850232D628B36008C7242 /* Payment */,
 				341850222D628B2D008C7242 /* Security */,
+<<<<<<< HEAD
 				3474FC2D2D4704B1001AF91D /* CustomTextField.swift */,
 				3447890F2CC879E8006543A4 /* UserPermissions.swift */,
 				34B4123A2CBA3FAD00ED5BAF /* ImageDownloader.swift */,
@@ -202,6 +224,9 @@
 				34DDE9102CA2200C00CB47FC /* HomePageView.swift */,
 				3F6C5A772CF140F400EF90DA /* StoreView.swift */,
 				C3829B672CB4FFB500001049 /* CustomerMenuView.swift */,
+=======
+				C33599342D7055D700917BFB /* Duplicates (IGNORE) */,
+>>>>>>> 377ed3f3a3388f1e33f35f1e32c8b1f2a68e286a
 			);
 			path = CapstoneProject;
 			sourceTree = "<group>";
@@ -233,10 +258,15 @@
 				3418501E2D628AB5008C7242 /* Login */,
 				3418501F2D628AFE008C7242 /* Account Creation */,
 				341850202D628B05008C7242 /* Menu */,
-				341850212D628B0F008C7242 /* Orders */,
 				341850222D628B2D008C7242 /* Security */,
-				341850232D628B36008C7242 /* Payment */,
 				341850242D628B3E008C7242 /* AR */,
+				C335990D2D70416300917BFB /* Data Handling */,
+				C335990E2D70418000917BFB /* UI Components */,
+				C33599342D7055D700917BFB /* Duplicates (IGNORE) */,
+				C33599352D7057AF00917BFB /* Staff Pages */,
+				C33599362D7057E900917BFB /* Main App Pages */,
+				C33599372D70583600917BFB /* Orders */,
+				C335993A2D70586C00917BFB /* Payment */,
 			);
 			name = CapstoneProject;
 			packageProductDependencies = (
@@ -322,6 +352,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 				3F4906F32CE01DAB00360F78 /* StaffHomePageView.swift in Sources */,
 				C3829B682CB4FFBE00001049 /* CustomerMenuView.swift in Sources */,
 				3499031C2CDEBB240087B403 /* ARView.swift in Sources */,
@@ -350,6 +381,9 @@
 				C34978A72CDDE49900966CAC /* CustomerCartView.swift in Sources */,
 				3F6C5A782CF140F400EF90DA /* StoreView.swift in Sources */,
 				34B412372CB9FFBD00ED5BAF /* MenuItemService.swift in Sources */,
+=======
+				34DDE8D02CA1C2A900CB47FC /* CapstoneProjectApp.swift in Sources */,
+>>>>>>> 377ed3f3a3388f1e33f35f1e32c8b1f2a68e286a
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

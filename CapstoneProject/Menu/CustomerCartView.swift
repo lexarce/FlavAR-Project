@@ -12,10 +12,12 @@ import FirebaseAuth
 
 struct CustomerCartView: View {
     @EnvironmentObject var navigationManager: NavigationManager
-    @EnvironmentObject var cartManager: CartManager
+    @ObservedObject var cartManager = CartManager.shared
     
     private var subtotal: Double {
-        cartManager.cartItems.reduce(0) { $0 + ($1.price * Double($1.quantity)) }
+        cartManager.cartItems.reduce(0) { total, cartItem in
+            total + (cartItem.price * Double(cartItem.quantity))
+        }
     }
     
     private var tax: Double {
@@ -33,21 +35,19 @@ struct CustomerCartView: View {
                     .resizable()
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
-                
+
                 VStack {
                     HStack {
-                        NavigationLink(destination: CustomerMenuView().environmentObject(cartManager)) {
-                            Image("BackButton")
-                                .resizable()
-                                .frame(width: 40, height: 40)
+                        NavigationLink(destination: MenuView()) {
+                            Image(systemName: "arrowshape.backward")
+                                .foregroundColor(.white)
                                 .padding()
                         }
                         Spacer()
                         
                         NavigationLink(destination: HomePageView().environmentObject(cartManager)) {
-                            Image("ExitButton")
-                                .resizable()
-                                .frame(width: 40, height: 40)
+                            Image(systemName: "cart")
+                                .foregroundColor(.white)
                                 .padding()
                         }
                     }
@@ -62,56 +62,8 @@ struct CustomerCartView: View {
                     
                     ScrollView {
                         VStack(spacing: 20) {
-                            ForEach(cartManager.cartItems) { item in
-                                VStack(alignment: .leading, spacing: 8) {
-                                    HStack {
-                                        if let image = UIImage(named: item.imagePath) {
-                                            Image(uiImage: image)
-                                                .resizable()
-                                                .frame(width: 60, height: 60)
-                                                .cornerRadius(8)
-                                        } else {
-                                            Rectangle()
-                                                .fill(Color.gray)
-                                                .frame(width: 60, height: 60)
-                                                .cornerRadius(8)
-                                        }
-                                        
-                                        VStack(alignment: .leading) {
-                                            Text(item.title)
-                                                .font(.headline)
-                                                .foregroundColor(.white)
-                                            
-                                            Text("$\(item.price, specifier: "%.2f")")
-                                                .font(.subheadline)
-                                                .foregroundColor(.yellow)
-                                        }
-                                        
-                                        Spacer()
-                                        
-                                        HStack(spacing: 10) {
-                                            Button(action: {
-                                                cartManager.removeFromCart(item)
-                                            }) {
-                                                Image(systemName: "minus.circle.fill")
-                                                    .foregroundColor(.yellow)
-                                            }
-                                            
-                                            Text("\(item.quantity)")
-                                                .font(.subheadline)
-                                                .foregroundColor(.white)
-                                            
-                                            Button(action: {
-                                                cartManager.addToCart(item)
-                                            }) {
-                                                Image(systemName: "plus.circle.fill")
-                                                    .foregroundColor(.yellow)
-                                            }
-                                        }
-                                    }
-                                    Divider()
-                                }
-                                .padding(.horizontal)
+                            ForEach(cartManager.cartItems) { cartItem in
+                                CartItemRow(cartItem: cartItem, cartManager: cartManager)
                             }
                         }
                     }
@@ -142,6 +94,7 @@ struct CustomerCartView: View {
                                 .foregroundColor(.white)
                         }
                     }
+                    .navigationBarBackButtonHidden(true)
                     .padding()
                     .background(Color.white.opacity(0.1))
                     .cornerRadius(10)
@@ -173,10 +126,95 @@ struct CustomerCartView: View {
     }
 }
 
+struct CartItemRow: View {
+    var cartItem: CartItem
+    @ObservedObject var cartManager = CartManager.shared
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                if let image = UIImage(named: cartItem.imagepath) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .frame(width: 60, height: 60)
+                        .cornerRadius(8)
+                } else {
+                    Rectangle()
+                        .fill(Color.gray)
+                        .frame(width: 60, height: 60)
+                        .cornerRadius(8)
+                }
+                
+                VStack(alignment: .leading) {
+                    Text(cartItem.title)
+                        .font(.headline)
+                        .foregroundColor(.white)
+                    
+                    Text("$\(cartItem.price, specifier: "%.2f")")
+                        .font(.subheadline)
+                        .foregroundColor(.yellow)
+                }
+                
+                Spacer()
+                
+                HStack(spacing: 10) {
+                    Button(action: { removeItem() }) {
+                        Image(systemName: "minus.circle.fill")
+                            .foregroundColor(.yellow)
+                    }
+                    
+                    Text("\(cartItem.quantity)")
+                        .font(.subheadline)
+                        .foregroundColor(.white)
+                    
+                    Button(action: { addItem() }) {
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundColor(.yellow)
+                    }
+                }
+            }
+            Divider()
+        }
+        .padding(.horizontal)
+    }
+    
+    func removeItem() {
+        let menuItem = MenuItem(
+            id: cartItem.id,
+            title: cartItem.title,
+            description: "",
+            price: cartItem.price,
+            imagepath: cartItem.imagepath,
+            isAvailable: true
+        )
+        cartManager.removeFromCart(menuItem)
+    }
+
+
+    func addItem() {
+        let menuItem = MenuItem(
+            id: cartItem.id,
+            title: cartItem.title,
+            description: "",
+            price: cartItem.price,
+            imagepath: cartItem.imagepath,
+            isAvailable: true // Set default availability
+        )
+        cartManager.addToCart(menuItem) // Pass as a MenuItem
+    }
+}
+
 struct CustomerCartView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomerCartView()
-            .environmentObject(CartManager())
+        let mockCartManager = CartManager.shared
+        mockCartManager.cartItems = [
+            CartItem(id: "1", title: "Premium Bulgogi Box", price: 14.99, imagepath: "MenuItems/PremiumBeefBulgogiBox", quantity: 2),
+            CartItem(id: "2", title: "Premium Japchae Box", price: 13.99, imagepath: "MenuItems/PremiumJapchaeBox", quantity: 1)
+        ]
+        
+        return CustomerCartView()
+            .environmentObject(mockCartManager)
             .environmentObject(NavigationManager.shared)
     }
 }
+

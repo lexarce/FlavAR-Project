@@ -1,4 +1,4 @@
-//
+/*//
 //  OrderConfirmationView.swift
 //  CapstoneProject
 //
@@ -96,3 +96,4 @@ struct OrderConfirmationView_Previews: PreviewProvider {
         OrderConfirmationView()
     }
 }
+*/
