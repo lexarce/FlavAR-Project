@@ -9,7 +9,11 @@ import SwiftUI
 import Combine
 
 class CartManager: ObservableObject {
+    static let shared = CartManager()   // Singleton pattern instance
+    
     @Published var cartItems: [CartItem] = []
+    
+    private init() {}
 
     func addToCart(_ menuItem: MenuItem) {
         if let index = cartItems.firstIndex(where: { $0.id == menuItem.id }) {
