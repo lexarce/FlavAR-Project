@@ -11,7 +11,6 @@
 		34DDE8D02CA1C2A900CB47FC /* CapstoneProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE8CF2CA1C2A900CB47FC /* CapstoneProjectApp.swift */; };
 		34DDE8D42CA1C2AB00CB47FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34DDE8D32CA1C2AB00CB47FC /* Assets.xcassets */; };
 		34DDE8D72CA1C2AB00CB47FC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34DDE8D62CA1C2AB00CB47FC /* Preview Assets.xcassets */; };
-		34DDE8DE2CA1C2D800CB47FC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDE8DD2CA1C2D800CB47FC /* LoginView.swift */; };
 		34DDE8E02CA1FB3100CB47FC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 34DDE8DF2CA1FB3100CB47FC /* GoogleService-Info.plist */; };
 		34DDE8E32CA1FB9F00CB47FC /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 34DDE8E22CA1FB9F00CB47FC /* FirebaseAnalytics */; };
 		34DDE8E52CA1FB9F00CB47FC /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 34DDE8E42CA1FB9F00CB47FC /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -44,7 +43,6 @@
 		34DDE8CF2CA1C2A900CB47FC /* CapstoneProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapstoneProjectApp.swift; sourceTree = "<group>"; };
 		34DDE8D32CA1C2AB00CB47FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		34DDE8D62CA1C2AB00CB47FC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		34DDE8DD2CA1C2D800CB47FC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		34DDE8DF2CA1FB3100CB47FC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 

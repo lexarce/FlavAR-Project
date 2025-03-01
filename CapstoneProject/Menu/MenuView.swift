@@ -57,26 +57,9 @@ struct MenuView: View {
 
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 12) {
-<<<<<<< HEAD
-                            // Premium Jin's Box Navigation
-                            NavigationLink(destination: PremiumJinsBox()) {
-                                CategoryItemView(imageName: "PremiumBoxesIcon", categoryName: "Premium Jin's Box")
-                            }
-                            
-                            // Korean Food Navigiation
-                            NavigationLink(destination: KoreanFood()) {
-                                CategoryItemView(imageName: "KoreanFoodIcon", categoryName: "Korean Side Dishes")
-                            }
-                            
-                            // Naviation to Popular Item Page
-                            NavigationLink(destination: PopularItems()) {
-                                CategoryItemView(imageName: "PopularIcon", categoryName: "Popular")
-                            }
-=======
                             CategoryLinkView(destination: PremiumJinsBox(), imageName: "PremiumBoxesIcon", categoryName: "Premium Jin's Box")
                             CategoryLinkView(destination: KoreanFood(), imageName: "KoreanFoodIcon", categoryName: "Korean Food")
                             CategoryLinkView(destination: PopularItems(), imageName: "PopularIcon", categoryName: "Popular")
->>>>>>> 377ed3f3a3388f1e33f35f1e32c8b1f2a68e286a
                         }
                         .padding(.horizontal)
                     }

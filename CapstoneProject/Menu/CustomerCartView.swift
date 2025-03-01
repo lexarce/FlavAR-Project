@@ -3,6 +3,7 @@
 //  CapstoneProject
 //
 //  Created by Alexis Arce on 11/7/24.
+//  Edited by Kimberly COstes 2/28/25
 //
 
 import SwiftUI
@@ -178,6 +179,7 @@ struct CartItemRow: View {
         .padding(.horizontal)
     }
     
+    
     func removeItem() {
         let menuItem = MenuItem(
             id: cartItem.id,
@@ -185,6 +187,8 @@ struct CartItemRow: View {
             description: "",
             price: cartItem.price,
             imagepath: cartItem.imagepath,
+            category: "", // default category
+            isPopular: false, // default value
             isAvailable: true
         )
         cartManager.removeFromCart(menuItem)
@@ -198,7 +202,9 @@ struct CartItemRow: View {
             description: "",
             price: cartItem.price,
             imagepath: cartItem.imagepath,
-            isAvailable: true // Set default availability
+            category: "", // default category
+            isPopular: false, // default value
+            isAvailable: true
         )
         cartManager.addToCart(menuItem) // Pass as a MenuItem
     }

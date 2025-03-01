@@ -3,6 +3,7 @@
 //  CapstoneProject
 //
 //  Created by Kaleb on 9/23/24.
+//  Edited by Kimberly 2/28/25
 //
 
 import SwiftUI
@@ -14,7 +15,7 @@ import FirebaseAuth
 //This is where the program starts
 @main
 struct CapstoneProjectApp: App {
-    @StateObject var cartManager = CartManager()
+    @StateObject var cartManager = CartManager.shared // changed CartManager to CartManager.shared
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
