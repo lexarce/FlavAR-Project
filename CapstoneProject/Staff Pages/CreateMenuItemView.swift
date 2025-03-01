@@ -71,6 +71,8 @@ struct CreateMenuItemView: View {
     @State private var customizations: [String] = []
     @State private var newCustomization: String = "Add customization"
     @State private var imageURL: String? // Store uploaded image URL
+    @State private var selectedImage: UIImage? = nil
+
     
     @State private var isPopular: Bool
     @State private var category: String
@@ -101,9 +103,15 @@ struct CreateMenuItemView: View {
                 VStack(spacing: 0) {
                     Spacer().frame(height: 50)
 
-                    EditableImageView(imageName: "DefaultFoodImage", onImageUpload: { newURL in
-                        self.imageURL = newURL
-                    })
+                    EditableImageView(
+                        imageName: "DefaultFoodImage",
+                        onImageUpload: { newURL in
+                            self.imageURL = newURL
+                        },
+                        onImageSelect: { newImage in
+                            self.selectedImage = newImage
+                        }
+                    )
 
                     MenuItemName(title: $title, isEditingTitle: $isEditingTitle, onTitleChange: { newTitle in
                         self.title = newTitle // update title in main view
@@ -161,6 +169,7 @@ struct CreateMenuItemView: View {
         }
     }
     
+    // function to save menu item and update firebase data
     func saveMenuItem() {
         guard !title.isEmpty,
               !description.isEmpty,
@@ -171,38 +180,77 @@ struct CreateMenuItemView: View {
             showSuccessMessage = false
             return
         }
-        
+
+        // use `menuItem.id` if available, otherwise fall back to `title`
         let menuItemRef = db.collection("MenuItems").document(menuItem.id ?? title)
- // menu item ID as document ID if available, otherwise use title as ID
-        
+
+        // check if a new image has been selected
+        if let image = selectedImage, let imageData = image.jpegData(compressionQuality: 0.8) {
+            uploadImageToFirebase(imageData: imageData) { uploadedURL in
+                self.imageURL = uploadedURL
+                self.saveMenuItemData(menuItemRef: menuItemRef, priceValue: priceValue)
+            }
+        }
+        else {
+            // no new image, just save menu item
+            saveMenuItemData(menuItemRef: menuItemRef, priceValue: priceValue)
+        }
+    }
+
+    // helper function to save menu item data
+    func saveMenuItemData(menuItemRef: DocumentReference, priceValue: Double) {
         let menuItemData: [String: Any] = [
             "title": title,
             "description": description,
             "price": priceValue,
             "isPopular": isPopular,
             "category": category,
-            "imagepath": imageURL ?? "", // uploaded image
-            "isAvailable": true // availability status
+            "imagepath": imageURL ?? "", // save the latest image URL
+            "isAvailable": true
         ]
-        
+
         menuItemRef.setData(menuItemData) { error in
             if let error = error {
-                print("Error adding document: \(error)")
+                print("Error saving menu item: \(error)")
                 errorMessage = "Failed to save item."
             } else {
                 print("Menu item successfully added/updated!")
-                
+
                 // save customizations as a subcollection
                 for customization in customizations {
                     let customizationRef = menuItemRef.collection("customizations").document(customization)
-                    customizationRef.setData([:]) // empty document for structure
+                    customizationRef.setData([:])
                 }
-                
+
                 errorMessage = nil
                 showSuccessMessage = true
             }
         }
     }
+    
+    // function to update image on firebase database
+    func uploadImageToFirebase(imageData: Data, completion: @escaping (String?) -> Void) {
+        let storageRef = Storage.storage().reference().child("menu_images/\(UUID().uuidString).jpg")
+
+        storageRef.putData(imageData, metadata: nil) { metadata, error in
+            if let error = error {
+                print("Error uploading image: \(error)")
+                completion(nil)
+                return
+            }
+
+            storageRef.downloadURL { url, error in
+                if let url = url {
+                    print("Image uploaded successfully: \(url.absoluteString)")
+                    completion(url.absoluteString)
+                } else {
+                    completion(nil)
+                }
+            }
+        }
+    }
+
+
         
 }
 
@@ -210,11 +258,14 @@ struct CreateMenuItemView: View {
 struct EditableImageView: View {
     var imageName: String // default image name
     var onImageUpload: (String) -> Void // closure to send uploaded image URL
+    var onImageSelect: (UIImage?) -> Void // notify parent when new image is selected
+    
     @StateObject private var viewModel = PhotoPickerViewModel()
 
-    init(imageName: String, onImageUpload: @escaping (String) -> Void) {
+    init(imageName: String, onImageUpload: @escaping (String) -> Void, onImageSelect: @escaping (UIImage?) -> Void) {
         self.imageName = imageName
         self.onImageUpload = onImageUpload
+        self.onImageSelect = onImageSelect
         _viewModel = StateObject(wrappedValue: PhotoPickerViewModel())
     }
 
@@ -259,6 +310,10 @@ struct EditableImageView: View {
                 onImageUpload(newURL) // notify parent when upload is complete
             }
         }
+        .onChange(of: viewModel.selectedImage) {
+            onImageSelect(viewModel.selectedImage) // notify parent when new image is selected
+        }
+
     }
 }
 
