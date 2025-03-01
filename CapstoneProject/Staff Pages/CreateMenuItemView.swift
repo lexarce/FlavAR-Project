@@ -72,9 +72,9 @@ struct CreateMenuItemView: View {
     @State private var newCustomization: String = "Add customization"
     @State private var imageURL: String? // Store uploaded image URL
     @State private var selectedImage: UIImage? = nil
-
     
-    @State private var isPopular: Bool
+    @State private var isAvailable: Bool = true // availablility defaulted to true
+    @State private var isPopular: Bool = false // defaulted to false
     @State private var category: String
     
     @State private var isEditingTitle: Bool = false
@@ -93,6 +93,7 @@ struct CreateMenuItemView: View {
         _price = State(initialValue: String(format: "%.2f", menuItem.price))
         _isPopular = State(initialValue: menuItem.isPopular)
         _category = State(initialValue: menuItem.category)
+        _isAvailable = State(initialValue: menuItem.isAvailable)
     }
 
     
@@ -133,7 +134,9 @@ struct CreateMenuItemView: View {
                         // edit customization view (editing existing items)
                         EditCustomizationView(customizations: $customizations)
                         
-                        AvailabilityView()
+                        EditableCategoryView(category: $category)
+                        
+                        ToggleView(isAvailable: $isAvailable, isPopular: $isPopular)
                         
                         // error message if validation fails
                         if let errorMessage = errorMessage {
@@ -171,21 +174,38 @@ struct CreateMenuItemView: View {
     
     // function to save menu item and update firebase data
     func saveMenuItem() {
+        
+        // Debugging print statements
+        print("DEBUG: Attempting to save menu item...")
+        print("Title:", title)
+        print("Description:", description)
+        print("Price (String):", price)
+        print("Category:", category)
+        print("Selected Image:", selectedImage != nil ? "Exists" : "Nil")
+        print("Image URL:", imageURL ?? "No URL")
+        print("Availability:", isAvailable)
+        print("Popular:", isPopular)
+        
         guard !title.isEmpty,
               !description.isEmpty,
               !price.isEmpty,
               !category.isEmpty,
+              selectedImage != nil || imageURL != nil,
               let priceValue = Double(price) else {
+            print("DEBUG: Validation failed - one or more fields are empty or incorrect.")
             errorMessage = "Please fill in all fields correctly before saving."
             showSuccessMessage = false
             return
         }
 
+        print("DEBUG: Validation passed. Proceeding to save menu item.")
+        
         // use `menuItem.id` if available, otherwise fall back to `title`
         let menuItemRef = db.collection("MenuItems").document(menuItem.id ?? title)
 
         // check if a new image has been selected
         if let image = selectedImage, let imageData = image.jpegData(compressionQuality: 0.8) {
+            print("DEBUG: Uploading new image...")
             uploadImageToFirebase(imageData: imageData) { uploadedURL in
                 self.imageURL = uploadedURL
                 self.saveMenuItemData(menuItemRef: menuItemRef, priceValue: priceValue)
@@ -193,6 +213,7 @@ struct CreateMenuItemView: View {
         }
         else {
             // no new image, just save menu item
+            print("DEBUG: No new image, saving menu item without uploading a new image.")
             saveMenuItemData(menuItemRef: menuItemRef, priceValue: priceValue)
         }
     }
@@ -206,7 +227,7 @@ struct CreateMenuItemView: View {
             "isPopular": isPopular,
             "category": category,
             "imagepath": imageURL ?? "", // save the latest image URL
-            "isAvailable": true
+            "isAvailable": isAvailable
         ]
 
         menuItemRef.setData(menuItemData) { error in
@@ -656,17 +677,60 @@ struct EditCustomizationView: View {
     }
 }
 
-// item name and editing functionality
-struct AvailabilityView: View {
+// toggles including availability and popularity
+struct ToggleView: View {
+    @Binding var isAvailable: Bool
+    @Binding var isPopular: Bool
+    
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Availability")
+            
+            Text("Toggles")
                 .font(.headline)
                 .foregroundColor(.white)
                 .padding(.top, 15)
+            
+            Toggle("Available for Order", isOn: $isAvailable)
+                .foregroundColor(.black)
+                .padding(.top, 5)
+                .toggleStyle(SwitchToggleStyle())
+            
+            Toggle("Popular Item", isOn: $isAvailable)
+                .foregroundColor(.black)
+                .padding(.top, 5)
+                .toggleStyle(SwitchToggleStyle())
         }
+        .padding(.leading, 10)
+        .padding(.horizontal)
     }
-    
+}
+
+// TODO: FIX how it looks in UI
+struct EditableCategoryView: View {
+    @Binding var category: String
+
+    let categories = ["Jin's Premium Boxes", "Korean Food"]
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Category")
+                .font(.headline)
+                .foregroundColor(.white)
+                .padding(.top, 15)
+
+            Picker("Select Category", selection: $category) {
+                ForEach(categories, id: \.self) { category in
+                    Text(category).tag(category)
+                }
+            }
+            .pickerStyle(MenuPickerStyle()) // dropdown
+            .padding()
+            .background(RoundedRectangle(cornerRadius: 8).fill(Color.white.opacity(0.2)))
+            .foregroundColor(.black)
+        }
+        .padding(.leading, 10)
+        .padding(.horizontal)
+    }
 }
 
 
