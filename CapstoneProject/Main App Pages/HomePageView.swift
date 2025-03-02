@@ -5,6 +5,8 @@
 //  Created by kimi on 11/08/24.
 //
 
+// BROKEN
+
 import SwiftUI
 import FirebaseCore
 import FirebaseFirestore
@@ -219,3 +221,4 @@ struct CustomerGalleryImageView: View {
     HomePageView()
         .environmentObject(NavigationManager.shared)
 }
+ 

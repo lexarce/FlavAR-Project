@@ -18,7 +18,8 @@ struct MenuItem: Identifiable, Codable {
     var isPopular: Bool
     var ARModelPath: String? = nil
     var isAvailable: Bool = true
-    var quantity: Int = 1
+    var quantity: Int? = 1
+    var customizations: [String]?
 
     // initializer
     init(id: String? = nil, title: String, description: String, price: Double, imagepath: String, category: String, isPopular: Bool, ARModelPath: String? = nil, isAvailable: Bool = true, quantity: Int = 1) {
@@ -32,5 +33,6 @@ struct MenuItem: Identifiable, Codable {
         self.ARModelPath = ARModelPath
         self.isAvailable = isAvailable
         self.quantity = quantity
+        self.customizations = nil
     }
 }

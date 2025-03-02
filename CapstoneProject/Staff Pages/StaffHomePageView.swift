@@ -7,7 +7,7 @@
 // NOTE: This file only exists so we can easily see how the staff view would look like. The
 //       HomePageView.swift will automatically check whether a user is an admin or not, and adjust
 //       the UI.
-
+/*
 import SwiftUI
 import FirebaseAuth
 
@@ -80,4 +80,4 @@ struct StaffHomePageView: View {
 
 #Preview {
     StaffHomePageView()
-}
+}*/
