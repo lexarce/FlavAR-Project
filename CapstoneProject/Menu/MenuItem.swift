@@ -20,6 +20,7 @@ struct MenuItem: Identifiable, Codable {
     var isAvailable: Bool = true
     var quantity: Int? = 1
     var customizations: [String]?
+    var nutrition: Nutrition?
 
     // initializer
     init(id: String? = nil, title: String, description: String, price: Double, imagepath: String, category: String, isPopular: Bool, ARModelPath: String? = nil, isAvailable: Bool = true, quantity: Int = 1) {

@@ -717,16 +717,18 @@ struct EditableCategoryView: View {
                 .font(.headline)
                 .foregroundColor(.white)
                 .padding(.top, 15)
-
-            Picker("Select Category", selection: $category) {
-                ForEach(categories, id: \.self) { category in
-                    Text(category).tag(category)
+            HStack{
+                
+                Picker("Select Category", selection: $category) {
+                    ForEach(categories, id: \.self) { category in
+                        Text(category).tag(category)
+                    }
                 }
+                .pickerStyle(MenuPickerStyle()) // dropdown
+                .padding()
+                .background(RoundedRectangle(cornerRadius: 8).fill(Color.white.opacity(0.2)))
+                .foregroundColor(.black)
             }
-            .pickerStyle(MenuPickerStyle()) // dropdown
-            .padding()
-            .background(RoundedRectangle(cornerRadius: 8).fill(Color.white.opacity(0.2)))
-            .foregroundColor(.black)
         }
         .padding(.leading, 10)
         .padding(.horizontal)
