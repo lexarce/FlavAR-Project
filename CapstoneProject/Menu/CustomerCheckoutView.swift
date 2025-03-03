@@ -13,6 +13,12 @@ struct CustomerCheckoutView: View {
     @EnvironmentObject var cartManager: CartManager
     @State private var isOrderPlaced = false
     @State private var isProcessing = false
+    @State var showingPaymentPage = false
+    
+    @State private var cardHolderName = ""
+    @State private var cardNumber = ""
+    @State private var expirationDate = ""
+    @State private var cvv = ""
 
     private var subtotal: Double {
         cartManager.cartItems.reduce(0) { $0 + ($1.price * Double($1.quantity)) }
@@ -72,6 +78,20 @@ struct CustomerCheckoutView: View {
                     .background(Color.white.opacity(0.1))
                     .cornerRadius(10)
                     .padding(.horizontal)
+                    
+                    Button(action: {
+                        showingPaymentPage = true
+                    }) {
+                        Text("Enter Payment Method")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity) // Make it stretch across the width
+                            .padding()
+                            .background(Color("AppColor4")) // Change to your app's theme color
+                            .cornerRadius(10) // Slightly rounded edges for a modern look
+                    }
+                    .padding(.horizontal)
+                    .offset(y: 50)
 
                     Button(action: placeOrder) {
                         if isProcessing {
@@ -84,19 +104,27 @@ struct CustomerCheckoutView: View {
                                 .padding()
                                 .frame(maxWidth: .infinity)
                                 .background(RoundedRectangle(cornerRadius: 30).fill(Color("AppColor4")))
+                                
                         }
                     }
+                    .offset(y: 100)
                     .padding(.horizontal, 20)
                     .padding(.top, 10)
                     .disabled(isProcessing)
 
+                    Spacer()
                     NavigationBar()
                 }
+                .offset(y: 100)
                 .alert("Order Placed!", isPresented: $isOrderPlaced) {
                     Button("OK") {
                         cartManager.clearCart()
                     }
                 }
+            }
+            .sheet(isPresented: $showingPaymentPage)
+            {
+                PaymentView(cardHolderName: $cardHolderName, cardNumber: $cardNumber, expirationDate: $expirationDate, cvv: $cvv)
             }
         }
     }
@@ -120,3 +148,18 @@ struct CustomerCheckoutView: View {
     }
 }
 
+struct CustomerCheckoutView_Previews: PreviewProvider {
+    static var previews: some View {
+        let cartManager = CartManager.shared
+        cartManager.cartItems = [
+            CartItem(id: "", title: "Sample Item", price: 9.99, imagepath: "", quantity: 2),
+            CartItem(id: "", title: "Another Item", price: 14.50, imagepath: "", quantity: 1)
+        ]
+        let navigationManager = NavigationManager.shared
+        
+        return CustomerCheckoutView()
+            .environmentObject(cartManager)
+            .environmentObject(navigationManager)
+            .previewLayout(.sizeThatFits)
+    }
+}

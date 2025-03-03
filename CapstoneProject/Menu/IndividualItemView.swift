@@ -134,7 +134,7 @@ struct IndividualItemView_Previews: PreviewProvider {
             description: "Delicious beef bulgogi served with rice, vegetables, and sauce.",
             price: 14.99,
             imagepath: "PremiumBulgogiBox",
-            category: "Jin's Box", //
+            category: "Jin's Box",
             isPopular: true, 
             isAvailable: true
         )
