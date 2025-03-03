@@ -12,6 +12,7 @@ import FirebaseAuth
 struct CustomerCheckoutView: View {
     @EnvironmentObject var cartManager: CartManager
     @State private var isOrderPlaced = false
+    @State private var orderError = false
     @State private var isProcessing = false
     @State var showingPaymentPage = false
     
@@ -93,7 +94,13 @@ struct CustomerCheckoutView: View {
                     .padding(.horizontal)
                     .offset(y: 50)
 
-                    Button(action: placeOrder) {
+                    Button(action: {
+                        if cardHolderName.isEmpty || cardNumber.isEmpty || expirationDate.isEmpty || cvv.isEmpty {
+                            orderError = true 
+                        } else {
+                            placeOrder()
+                        }
+                    }) {
                         if isProcessing {
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle())
@@ -104,7 +111,6 @@ struct CustomerCheckoutView: View {
                                 .padding()
                                 .frame(maxWidth: .infinity)
                                 .background(RoundedRectangle(cornerRadius: 30).fill(Color("AppColor4")))
-                                
                         }
                     }
                     .offset(y: 100)
@@ -119,6 +125,10 @@ struct CustomerCheckoutView: View {
                 .alert("Order Placed!", isPresented: $isOrderPlaced) {
                     Button("OK") {
                         cartManager.clearCart()
+                    }
+                }
+                .alert("Unable to place order", isPresented: $orderError) {
+                    Button("OK") {
                     }
                 }
             }
