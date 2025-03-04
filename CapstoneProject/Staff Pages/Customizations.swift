@@ -25,3 +25,4 @@ struct CustomizationCategory: Codable {
     var isRequired: Bool // e.g., true if a choice is mandatory
     var options: [CustomizationOption] // List of available options
 }
+
