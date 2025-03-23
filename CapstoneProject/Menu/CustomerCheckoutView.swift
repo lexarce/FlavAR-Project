@@ -15,11 +15,7 @@ struct CustomerCheckoutView: View {
     @State private var orderError = false
     @State private var isProcessing = false
     @State var showingPaymentPage = false
-    
-    @State private var cardHolderName = ""
-    @State private var cardNumber = ""
-    @State private var expirationDate = ""
-    @State private var cvv = ""
+    @State var paymentMethodCompleted = false
 
     private var subtotal: Double {
         cartManager.cartItems.reduce(0) { $0 + ($1.price * Double($1.quantity)) }
@@ -95,10 +91,11 @@ struct CustomerCheckoutView: View {
                     .offset(y: 50)
 
                     Button(action: {
-                        if cardHolderName.isEmpty || cardNumber.isEmpty || expirationDate.isEmpty || cvv.isEmpty {
-                            orderError = true 
-                        } else {
+                        //Add a check to see if a payment option is selected
+                        if paymentMethodCompleted == true {
                             placeOrder()
+                        } else {
+                            orderError = true
                         }
                     }) {
                         if isProcessing {
@@ -134,7 +131,7 @@ struct CustomerCheckoutView: View {
             }
             .sheet(isPresented: $showingPaymentPage)
             {
-                PaymentView(cardHolderName: $cardHolderName, cardNumber: $cardNumber, expirationDate: $expirationDate, cvv: $cvv)
+                PaymentView(paymentMethodCompleted: $paymentMethodCompleted)
             }
         }
     }
