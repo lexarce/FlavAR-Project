@@ -9,7 +9,7 @@ import SwiftUI
 import PassKit
 
 enum PaymentMethod: String, CaseIterable {
-    case creditCard, debitCard, paypal, applePay, googlePay
+    case creditCard, debitCard, paypal, applePay
 }
 
 struct PaymentView: View {
@@ -37,8 +37,6 @@ struct PaymentView: View {
                         PayPalPaymentView(paymentMethodCompleted: $paymentMethodCompleted)
                     case .applePay:
                         ApplePayView(paymentMethodCompleted: $paymentMethodCompleted)
-                    case .googlePay:
-                        GooglePayView()
                     }
                 }
             }
@@ -60,7 +58,7 @@ struct PaymentMethodView: View {
                         .padding()
                         .font(.system(size: 14))
                         .fixedSize()
-                        .frame(minWidth: 60, maxWidth: 60, minHeight: 40, maxHeight: 40)
+                        .frame(minWidth: 70, maxWidth: 70, minHeight: 50, maxHeight: 50)
                         .background(selectedPaymentMethod == method ? Color.blue : Color.white)
                         .foregroundColor(selectedPaymentMethod == method ? .white : .black)
                         .cornerRadius(12)
@@ -81,9 +79,7 @@ struct PaymentMethodView: View {
             case .creditCard: return "Credit"
             case .debitCard: return "Debit"
             case .paypal: return "PayPal"
-            case .applePay: return "Apple \nPay"
-            case .googlePay: return "Google \nPay"
-        }
+            case .applePay: return "Apple \nPay"        }
     }
 }
 
@@ -285,14 +281,6 @@ struct ApplePayView: View {
     }
 }
 
-
-
-struct GooglePayView: View {
-
-    var body: some View {
-        Text("Google Pay View")
-    }
-}
 
 struct PaymentField: View {
     var header: String
