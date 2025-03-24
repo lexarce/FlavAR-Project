@@ -35,13 +35,12 @@ struct CapstoneProjectApp: App {
             
             //HomePageView()
             LoginView()
+            //CustomerCheckoutView()
             //ContentView()
-            //CustomerMenuView()
             //CustomerMenuView()
                 .environmentObject(navigationManager)
                 .environmentObject(userManager)
             
-            //CustomerMenuView()
                // .environmentObject(cartManager)
                 //.environmentObject(navigationManager)
         }

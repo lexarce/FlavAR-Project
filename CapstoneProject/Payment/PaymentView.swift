@@ -33,7 +33,7 @@ struct PaymentView: View {
                     case .debitCard:
                         DebitCardPaymentView(paymentMethodCompleted: $paymentMethodCompleted)
                     case .paypal:
-                        PayPalPaymentView()
+                        PayPalPaymentView(paymentMethodCompleted: $paymentMethodCompleted)
                     case .applePay:
                         ApplePayView()
                     case .googlePay:
@@ -89,7 +89,6 @@ struct PaymentMethodView: View {
 
 
 struct CreditCardPaymentView: View {
-
     @Environment(\.dismiss) var dismiss
     @Binding var paymentMethodCompleted: Bool
     
@@ -204,9 +203,31 @@ struct DebitCardPaymentView: View {
 }
 
 struct PayPalPaymentView: View {
-
+    @Environment(\.dismiss) var dismiss
+    @Environment(\.openURL) private var openURL
+    @Binding var paymentMethodCompleted: Bool
+    
     var body: some View {
-        Text("PayPal View")
+        Text("PayPal")
+            .font(.headline)
+        
+        HStack {
+            Spacer()
+            
+            Button("Go to PayPal") {
+                openURL(URL(string: "https://www.paypal.com/signin")!)
+                paymentMethodCompleted = true
+                dismiss()
+            }
+            .padding()
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(8)
+            .buttonStyle(PlainButtonStyle())
+            
+            Spacer()
+        }
+        
     }
 }
 
