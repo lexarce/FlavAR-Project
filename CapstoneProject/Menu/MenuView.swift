@@ -76,6 +76,34 @@ struct MenuView: View {
 
                 VStack { Spacer(); NavigationBar() }
             }
+            // Top toolbar
+            .navigationBarBackButtonHidden(true)
+            .navigationTitle("")
+            .foregroundStyle(.white)
+            .toolbar {
+                // Title
+                ToolbarItem(placement: .principal) {
+                    Text("")
+                        .font(.title2)
+                        .foregroundColor(.white)
+                }
+                // Back button
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        navigationManager.currentView = "MenuView"
+                    }) {
+                        Image(systemName: "arrowshape.backward")
+                            .foregroundColor(.white)
+                    }
+                }
+                // Cart button
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: CustomerCartView()) {
+                        Image(systemName: "cart")
+                            .foregroundColor(.white)
+                    }
+                }
+            }
         }
         .onAppear {
             menuItemService.fetchMenuItems { items in self.menuItems = items }
