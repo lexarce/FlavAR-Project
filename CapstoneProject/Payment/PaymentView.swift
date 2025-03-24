@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PassKit
 
 enum PaymentMethod: String, CaseIterable {
     case creditCard, debitCard, paypal, applePay, googlePay
@@ -35,7 +36,7 @@ struct PaymentView: View {
                     case .paypal:
                         PayPalPaymentView(paymentMethodCompleted: $paymentMethodCompleted)
                     case .applePay:
-                        ApplePayView()
+                        ApplePayView(paymentMethodCompleted: $paymentMethodCompleted)
                     case .googlePay:
                         GooglePayView()
                     }
@@ -232,11 +233,59 @@ struct PayPalPaymentView: View {
 }
 
 struct ApplePayView: View {
-
+    @Environment(\.dismiss) var dismiss
+    @State private var showAlert = false
+    @Binding var paymentMethodCompleted: Bool
+    
     var body: some View {
-        Text("Apple Pay View")
+        Text("Apple Pay")
+            .font(.headline)
+
+        HStack {
+            Spacer()
+            ApplePayButton(showAlert: $showAlert, paymentMethodCompleted: $paymentMethodCompleted)
+                .frame(width: 200, height: 50)
+            Spacer()
+        }
+        .alert("Payment Successful!", isPresented: $showAlert) {
+            Button("OK", role: .cancel) {
+                dismiss()
+            }
+        }
+            
+    }
+    
+    private struct ApplePayButton: UIViewRepresentable {
+        @Binding var showAlert: Bool
+        @Binding var paymentMethodCompleted: Bool
+        
+        func makeUIView(context: Context) -> PKPaymentButton {
+            let button = PKPaymentButton(paymentButtonType: .buy, paymentButtonStyle: .black)
+            button.addTarget(context.coordinator, action: #selector(Coordinator.simulatePayment), for: .touchUpInside)
+            return button
+        }
+
+        func updateUIView(_ uiView: PKPaymentButton, context: Context) {}
+
+        func makeCoordinator() -> Coordinator {
+            Coordinator(showAlert: $showAlert)
+        }
+
+        class Coordinator: NSObject {
+            var showAlert: Binding<Bool>
+
+            init(showAlert: Binding<Bool>) {
+                self.showAlert = showAlert
+            }
+
+            @objc func simulatePayment() {
+                showAlert.wrappedValue = true
+            }
+        }
     }
 }
+
+
 
 struct GooglePayView: View {
 
