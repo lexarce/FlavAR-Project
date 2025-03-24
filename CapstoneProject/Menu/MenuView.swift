@@ -19,6 +19,7 @@ struct MenuView: View {
     @State private var isAdmin: Bool = false
     @State private var selectedItem: MenuItem?
     @State private var showItemDetail = false
+    @Environment(\.dismiss) var dismiss
 
     let menuItemService = MenuItemService()
 
@@ -90,7 +91,7 @@ struct MenuView: View {
                 // Back button
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
-                        navigationManager.currentView = "MenuView"
+                        dismiss()
                     }) {
                         Image(systemName: "arrowshape.backward")
                             .foregroundColor(.white)

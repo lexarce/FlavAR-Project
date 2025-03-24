@@ -14,6 +14,8 @@ import FirebaseAuth
 struct CustomerCartView: View {
     @EnvironmentObject var navigationManager: NavigationManager
     @ObservedObject var cartManager = CartManager.shared
+    @Environment(\.dismiss) var dismiss
+
     
     private var subtotal: Double {
         cartManager.cartItems.reduce(0) { total, cartItem in
@@ -37,30 +39,9 @@ struct CustomerCartView: View {
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
 
+                Spacer()
+                
                 VStack {
-                    HStack {
-                        NavigationLink(destination: MenuView()) {
-                            Image(systemName: "arrowshape.backward")
-                                .foregroundColor(.white)
-                                .padding()
-                        }
-                        Spacer()
-                        
-                        NavigationLink(destination: HomePageView().environmentObject(cartManager)) {
-                            Image(systemName: "cart")
-                                .foregroundColor(.white)
-                                .padding()
-                        }
-                    }
-                    .padding(.horizontal)
-                    .padding(.top, 5)
-                    
-                    Text("CART")
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .padding(.top, 5)
-                    
                     ScrollView {
                         VStack(spacing: 20) {
                             ForEach(cartManager.cartItems) { cartItem in
@@ -68,7 +49,7 @@ struct CustomerCartView: View {
                             }
                         }
                     }
-                    .padding(.top, 5)
+                    .padding(.top, 50)
                     
                     VStack(alignment: .leading, spacing: 8) {
                         HStack {
@@ -95,7 +76,6 @@ struct CustomerCartView: View {
                                 .foregroundColor(.white)
                         }
                     }
-                    .navigationBarBackButtonHidden(true)
                     .padding()
                     .background(Color.white.opacity(0.1))
                     .cornerRadius(10)
@@ -122,6 +102,34 @@ struct CustomerCartView: View {
                 .onAppear {
                     navigationManager.currentView = "CustomerCartView"
                 }
+            }
+            .navigationBarBackButtonHidden(true)
+            .navigationTitle("")
+            .foregroundStyle(.white)
+            .toolbar {
+                // Title
+                ToolbarItem(placement: .principal) {
+                    Text("Cart")
+                        .font(.title2)
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
+                }
+                // Back button
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Image(systemName: "arrowshape.backward")
+                            .foregroundColor(.white)
+                    }
+                }
+                // Cart button
+                /*ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: CustomerCartView()) {
+                        Image(systemName: "cart")
+                            .foregroundColor(.white)
+                    }
+                }*/
             }
         }
     }
