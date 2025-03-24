@@ -29,9 +29,9 @@ struct PaymentView: View {
                 Section {
                     switch method {
                     case .creditCard:
-                        CreditCardPaymentView()
+                        CreditCardPaymentView(paymentMethodCompleted: $paymentMethodCompleted)
                     case .debitCard:
-                        DebitCardPaymentView()
+                        DebitCardPaymentView(paymentMethodCompleted: $paymentMethodCompleted)
                     case .paypal:
                         PayPalPaymentView()
                     case .applePay:
@@ -57,7 +57,7 @@ struct PaymentMethodView: View {
                 }) {
                     Text(methodName(for: method))
                         .padding()
-                        .font(.system(size: 10))
+                        .font(.system(size: 14))
                         .fixedSize()
                         .frame(minWidth: 60, maxWidth: 60, minHeight: 40, maxHeight: 40)
                         .background(selectedPaymentMethod == method ? Color.blue : Color.white)
@@ -86,17 +86,120 @@ struct PaymentMethodView: View {
     }
 }
 
+
+
 struct CreditCardPaymentView: View {
 
+    @Environment(\.dismiss) var dismiss
+    @Binding var paymentMethodCompleted: Bool
+    
+    @State private var nameOnCard = ""
+    @State private var cardNumber = ""
+    @State private var expirationDate = ""
+    @State private var cvv = ""
+    @State private var showingError = false
+    
     var body: some View {
-        Text("Credit Card View")
+        Text("Credit Card")
+            .font(.headline)
+        
+        VStack {
+            VStack(spacing: 16) {
+                PaymentField(header: "Name on Card:", text: $nameOnCard)
+                PaymentField(header: "Card Number:", text: $cardNumber)
+                PaymentField(header: "Expiration Date (MM/YY):", text: $expirationDate)
+                PaymentField(header: "CVV:", text: $cvv)
+            }
+            .padding()
+            
+            Button(action: {
+                if !fieldsAreFilled() {
+                    //Display a popup error message
+                    showingError = true
+                }
+                else {
+                    paymentMethodCompleted = true
+                    dismiss()
+                }
+            }) {
+                Text("Confirm Payment Method")
+                    .padding()
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(8)
+            }
+            .buttonStyle(PlainButtonStyle())
+        }
+        .alert("Credit Card Confirmation Failed", isPresented: $showingError) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("Please fill out all fields before proceeding.")
+        }
     }
-}
+    
+    private func fieldsAreFilled() -> Bool {
+        return !nameOnCard.isEmpty &&
+               !cardNumber.isEmpty &&
+               !expirationDate.isEmpty &&
+               !cvv.isEmpty
+    }}
 
 struct DebitCardPaymentView: View {
-
+    @Environment(\.dismiss) var dismiss
+    @Binding var paymentMethodCompleted: Bool
+    
+    @State private var nameOnCard = ""
+    @State private var cardNumber = ""
+    @State private var expirationDate = ""
+    @State private var cvv = ""
+    @State private var billingAddress = ""
+    @State private var showingError = false
+    
     var body: some View {
-        Text("Debit Card View")
+        Text("Debit Card")
+            .font(.headline)
+        
+        VStack {
+            VStack(spacing: 16) {
+                PaymentField(header: "Name on Card:", text: $nameOnCard)
+                PaymentField(header: "Card Number:", text: $cardNumber)
+                PaymentField(header: "Expiration Date (MM/YY):", text: $expirationDate)
+                PaymentField(header: "CVV:", text: $cvv)
+                PaymentField(header: "Billing Address:", text: $billingAddress)
+            }
+            .padding()
+            
+            Button(action: {
+                if !fieldsAreFilled() {
+                    //Display a popup error message
+                    showingError = true
+                }
+                else {
+                    paymentMethodCompleted = true
+                    dismiss()
+                }
+            }) {
+                Text("Confirm Payment Method")
+                    .padding()
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(8)
+            }
+            .buttonStyle(PlainButtonStyle())
+        }
+        .alert("Debit Card Confirmation Failed", isPresented: $showingError) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("Please fill out all fields before proceeding.")
+        }
+    }
+    
+    private func fieldsAreFilled() -> Bool {
+        return !nameOnCard.isEmpty &&
+               !cardNumber.isEmpty &&
+               !expirationDate.isEmpty &&
+               !cvv.isEmpty &&
+               !billingAddress.isEmpty
     }
 }
 
@@ -118,6 +221,27 @@ struct GooglePayView: View {
 
     var body: some View {
         Text("Google Pay View")
+    }
+}
+
+struct PaymentField: View {
+    var header: String
+    @Binding var text: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(header)
+                .font(.subheadline)
+                .font(.system(size: 13))
+            TextField("", text: $text)
+                .padding(8)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 5)
+                        .stroke(Color.black, lineWidth: 1)
+                )
+                .frame(height: 40)
+        }
+            
     }
 }
 
