@@ -243,7 +243,7 @@ struct ApplePayView: View {
                 .frame(width: 200, height: 50)
             Spacer()
         }
-        .alert("Payment Successful!", isPresented: $showAlert) {
+        .alert("Apple Pay Successful!", isPresented: $showAlert) {
             Button("OK", role: .cancel) {
                 dismiss()
             }
