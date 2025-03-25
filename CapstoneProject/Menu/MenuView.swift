@@ -75,7 +75,8 @@ struct MenuView: View {
                 }
                 .padding()
 
-                VStack { Spacer(); NavigationBar() }
+                VStack { Spacer(); NavigationBar()
+                    Spacer().frame(height: 40)}
             }
             // Top toolbar
             .navigationBarBackButtonHidden(true)

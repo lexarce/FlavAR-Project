@@ -22,6 +22,7 @@ struct PremiumJinsBox: View {
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack {
+                    Spacer().frame(height: 40)
                     
                     List(menuViewModel.menuItems) { item in
                         NavigationLink(destination: IndividualItemView(menuItem: item)) {
@@ -47,6 +48,7 @@ struct PremiumJinsBox: View {
                     .scrollContentBackground(.hidden)
                     
                     NavigationBar()
+                    Spacer().frame(height: 40)
                 }
             }
             .navigationBarBackButtonHidden(true)
