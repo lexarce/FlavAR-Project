@@ -16,6 +16,8 @@ struct IndividualItemView: View {
     var menuItem: MenuItem
     @State private var isARViewPresented: Bool = false
     @State private var downloadedImage: UIImage? = nil
+    @State private var showSuccessAlert = false
+    @State private var showErrorAlert = false
     @EnvironmentObject var cartManager: CartManager
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.dismiss) var dismiss
@@ -73,7 +75,12 @@ struct IndividualItemView: View {
                 Divider()
                 
                 Button(action: {
-                    cartManager.addToCart(menuItem)
+                    if let _ = menuItem.id {
+                        cartManager.addToCart(menuItem)
+                        showSuccessAlert = true
+                    } else {
+                        showErrorAlert = true
+                    }
                 }) {
                     Text("ADD TO CART")
                         .bold()
@@ -87,6 +94,16 @@ struct IndividualItemView: View {
                 }
                 .padding(.horizontal, 20)
                 .shadow(radius: 10)
+                .alert("Success", isPresented: $showSuccessAlert) {
+                    Button("OK", role: .cancel) { }
+                } message: {
+                    Text("Successfully added to cart!")
+                }
+                .alert("Error", isPresented: $showErrorAlert) {
+                    Button("OK", role: .cancel) { }
+                } message: {
+                    Text("Something went wrong. Please try again.")
+                }
                 
             }
             //.padding(.top, 10)
