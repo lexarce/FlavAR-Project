@@ -25,7 +25,8 @@ struct PremiumJinsBox: View {
                     Spacer().frame(height: 40)
                     
                     List(menuViewModel.menuItems) { item in
-                        NavigationLink(destination: IndividualItemView(menuItem: item)) {
+                        NavigationLink(destination: IndividualItemView(menuItem: item)
+                            .environmentObject(CartManager.shared)) {
                             HStack {
                                 MenuItemImageView(imagePath: item.imagepath)
                                     .frame(width: 60, height: 60)
