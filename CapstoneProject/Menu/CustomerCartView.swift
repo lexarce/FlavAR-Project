@@ -142,17 +142,9 @@ struct CartItemRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
-                if let image = UIImage(named: cartItem.imagepath) {
-                    Image(uiImage: image)
-                        .resizable()
-                        .frame(width: 60, height: 60)
-                        .cornerRadius(8)
-                } else {
-                    Rectangle()
-                        .fill(Color.gray)
-                        .frame(width: 60, height: 60)
-                        .cornerRadius(8)
-                }
+                MenuItemImageView(imagePath: cartItem.imagepath)
+                    .frame(width: 60, height: 60)
+                    .cornerRadius(8)
                 
                 VStack(alignment: .leading) {
                     Text(cartItem.title)

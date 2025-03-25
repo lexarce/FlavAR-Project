@@ -17,19 +17,19 @@ struct CustomerCheckoutView: View {
     @State private var isProcessing = false
     @State var showingPaymentPage = false
     @State var paymentMethodCompleted = false
-
+    
     private var subtotal: Double {
         cartManager.cartItems.reduce(0) { $0 + ($1.price * Double($1.quantity)) }
     }
-
+    
     private var tax: Double {
         subtotal * 0.1 // Example 10% tax
     }
-
+    
     private var total: Double {
         subtotal + tax
     }
-
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -37,8 +37,32 @@ struct CustomerCheckoutView: View {
                     .resizable()
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
-
+                
                 VStack {
+                    // Ordered Items
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Items Ordered")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding(.bottom, 5)
+                        
+                        ForEach(cartManager.cartItems) { item in
+                            HStack {
+                                Text("\(item.title) x\(item.quantity)")
+                                    .foregroundColor(.white)
+                                    .font(.subheadline)
+                                Spacer()
+                                Text("$\(item.price * Double(item.quantity), specifier: "%.2f")")
+                                    .foregroundColor(.white)
+                                    .font(.subheadline)
+                            }
+                        }
+                    }
+                    .padding()
+                    .background(Color.white.opacity(0.1))
+                    .cornerRadius(10)
+                    .padding(.horizontal)
+                    
                     // Order Summary
                     VStack(alignment: .leading, spacing: 10) {
                         HStack {
@@ -71,7 +95,7 @@ struct CustomerCheckoutView: View {
                     .background(Color.white.opacity(0.1))
                     .cornerRadius(10)
                     .padding(.horizontal)
-
+                    
                     // Payment Method Button
                     Button(action: {
                         showingPaymentPage = true
@@ -86,7 +110,7 @@ struct CustomerCheckoutView: View {
                     }
                     .padding(.horizontal)
                     .offset(y: 50)
-
+                    
                     // Place Order Button
                     Button(action: {
                         if paymentMethodCompleted {
@@ -111,7 +135,7 @@ struct CustomerCheckoutView: View {
                     .padding(.horizontal, 20)
                     .padding(.top, 10)
                     .disabled(isProcessing)
-
+                    
                     Spacer()
                     NavigationBar()
                 }
@@ -136,7 +160,7 @@ struct CustomerCheckoutView: View {
                         .foregroundColor(.white)
                         .fontWeight(.bold)
                 }
-
+                
                 // Back button
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
@@ -146,7 +170,7 @@ struct CustomerCheckoutView: View {
                             .foregroundColor(.white)
                     }
                 }
-
+                
                 // Cart button
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: CustomerCartView()) {
@@ -160,7 +184,7 @@ struct CustomerCheckoutView: View {
             }
         }
     }
-
+    
     private func placeOrder() {
         isProcessing = true
         let orderData: [String: Any] = [
@@ -170,7 +194,7 @@ struct CustomerCheckoutView: View {
             "total": total,
             "timestamp": Timestamp(date: Date())
         ]
-
+        
         Firestore.firestore().collection("orders").addDocument(data: orderData) { error in
             isProcessing = false
             if error == nil {
@@ -190,7 +214,7 @@ struct CustomerCheckoutView_Previews: PreviewProvider {
             CartItem(id: "", title: "Another Item", price: 14.50, imagepath: "", quantity: 1)
         ]
         let navigationManager = NavigationManager.shared
-
+        
         return CustomerCheckoutView()
             .environmentObject(cartManager)
             .environmentObject(navigationManager)
