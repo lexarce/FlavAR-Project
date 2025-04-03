@@ -4,38 +4,37 @@
 //
 //  Created by kimi on 11/08/24.
 //
-
-// BROKEN
-
 import SwiftUI
-import FirebaseCore
-import FirebaseFirestore
-import FirebaseAuth
 import FirebaseStorage
-import UIKit
+import FirebaseAuth
 
 let storage = Storage.storage()
 
-
-
-//A Placeholder for the HomePageView
 struct HomePageView: View {
-    @EnvironmentObject var navigationManager: NavigationManager //For navigating views
+    @EnvironmentObject var navigationManager: NavigationManager
+    @EnvironmentObject var userSessionViewModel: UserSessionViewModel
+
     @State private var image: UIImage? = nil
-    @State private var userName: String = "User"  // Default name if the user is not found
-    @State private var isAdmin: Bool = false // Track if user is an admin or not
-    @EnvironmentObject var userManager: UserInfoManager
-    
+    @State private var userName: String = "User"
+    @State private var isAdmin: Bool = false
+
     let galleryImages: [String] = ["JinGalleryPic1", "JinGalleryPic2", "JinGalleryPic3"]
 
     var body: some View {
         NavigationStack {
             ZStack {
                 BackgroundView(imageName: "Bright_Red_Gradient_BG")
-                
+
                 VStack {
                     Spacer(minLength: 90)
-                    GreetUser(userName: $userName)
+
+                    // Greet the User
+                    Text("Hi \(userSessionViewModel.userInfo?.firstName ?? "User")!")
+                        .font(.system(size: 36, weight: .bold))
+                        .foregroundColor(.white)
+                        .bold()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.leading, 20)
 
                     Image("Line")
                         .resizable()
@@ -46,12 +45,15 @@ struct HomePageView: View {
 
                     ScrollView {
                         VStack {
-                            CustomerGalleryImageView(images: galleryImages, isAdmin: isAdmin)
-                                .background(Color.black)
-                                .cornerRadius(25)
-                                .padding()
+                            CustomerGalleryImageView(
+                                images: galleryImages,
+                                isAdmin: userSessionViewModel.isAdmin
+                            )
+                            .background(Color.black)
+                            .cornerRadius(25)
+                            .padding()
 
-                            DealsHeadline(isAdmin: isAdmin)
+                            DealsHeadline(isAdmin: userSessionViewModel.isAdmin)
 
                             Image("Line")
                                 .resizable()
@@ -61,63 +63,23 @@ struct HomePageView: View {
                                 .padding(.horizontal, 20)
                         }
                     }
-                    
+
                     Spacer()
                 }
                 .navigationBarBackButtonHidden(true)
                 .padding(.top, 10)
                 .onAppear {
-                    //checking admin status
-                    checkUserAdminStatus { (isAdminStatus, error) in
-                        if let error = error {
-                            print("Error: \(error.localizedDescription)")
-                        } else {
-                            DispatchQueue.main.async {
-                                self.isAdmin = isAdminStatus ?? false
-                            }
-                        }
-                    }
-                    
-                    //updating view
                     navigationManager.currentView = "HomePageView"
-                    
-                    //Get user info
-                    userManager.fetchUserInfo()
+                    userSessionViewModel.fetchUserInfo()
+                    userSessionViewModel.checkAdminStatus()
                 }
-                .onReceive(userManager.$userInfo) { userInfo in
-                    if let userInfo = userInfo {
-                        print("User First Name: \(userInfo.firstName)")
-                    } else {
-                        print("User info is nil")
-                    }
-                }
-                
+
                 VStack {
                     Spacer()
                     NavigationBar()
                 }
             }
         }
-    }
-}
-
-// Header that greets the user
-struct GreetUser: View {
-    @Binding var userName: String
-
-    var body: some View {
-        Text("Hi \(userName)!")
-            .font(.headline)
-            .foregroundColor(.white)
-            .bold()
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading, 20)  // Add left padding
-            .onAppear {
-                // Fetch user name from Firebase when the view appears
-                if let user = Auth.auth().currentUser {
-                    userName = user.displayName ?? "User" // Set to displayName if available, otherwise fallback to "User"
-                }
-            }
     }
 }
 
@@ -219,6 +181,7 @@ struct CustomerGalleryImageView: View {
 
 #Preview {
     HomePageView()
+        .environmentObject(UserSessionViewModel())
         .environmentObject(NavigationManager.shared)
 }
- 
+

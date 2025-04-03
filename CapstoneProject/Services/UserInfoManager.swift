@@ -1,41 +1,33 @@
 //
-//  UserInfo.swift
+//  UserInfoManager.swift
 //  CapstoneProject
 //
-//  Created by Kaleb on 2/16/25.
+//  Created by Kaleb
 //
 
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
-//Object for storing user data
-struct UserInfo: Codable, Identifiable {
-    var id: String
-    var firstName: String
-    var lastName: String
-    var emailAddress: String
-    var phoneNumber: String
-    var isAdmin: Bool
-}
+class UserInfoManager {
+    
+    private let db = Firestore.firestore()
 
-class UserInfoManager: ObservableObject {
-    @Published var userInfo: UserInfo?
-
-    private var db = Firestore.firestore()
-
-    func fetchUserInfo() {
+    // fetches user info from Firestore and returns it via a completion handler
+    func fetchUserInfo(completion: @escaping (UserInfo?) -> Void) {
         guard let userID = Auth.auth().currentUser?.uid else {
             print("No user is currently signed in.")
+            completion(nil)
             return
         }
-        
+
         db.collection("users").document(userID).getDocument { (document, error) in
             if let error = error {
-                print("Error fetching document: \(error)")
+                print("Error fetching document: \(error.localizedDescription)")
+                completion(nil)
                 return
             }
-            
+
             if let document = document, document.exists, let data = document.data() {
                 let user = UserInfo(
                     id: userID,
@@ -45,12 +37,10 @@ class UserInfoManager: ObservableObject {
                     phoneNumber: data["phoneNumber"] as? String ?? "",
                     isAdmin: data["isAdmin"] as? Bool ?? false
                 )
-                
-                DispatchQueue.main.async {
-                    self.userInfo = user
-                }
+                completion(user)
             } else {
                 print("Document does not exist.")
+                completion(nil)
             }
         }
     }

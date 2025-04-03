@@ -19,7 +19,7 @@ struct MenuItem: Identifiable, Codable {
     var ARModelPath: String? = nil
     var isAvailable: Bool = true
     var quantity: Int? = 1
-    var customizations: [String]? //TODO: update to use customizations struct
+    var customizations: [CustomizationCategory]? //TODO: update to use customizations struct
     var nutrition: Nutrition?
 
     // initializer

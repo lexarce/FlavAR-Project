@@ -21,7 +21,7 @@ struct CapstoneProjectApp: App {
     
     //Object for keeping track of which view the app is in
     @StateObject private var navigationManager = NavigationManager.shared
-    @StateObject var userManager = UserInfoManager()
+    @StateObject var userSessionViewModel = UserSessionViewModel()
     
     init() {
         FirebaseApp.configure()
@@ -39,7 +39,7 @@ struct CapstoneProjectApp: App {
             //ContentView()
             //CustomerMenuView()
                 .environmentObject(navigationManager)
-                .environmentObject(userManager)
+                .environmentObject(userSessionViewModel)
             
                // .environmentObject(cartManager)
                 //.environmentObject(navigationManager)
