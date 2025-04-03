@@ -47,17 +47,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		341850202D628B05008C7242 /* Menu */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Menu; sourceTree = "<group>"; };
-		341850242D628B3E008C7242 /* AR */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = AR; sourceTree = "<group>"; };
 		3F02BA112D9E64E600C2ADEE /* Models */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Models; sourceTree = "<group>"; };
 		3F02BA132D9E6BD300C2ADEE /* Utilities */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Utilities; sourceTree = "<group>"; };
 		3F02BA142D9E6F3E00C2ADEE /* ViewModels */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ViewModels; sourceTree = "<group>"; };
 		3F02BA2E2D9E7D4F00C2ADEE /* Views */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Views; sourceTree = "<group>"; };
 		3F02BA542D9E925D00C2ADEE /* Services */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Services; sourceTree = "<group>"; };
-		C335990D2D70416300917BFB /* Data Handling */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Data Handling"; sourceTree = "<group>"; };
+		3F24B4422D9EB30400F6D5A7 /* TODO */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = TODO; sourceTree = "<group>"; };
 		C33599342D7055D700917BFB /* Duplicates (IGNORE) */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Duplicates (IGNORE)"; sourceTree = "<group>"; };
-		C33599372D70583600917BFB /* Orders */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Orders; sourceTree = "<group>"; };
-		C335993A2D70586C00917BFB /* Payment */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Payment; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				34DDE8CF2CA1C2A900CB47FC /* CapstoneProjectApp.swift */,
+				3F24B4422D9EB30400F6D5A7 /* TODO */,
 				3F02BA542D9E925D00C2ADEE /* Services */,
 				3F02BA112D9E64E600C2ADEE /* Models */,
 				3F02BA142D9E6F3E00C2ADEE /* ViewModels */,
@@ -123,11 +120,6 @@
 				34DDE8DF2CA1FB3100CB47FC /* GoogleService-Info.plist */,
 				34DDE8D32CA1C2AB00CB47FC /* Assets.xcassets */,
 				34DDE8D52CA1C2AB00CB47FC /* Preview Content */,
-				341850202D628B05008C7242 /* Menu */,
-				C33599372D70583600917BFB /* Orders */,
-				C335993A2D70586C00917BFB /* Payment */,
-				C335990D2D70416300917BFB /* Data Handling */,
-				341850242D628B3E008C7242 /* AR */,
 				C33599342D7055D700917BFB /* Duplicates (IGNORE) */,
 			);
 			path = CapstoneProject;
@@ -157,17 +149,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				341850202D628B05008C7242 /* Menu */,
-				341850242D628B3E008C7242 /* AR */,
 				3F02BA112D9E64E600C2ADEE /* Models */,
 				3F02BA132D9E6BD300C2ADEE /* Utilities */,
 				3F02BA142D9E6F3E00C2ADEE /* ViewModels */,
 				3F02BA2E2D9E7D4F00C2ADEE /* Views */,
 				3F02BA542D9E925D00C2ADEE /* Services */,
-				C335990D2D70416300917BFB /* Data Handling */,
+				3F24B4422D9EB30400F6D5A7 /* TODO */,
 				C33599342D7055D700917BFB /* Duplicates (IGNORE) */,
-				C33599372D70583600917BFB /* Orders */,
-				C335993A2D70586C00917BFB /* Payment */,
 			);
 			name = CapstoneProject;
 			packageProductDependencies = (

@@ -13,6 +13,7 @@ import FirebaseFirestore
 
 struct MenuView: View {
     @EnvironmentObject var navigationManager: NavigationManager
+    @EnvironmentObject var cartManager: CartManager
     @EnvironmentObject var userSessionViewModel: UserSessionViewModel
 
     @StateObject private var menuViewModel = MenuViewModel()
@@ -194,5 +195,6 @@ struct MenuView: View {
     MenuView()
         .environmentObject(NavigationManager.shared)
         .environmentObject(UserSessionViewModel())
+        .environmentObject(CartManager.shared)
 }
 
