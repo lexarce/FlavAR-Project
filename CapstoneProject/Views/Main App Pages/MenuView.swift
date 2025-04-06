@@ -15,23 +15,23 @@ struct MenuView: View {
     @EnvironmentObject var navigationManager: NavigationManager
     @EnvironmentObject var cartManager: CartManager
     @EnvironmentObject var userSessionViewModel: UserSessionViewModel
-
+    
     @StateObject private var menuViewModel = MenuViewModel()
-
+    
     @State private var searchText: String = ""
     @State private var selectedItem: MenuItem?
     @State private var showItemDetail = false
-
+    
     @Environment(\.dismiss) var dismiss
-
+    
     var body: some View {
         NavigationStack {
             ZStack {
                 BackgroundView(imageName: "StaffMenuViewBG")
-
+                
                 VStack(alignment: .leading, spacing: 1) {
                     Spacer().frame(height: 80)
-
+                    
                     // Jin BBQ Logo
                     HStack {
                         Image("JinBBQTakeout")
@@ -41,9 +41,9 @@ struct MenuView: View {
                             .padding(.top, -50)
                     }
                     .frame(maxWidth: .infinity, alignment: .center)
-
+                    
                     DividerView()
-
+                    
                     // Search bar
                     SearchBar(searchText: $searchText)
                         .padding(.vertical, 10)
@@ -54,16 +54,16 @@ struct MenuView: View {
                                 menuViewModel.searchItems(newValue)
                             }
                         }
-
+                    
                     DividerView()
-
+                    
                     // Categories Header
                     Text("Categories")
                         .font(.system(size: 24, weight: .bold))
                         .foregroundColor(.white)
                         .padding(.leading, 5)
                         .padding(.bottom, 10)
-
+                    
                     // Horizontal Category Scroll
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 12) {
@@ -85,7 +85,7 @@ struct MenuView: View {
                                 .cornerRadius(15)
                                 
                             }
-
+                            
                             // Filter by "Korean Food"
                             Button(action: {
                                 menuViewModel.filterByCategory("Korean Food")
@@ -103,7 +103,7 @@ struct MenuView: View {
                                 .background(menuViewModel.selectedCategory == "Korean Food" ? Color.white.opacity(0.2) : Color.clear)
                                 .cornerRadius(15)
                             }
-
+                            
                             // Filter by "Popular"
                             Button(action: {
                                 menuViewModel.filterByPopular()
@@ -124,26 +124,52 @@ struct MenuView: View {
                         }
                         .padding(.horizontal)
                     }
-
-
+                    
+                    
                     DividerView()
-
+                    
                     if userSessionViewModel.isAdmin {
                         AddButtonView()
                             .padding(.bottom, 10)
                     }
-
+                    
                     // Menu Items List (now from ViewModel)
-                    MenuItemList(
-                        menuItems: menuViewModel.filteredMenuItems,
-                        searchText: searchText,
-                        selectedItem: $selectedItem,
-                        showItemDetail: $showItemDetail
-                    )
-                    .padding()
+                    /*MenuItemList(
+                     menuItems: menuViewModel.filteredMenuItems,
+                     searchText: searchText,
+                     selectedItem: $selectedItem,
+                     showItemDetail: $showItemDetail
+                     )
+                     .padding()*/
+                    
+                    List(menuViewModel.filteredMenuItems) { item in
+                        NavigationLink(destination: IndividualItemView(menuItem: item)) {
+                            HStack {
+                                MenuItemImageView(imagePath: item.imagepath)
+                                    .frame(width: 60, height: 60)
+                                    .cornerRadius(10)
+                                
+                                VStack(alignment: .leading) {
+                                    Text(item.title)
+                                        .font(.headline)
+                                        .foregroundColor(.white)
+                                    
+                                    Text("$\(item.price, specifier: "%.2f")")
+                                        .font(.caption)
+                                        .foregroundColor(.white)
+                                }
+                                Spacer()
+                            }
+                        }
+                        .listRowBackground(Color.clear)
+                    }
+                    .scrollContentBackground(.hidden)
+                    .background(Color.clear)
+                    
+                    
                 }
                 .padding()
-
+                
                 // Bottom nav bar
                 VStack {
                     Spacer()
