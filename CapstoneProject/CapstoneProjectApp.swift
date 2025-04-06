@@ -41,7 +41,7 @@ struct CapstoneProjectApp: App {
                 .environmentObject(navigationManager)
                 .environmentObject(userSessionViewModel)
             
-               // .environmentObject(cartManager)
+               .environmentObject(cartManager)
                 //.environmentObject(navigationManager)
         }
     }

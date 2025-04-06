@@ -195,7 +195,9 @@ struct MenuView: View {
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: CustomerCartView()) {
+                    NavigationLink(destination: CustomerCartView()
+                        .environmentObject(CartManager.shared)
+                        .environmentObject(NavigationManager.shared)) {
                         Image(systemName: "cart")
                             .foregroundColor(.white)
                     }
