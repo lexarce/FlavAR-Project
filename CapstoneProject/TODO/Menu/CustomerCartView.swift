@@ -45,8 +45,8 @@ struct CustomerCartView: View {
                 VStack {
                     ScrollView {
                         VStack(spacing: 20) {
-                            ForEach(cartManager.cartItems) { cartItem in
-                                CartItemRow(cartItem: cartItem, cartManager: _cartManager)
+                            ForEach(cartManager.cartItems, id: \.id) { cartItem in
+                                CartItemRow(cartItem: cartItem)
                             }
                         }
                     }
