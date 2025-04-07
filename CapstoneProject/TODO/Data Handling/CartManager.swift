@@ -16,11 +16,13 @@ class CartManager: ObservableObject {
     private init() {}
 
     func addToCart(_ menuItem: MenuItem) {
-        if let index = cartItems.firstIndex(where: { $0.id == menuItem.id }) {
+        let validID = menuItem.id ?? UUID().uuidString
+
+        if let index = cartItems.firstIndex(where: { $0.id == validID }) {
             cartItems[index].quantity += 1
         } else {
             let newCartItem = CartItem(
-                id: menuItem.id ?? UUID().uuidString,
+                id: validID,
                 title: menuItem.title,
                 price: menuItem.price,
                 imagepath: menuItem.imagepath,
@@ -32,6 +34,22 @@ class CartManager: ObservableObject {
 
     func removeFromCart(_ menuItem: MenuItem) {
         if let index = cartItems.firstIndex(where: { $0.id == menuItem.id }) {
+            if cartItems[index].quantity > 1 {
+                cartItems[index].quantity -= 1
+            } else {
+                cartItems.remove(at: index)
+            }
+        }
+    }
+    
+    func increaseQuantity(for id: String) {
+        if let index = cartItems.firstIndex(where: { $0.id == id }) {
+            cartItems[index].quantity += 1
+        }
+    }
+
+    func decreaseQuantity(for id: String) {
+        if let index = cartItems.firstIndex(where: { $0.id == id }) {
             if cartItems[index].quantity > 1 {
                 cartItems[index].quantity -= 1
             } else {

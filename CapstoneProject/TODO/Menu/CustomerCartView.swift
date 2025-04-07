@@ -13,9 +13,10 @@ import FirebaseAuth
 
 struct CustomerCartView: View {
     @EnvironmentObject var navigationManager: NavigationManager
-    @ObservedObject var cartManager = CartManager.shared
+    //@ObservedObject var cartManager = CartManager.shared
+    @EnvironmentObject var cartManager: CartManager
     @Environment(\.dismiss) var dismiss
-
+    @State private var showClearCartAlert = false
     
     private var subtotal: Double {
         cartManager.cartItems.reduce(0) { total, cartItem in
@@ -45,7 +46,7 @@ struct CustomerCartView: View {
                     ScrollView {
                         VStack(spacing: 20) {
                             ForEach(cartManager.cartItems) { cartItem in
-                                CartItemRow(cartItem: cartItem, cartManager: cartManager)
+                                CartItemRow(cartItem: cartItem, cartManager: _cartManager)
                             }
                         }
                     }
@@ -123,13 +124,23 @@ struct CustomerCartView: View {
                             .foregroundColor(.white)
                     }
                 }
-                // Cart button
-                /*ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: CustomerCartView()) {
-                        Image(systemName: "cart")
+                // Clear cart button
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        showClearCartAlert = true
+                    }) {
+                        Image(systemName: "trash")
                             .foregroundColor(.white)
                     }
-                }*/
+                }
+            }
+            .alert("Clear Cart?", isPresented: $showClearCartAlert) {
+                Button("Clear", role: .destructive) {
+                    cartManager.clearCart()
+                }
+                Button("Cancel", role: .cancel) { }
+            } message: {
+                Text("Are you sure you want to remove all items from your cart?")
             }
         }
     }
@@ -137,7 +148,8 @@ struct CustomerCartView: View {
 
 struct CartItemRow: View {
     var cartItem: CartItem
-    @ObservedObject var cartManager = CartManager.shared
+    //@ObservedObject var cartManager = CartManager.shared
+    @EnvironmentObject var cartManager: CartManager
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -159,7 +171,7 @@ struct CartItemRow: View {
                 Spacer()
                 
                 HStack(spacing: 10) {
-                    Button(action: { removeItem() }) {
+                    Button(action: { cartManager.decreaseQuantity(for: cartItem.id) }) {
                         Image(systemName: "minus.circle.fill")
                             .foregroundColor(.yellow)
                     }
@@ -168,7 +180,7 @@ struct CartItemRow: View {
                         .font(.subheadline)
                         .foregroundColor(.white)
                     
-                    Button(action: { addItem() }) {
+                    Button(action: { cartManager.increaseQuantity(for: cartItem.id) }) {
                         Image(systemName: "plus.circle.fill")
                             .foregroundColor(.yellow)
                     }
