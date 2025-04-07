@@ -14,6 +14,7 @@ struct CreateAccountView: View {
     @State private var phoneNumber = ""
     @State private var password = ""
     @State private var confirmedPassword = ""
+    @Environment(\.dismiss) private var dismiss
     
     var isRegisterDisabled: Bool {
         firstName.isEmpty ||
@@ -37,12 +38,14 @@ struct CreateAccountView: View {
                     .scaledToFill()
                     .aspectRatio(contentMode: .fill)
                     .edgesIgnoringSafeArea(.all)
+                    .offset(y: -60)
+                    
 
                 ScrollView {
                     VStack {
                         HeaderView() // Header with Sign Up Title
 
-                        VStack(spacing: 16) {
+                        VStack(spacing: 14) {
                             HStack {
                                 CustomTextField(placeholder: "First Name", text: $firstName)
                                 CustomTextField(placeholder: "Last name", text: $lastName)
@@ -52,12 +55,11 @@ struct CreateAccountView: View {
                             CustomTextField(placeholder: "Password", text: $password, isSecureField: true)
                             CustomTextField(placeholder: "Confirm your Password", text: $confirmedPassword, isSecureField: true)
                         }
-                        .padding()
 
                         ErrorMessageView(message: userSessionViewModel.createAccountErrorMessage)
                             .opacity(userSessionViewModel.createAccountErrorMessage.isEmpty ? 0 : 1)
 
-                        Spacer()
+                            .padding(.top, 5)
 
                         Button(action: {
                             userSessionViewModel.createAccount(
@@ -87,7 +89,7 @@ struct CreateAccountView: View {
                             .padding()
                     }
                     .padding()
-                    .padding(.top, 150)
+                    .padding(.top, 120)
                 }
 
                 // Redirect to login page
@@ -101,6 +103,17 @@ struct CreateAccountView: View {
                     EmptyView()
                 }
                 .hidden()
+            }
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Image(systemName: "arrowshape.backward")
+                            .foregroundColor(.white)
+                    }
+                }
             }
         }
     }

@@ -165,6 +165,7 @@ struct MenuView: View {
                     }
                     .scrollContentBackground(.hidden)
                     .background(Color.clear)
+                    .padding(.bottom, 150)
                     
                     
                 }
