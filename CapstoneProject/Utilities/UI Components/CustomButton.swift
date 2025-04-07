@@ -10,6 +10,7 @@ import SwiftUI
 struct CustomButton: View {
     let label: String
     let action: () -> Void
+    var disabled: Bool = false
     
     var body: some View {
         Button(action: action) {
@@ -20,9 +21,10 @@ struct CustomButton: View {
                 .frame(maxWidth: .infinity)
                 .background(
                     RoundedRectangle(cornerRadius: 30)
-                        .fill(Color("AppColor4"))
+                        .fill(disabled ? Color.gray : Color("AppColor4"))
                 )
         }
+        .disabled(disabled)
         .padding(.horizontal, 20)
     }
 }

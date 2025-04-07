@@ -4,6 +4,11 @@ struct LoginView: View {
     // State Variables
     @State private var emailInput: String = ""
     @State private var passwordInput: String = ""
+    @State private var showingForgotPassword = false
+    
+    var isLoginDisabled: Bool {
+        emailInput.isEmpty || passwordInput.isEmpty
+    }
 
     // ViewModel
     @EnvironmentObject var userSessionViewModel: UserSessionViewModel
@@ -31,11 +36,12 @@ struct LoginView: View {
 
                     CustomButton(label: "SIGN IN >", action: {
                         userSessionViewModel.login(email: emailInput, password: passwordInput)
-                    })
+                    }, disabled: isLoginDisabled)
 
                     // Forgot Password Button
                     Button("Forgot Password?") {
                         // Future: Add forgot password logic
+                        showingForgotPassword = true
                     }
                     .bold()
                     .foregroundStyle(.white)
@@ -72,12 +78,16 @@ struct LoginView: View {
                 .padding()
 
                 // Error Message
-                if !userSessionViewModel.errorMessage.isEmpty {
-                    Text(userSessionViewModel.errorMessage)
+                if !userSessionViewModel.loginErrorMessage.isEmpty {
+                    Text(userSessionViewModel.loginErrorMessage)
                         .bold()
                         .foregroundStyle(.red)
                         .offset(y: 145)
                 }
+            }
+            .sheet(isPresented: $showingForgotPassword) {
+                ForgotPasswordView()
+                    .presentationDetents([.medium, .height(400)])
             }
         }
     }

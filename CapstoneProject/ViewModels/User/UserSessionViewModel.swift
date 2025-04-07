@@ -13,7 +13,9 @@ class UserSessionViewModel: ObservableObject {
     @Published var userInfo: UserInfo?
     @Published var isAuthenticated: Bool = false
     @Published var isAdmin: Bool = false
-    @Published var errorMessage: String = ""
+    @Published var loginErrorMessage: String = ""
+    @Published var createAccountErrorMessage: String = ""
+    @Published var forgotPasswordErrorMessage: String = ""
     @Published var toLoginPage: Bool = false
 
     private let db = Firestore.firestore()
@@ -23,6 +25,8 @@ class UserSessionViewModel: ObservableObject {
     
     // CREATE ACCOUNT
     func createAccount(firstName: String, lastName: String, email: String, phone: String, password: String, confirmedPassword: String) {
+        self.loginErrorMessage = ""
+        
         guard checkInput(firstName: firstName, lastName: lastName, email: email, phone: phone, password: password, confirmedPassword: confirmedPassword) else {
             return
         }
@@ -31,12 +35,12 @@ class UserSessionViewModel: ObservableObject {
             guard let self = self else { return }
 
             if let error = error {
-                self.errorMessage = error.localizedDescription
+                self.createAccountErrorMessage = error.localizedDescription
                 return
             }
 
             guard let user = result?.user else {
-                self.errorMessage = "User creation failed"
+                self.createAccountErrorMessage = "User creation failed"
                 return
             }
 
@@ -48,7 +52,7 @@ class UserSessionViewModel: ObservableObject {
                 "isAdmin": false
             ]) { error in
                 if let error = error {
-                    self.errorMessage = error.localizedDescription
+                    self.createAccountErrorMessage = error.localizedDescription
                 } else {
                     self.sendEmailVerification(user: user)
                     self.toLoginPage = true
@@ -61,7 +65,7 @@ class UserSessionViewModel: ObservableObject {
     func sendEmailVerification(user: User) {
         user.sendEmailVerification { [weak self] error in
             if let error = error {
-                self?.errorMessage = error.localizedDescription
+                self?.loginErrorMessage = "error.localizedDescription"
             }
         }
     }
@@ -69,31 +73,31 @@ class UserSessionViewModel: ObservableObject {
     // VALIDATE INPUT
     func checkInput(firstName: String, lastName: String, email: String, phone: String, password: String, confirmedPassword: String) -> Bool {
         if firstName.isEmpty || lastName.isEmpty || email.isEmpty || phone.isEmpty || password.isEmpty || confirmedPassword.isEmpty {
-            errorMessage = "Please fill out all fields"
+            createAccountErrorMessage = "Please fill out all fields"
             return false
         }
         if firstName.count > 50 || lastName.count > 50 {
-            errorMessage = "Name too long"
+            createAccountErrorMessage = "Name too long"
             return false
         }
         if phone.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) != nil {
-            errorMessage = "Phone must be digits only"
+            createAccountErrorMessage = "Phone must be digits only"
             return false
         }
         if phone.count < 7 || phone.count > 15 {
-            errorMessage = "Phone number must be between 7 and 15 digits"
+            createAccountErrorMessage = "Phone number must be between 7 and 15 digits"
             return false
         }
         if password.count < 8 || password.count > 30 {
-            errorMessage = "Password must be between 8 and 30 characters"
+            createAccountErrorMessage = "Password must be between 8 and 30 characters"
             return false
         }
         if !isPasswordStrong(password) {
-            errorMessage = "Password too weak"
+            createAccountErrorMessage = "Password must contain at least one lowercase letter, uppercase letter, digit, and special character!"
             return false
         }
         if password != confirmedPassword {
-            errorMessage = "Passwords do not match"
+            createAccountErrorMessage = "Passwords do not match!"
             return false
         }
         return true
@@ -111,11 +115,13 @@ class UserSessionViewModel: ObservableObject {
     
     // LOGIN
     func login(email: String, password: String) {
+        self.createAccountErrorMessage = ""
+        
         auth.signIn(withEmail: email, password: password) { [weak self] result, error in
             guard let self = self else { return }
 
             if let error = error {
-                self.errorMessage = "Invalid Email Address or Password"
+                self.loginErrorMessage = "Invalid Email Address or Password"
                 print("Login failed: \(error.localizedDescription)")
                 self.isAuthenticated = false
                 return
@@ -133,7 +139,7 @@ class UserSessionViewModel: ObservableObject {
             guard let self = self else { return }
 
             if let error = error {
-                self.errorMessage = "Error verifying email: \(error.localizedDescription)"
+                self.loginErrorMessage = "Error verifying email address. Please try again"
                 self.isAuthenticated = false
                 return
             }
@@ -144,10 +150,10 @@ class UserSessionViewModel: ObservableObject {
             } else {
                 do {
                     try self.auth.signOut()
-                    self.errorMessage = "Please verify your email before logging in."
+                    self.loginErrorMessage = "Please verify your email before logging in."
                     self.isAuthenticated = false
                 } catch {
-                    self.errorMessage = "Error signing out: \(error.localizedDescription)"
+                    self.loginErrorMessage = "Error signing out. Please try again"
                 }
             }
         }
@@ -186,6 +192,26 @@ class UserSessionViewModel: ObservableObject {
             }
         }
     }
+    
+    func forgotPassword(email: String) {
+        self.forgotPasswordErrorMessage = "" // Reset error message
+        
+        // Check if email is empty
+        guard !email.isEmpty else {
+            self.forgotPasswordErrorMessage = "Please enter your email address."
+            return
+        }
+
+        // Send password reset email
+        auth.sendPasswordReset(withEmail: email) { [weak self] error in
+            guard let self = self else { return }
+            
+            if let error = error {
+            } else {
+                self.forgotPasswordErrorMessage = "Password reset email sent! Please check your inbox."
+            }
+        }
+    }
 
     // LOG OUT
     func logout() {
@@ -194,7 +220,7 @@ class UserSessionViewModel: ObservableObject {
             isAuthenticated = false
             userInfo = nil
         } catch {
-            errorMessage = "Error signing out"
+            loginErrorMessage = "Error signing out"
         }
     }
 }

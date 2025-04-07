@@ -14,6 +14,16 @@ struct CreateAccountView: View {
     @State private var phoneNumber = ""
     @State private var password = ""
     @State private var confirmedPassword = ""
+    
+    var isRegisterDisabled: Bool {
+        firstName.isEmpty ||
+        lastName.isEmpty ||
+        emailAddress.isEmpty ||
+        phoneNumber.isEmpty ||
+        password.isEmpty ||
+        confirmedPassword.isEmpty ||
+        password != confirmedPassword
+    }
 
     @EnvironmentObject var userSessionViewModel: UserSessionViewModel
     @EnvironmentObject var navigationManager: NavigationManager
@@ -35,17 +45,17 @@ struct CreateAccountView: View {
                         VStack(spacing: 16) {
                             HStack {
                                 CustomTextField(placeholder: "First Name", text: $firstName)
-                                CustomTextField(placeholder: "Last Name", text: $lastName)
+                                CustomTextField(placeholder: "Last name", text: $lastName)
                             }
-                            CustomTextField(placeholder: "Email Address", text: $emailAddress)
+                            CustomTextField(placeholder: "Email address: email@gmail.com", text: $emailAddress)
                             CustomTextField(placeholder: "Phone Number", text: $phoneNumber)
                             CustomTextField(placeholder: "Password", text: $password, isSecureField: true)
-                            CustomTextField(placeholder: "Confirm Password", text: $confirmedPassword, isSecureField: true)
+                            CustomTextField(placeholder: "Confirm your Password", text: $confirmedPassword, isSecureField: true)
                         }
                         .padding()
 
-                        ErrorMessageView(message: userSessionViewModel.errorMessage)
-                            .opacity(userSessionViewModel.errorMessage.isEmpty ? 0 : 1)
+                        ErrorMessageView(message: userSessionViewModel.createAccountErrorMessage)
+                            .opacity(userSessionViewModel.createAccountErrorMessage.isEmpty ? 0 : 1)
 
                         Spacer()
 
@@ -59,17 +69,18 @@ struct CreateAccountView: View {
                                 confirmedPassword: confirmedPassword
                             )
                         }) {
-                            Text("REGISTER  >")
+                            Text("Finish Creating Account >")
                                 .bold()
                                 .frame(maxWidth: .infinity)
                                 .padding()
-                                .background(RoundedRectangle(cornerRadius: 30).fill(Color("AppColor4")))
+                                .background(RoundedRectangle(cornerRadius: 30).fill(isRegisterDisabled ? Color.gray : Color("AppColor4")))
                                 .foregroundColor(.white)
                         }
+                        .disabled(isRegisterDisabled)
                         .padding(.horizontal)
 
                         // Text below button
-                        Text("Upon successful account creation, you will be redirected to the login page")
+                        Text("Upon successful account creation, a confirmation email will be sent to your email address you will be redirected to the login page")
                             .bold()
                             .multilineTextAlignment(.center)
                             .foregroundColor(.white)
