@@ -10,7 +10,7 @@ import Foundation
 
 // Keeps cart separate from menu
 
-struct CartItem: Identifiable {
+struct CartItem: Identifiable, Codable {
     var id: String
     var title: String
     var price: Double
