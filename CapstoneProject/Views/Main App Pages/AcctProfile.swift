@@ -74,7 +74,8 @@ struct AcctProfile: View {
                             TextField("First Name", text: $firstName)
                             TextField("Last Name", text: $lastName)
                             TextField("Email", text: $emailAddress)
-                                .disabled(true)
+                                .autocapitalization(.none)
+                                .disableAutocorrection(true)
                             TextField("Phone Number", text: $phoneNumber)
                         }
 
