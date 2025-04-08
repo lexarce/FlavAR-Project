@@ -95,7 +95,7 @@ struct MenuView: View {
                                         .resizable()
                                         .scaledToFit()
                                         .frame(height: 60)
-                                    Text("Korean Food")
+                                    Text("Korean Sides")
                                         .foregroundColor(.white)
                                         .font(.caption)
                                 }
