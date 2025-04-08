@@ -21,4 +21,5 @@ enum OrderStatus: String, Codable {
     case preparing = "Preparing"
     case readyForPickup = "Ready for Pickup"
     case completed = "Completed"
+    case cancelled = "Cancelled"
 }
