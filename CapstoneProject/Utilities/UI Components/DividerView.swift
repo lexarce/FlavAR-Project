@@ -16,6 +16,6 @@ struct DividerView: View {
             .scaledToFit()
             .frame(maxWidth: .infinity)
             .padding(.vertical, 5)
-            .padding(.horizontal, 10)
+            .padding(.horizontal, 20)
     }
 }
