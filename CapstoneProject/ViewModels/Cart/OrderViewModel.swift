@@ -111,9 +111,19 @@ class OrderViewModel: ObservableObject {
     }
 
     // filters either all orders or a specific user's orders based on its status
-    func filterOrders(by status: OrderStatus, from orders: [Order]) -> [Order] {
-        return orders.filter { $0.status == status }
+    func filterOrders(by tab: OrderTab, from orders: [Order]) -> [Order] {
+        switch tab {
+        case .inProgress:
+            return orders.filter {
+                $0.status == .orderPlaced || $0.status == .preparing || $0.status == .readyForPickup
+            }
+        case .completed:
+            return orders.filter {
+                $0.status == .completed
+            }
+        }
     }
+
 
 
 }
