@@ -53,16 +53,28 @@ struct OrdersView: View {
                             ForEach(filtered, id: \.id) { order in
                                 let colors = getCardColors(for: order.status, tab: selectedTab)
 
-                                OrderCardView(
-                                    orderId: String(order.id.prefix(8)),
-                                    customerName: "Unknown", // replace with real name if stored in Order
-                                    itemCount: order.items.count,
-                                    timestamp: order.timestamp,
-                                    backgroundColor: colors.background,
-                                    orderTitleColor: colors.titleColor,
-                                    detailsColor: colors.detailsColor
-                                )
+                                let customerName: String = {
+                                    if userSessionVM.isAdmin {
+                                        return "Unknown"
+                                    } else {
+                                        return "\(userSessionVM.userInfo?.firstName ?? "") \(userSessionVM.userInfo?.lastName ?? "")"
+                                    }
+                                }()
+
+                                NavigationLink(destination: OrderDetailView(order: order)) {
+                                    OrderCardView(
+                                        orderId: String(order.id.prefix(8)),
+                                        customerName: customerName,
+                                        itemCount: order.items.count,
+                                        timestamp: order.timestamp,
+                                        backgroundColor: colors.background,
+                                        orderTitleColor: colors.titleColor,
+                                        detailsColor: colors.detailsColor
+                                    )
+                                }
+                                .buttonStyle(PlainButtonStyle())
                             }
+
                         }
                         .padding(.horizontal)
                     }
@@ -145,7 +157,6 @@ struct OrderCardView: View {
                 .lineLimit(2)
                 .bold()
             
-            Spacer()
             Text(timestamp.formatted(date: .abbreviated, time: .shortened))
                 .font(.caption)
                 .foregroundColor(.black)
