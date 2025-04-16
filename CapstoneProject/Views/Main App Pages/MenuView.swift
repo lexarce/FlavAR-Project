@@ -15,12 +15,13 @@ struct MenuView: View {
     @EnvironmentObject var navigationManager: NavigationManager
     @EnvironmentObject var cartManager: CartManager
     @EnvironmentObject var userSessionViewModel: UserSessionViewModel
-    
     @StateObject private var menuViewModel = MenuViewModel()
     
     @State private var searchText: String = ""
     @State private var selectedItem: MenuItem?
     @State private var showItemDetail = false
+    @State private var showCreateMenuItem = false
+
     
     @Environment(\.dismiss) var dismiss
     
@@ -129,8 +130,22 @@ struct MenuView: View {
                     DividerView()
                     
                     if userSessionViewModel.isAdmin {
-                        AddButtonView()
-                            .padding(.bottom, 10)
+                        HStack {
+                            Spacer()
+                            Button(action: {
+                                showCreateMenuItem = true
+                            }) {
+                                Image(systemName: "plus.circle.fill")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(.white)
+                                    .background(Color(.systemGray5).opacity(0.25))
+                                    .clipShape(Circle())
+                                    .shadow(radius: 4)
+                            }
+                            .padding(.top, 10)
+                            .padding(.trailing, 20)
+                        }
                     }
                     
                     // Menu Items List (now from ViewModel)
@@ -214,6 +229,10 @@ struct MenuView: View {
                 IndividualItemView(menuItem: selectedItem)
             }
         }
+        .fullScreenCover(isPresented: $showCreateMenuItem) {
+            CreateMenuItemView()
+        }
+
     }
 }
 

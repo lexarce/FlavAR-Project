@@ -14,8 +14,9 @@ enum OrderTab {
 
 struct OrdersView: View {
     
-    @ObservedObject var orderVM: OrderViewModel
+    @EnvironmentObject var orderVM: OrderViewModel
     @EnvironmentObject var userSessionVM: UserSessionViewModel
+    @EnvironmentObject var navigationManager: NavigationManager
     @State private var selectedTab: OrderTab = .inProgress
     
     var body: some View {
@@ -272,6 +273,7 @@ func getCardColors(for status: OrderStatus, tab: OrderTab) -> OrderCardColorSche
     )
     mockSession.isAdmin = true
 
-    return OrdersView(orderVM: mockVM)
+    return OrdersView()
+        .environmentObject(mockVM)
         .environmentObject(mockSession)
 }
