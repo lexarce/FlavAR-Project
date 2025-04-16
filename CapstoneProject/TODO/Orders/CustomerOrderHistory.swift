@@ -13,7 +13,7 @@ import FirebaseAuth
 struct CustomerOrderHistory: View {
     
     var body: some View {
-        NavigationView {    // Wrap the view in a NavigationView
+        NavigationView {    
             ZStack {
                 Image("PlainBG")
                     .resizable()

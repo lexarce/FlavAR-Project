@@ -10,11 +10,13 @@ import SwiftUI
 
 struct NavigationBar: View {
     @EnvironmentObject var navigationManager: NavigationManager
+    @EnvironmentObject var orderVM: OrderViewModel
+    @EnvironmentObject var userSessionVM: UserSessionViewModel
 
     var body: some View {
         HStack {
             navButton(destination: HomePageView(), label: "Home", icon: "house", selectedIcon: "house.fill", viewName: "HomePageView")
-            navButton(destination: CustomerOrderHistory(), label: "Orders", icon: "book.closed", selectedIcon: "book.closed.fill", viewName: "CustomerOrderHistory")
+            navButton(destination: OrdersView(), label: "Orders", icon: "book.closed", selectedIcon: "book.closed.fill", viewName: "OrdersView")
             navButton(destination: MenuView(), label: "Menu", icon: "menucard", selectedIcon: "menucard.fill", viewName: "MenuView")
             navButton(destination: StoreView(), label: "Store", icon: "storefront", selectedIcon: "storefront.fill", viewName: "StoreView")
             navButton(destination: AcctProfile(), label: "Profile", icon: "person", selectedIcon: "person.fill", viewName: "AcctProfile")
@@ -29,8 +31,17 @@ struct NavigationBar: View {
         .padding(.bottom, 40)
     }
 
-    private func navButton<Destination: View>(destination: Destination, label: String, icon: String, selectedIcon: String, viewName: String) -> some View {
-        NavigationLink(destination: destination.environmentObject(navigationManager)) {
+    private func navButton<Destination: View>(
+        destination: Destination,
+        label: String,
+        icon: String,
+        selectedIcon: String,
+        viewName: String)
+    -> some View {
+        NavigationLink(destination: destination.environmentObject(navigationManager)
+            .environmentObject(userSessionVM)
+            .environmentObject(navigationManager)
+        ) {
             VStack {
                 Image(systemName: navigationManager.currentView == viewName ? selectedIcon : icon)
                     .resizable()
