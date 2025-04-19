@@ -12,19 +12,34 @@ enum PaymentMethod: String, CaseIterable {
     case creditCard, debitCard, paypal, applePay
 }
 
+var buttonColor: Color {
+    Color(red: 211 / 255, green: 126 / 255, blue: 116 / 255)
+}
+
 struct PaymentView: View {
     @Environment(\.dismiss) var dismiss
     
     @Binding var paymentMethodCompleted: Bool
     @State private var selectedPaymentMethod: PaymentMethod? = nil
     
+    var formColor: Color {
+            Color(red: 150 / 255, green: 59 / 255, blue: 51 / 255)
+    }
+    var sectionColor: Color {
+        Color(red: 166 / 255, green: 77 / 255, blue: 65 / 255)
+    }
+    
     var body: some View {
         Form
         {
-            Text("Select Payment Method")
-                .font(.headline)
-            
-            PaymentMethodView(selectedPaymentMethod: $selectedPaymentMethod)
+            Section {
+                Text("Select Payment Method")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                
+                PaymentMethodView(selectedPaymentMethod: $selectedPaymentMethod)
+            }
+            .listRowBackground(sectionColor)
             
             if let method = selectedPaymentMethod {
                 Section {
@@ -39,8 +54,11 @@ struct PaymentView: View {
                         ApplePayView(paymentMethodCompleted: $paymentMethodCompleted)
                     }
                 }
+                .listRowBackground(sectionColor)
             }
         }
+        .scrollContentBackground(.hidden)
+        .background(formColor)
     }
 }
 
@@ -59,12 +77,12 @@ struct PaymentMethodView: View {
                         .font(.system(size: 14))
                         .fixedSize()
                         .frame(minWidth: 70, maxWidth: 70, minHeight: 50, maxHeight: 50)
-                        .background(selectedPaymentMethod == method ? Color.blue : Color.white)
+                        .background(selectedPaymentMethod == method ? buttonColor : Color.white)
                         .foregroundColor(selectedPaymentMethod == method ? .white : .black)
                         .cornerRadius(12)
                         .overlay(
                             RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color.gray, lineWidth: 1)
+                                .stroke(buttonColor, lineWidth: 1)
                         )
                 }
                 .buttonStyle(PlainButtonStyle())
@@ -98,6 +116,7 @@ struct CreditCardPaymentView: View {
     var body: some View {
         Text("Credit Card")
             .font(.headline)
+            .foregroundColor(.white)
         
         VStack {
             VStack(spacing: 16) {
@@ -121,7 +140,7 @@ struct CreditCardPaymentView: View {
                 Text("Confirm Payment Method")
                     .padding()
                         .foregroundColor(.white)
-                        .background(Color.blue)
+                        .background(buttonColor)
                         .cornerRadius(8)
             }
             .buttonStyle(PlainButtonStyle())
@@ -154,6 +173,7 @@ struct DebitCardPaymentView: View {
     var body: some View {
         Text("Debit Card")
             .font(.headline)
+            .foregroundColor(.white)
         
         VStack {
             VStack(spacing: 16) {
@@ -178,7 +198,7 @@ struct DebitCardPaymentView: View {
                 Text("Confirm Payment Method")
                     .padding()
                         .foregroundColor(.white)
-                        .background(Color.blue)
+                        .background(buttonColor)
                         .cornerRadius(8)
             }
             .buttonStyle(PlainButtonStyle())
@@ -207,6 +227,7 @@ struct PayPalPaymentView: View {
     var body: some View {
         Text("PayPal")
             .font(.headline)
+            .foregroundColor(.white)
         
         HStack {
             Spacer()
@@ -217,7 +238,7 @@ struct PayPalPaymentView: View {
                 dismiss()
             }
             .padding()
-            .background(Color.blue)
+            .background(buttonColor)
             .foregroundColor(.white)
             .cornerRadius(8)
             .buttonStyle(PlainButtonStyle())
@@ -236,6 +257,7 @@ struct ApplePayView: View {
     var body: some View {
         Text("Apple Pay")
             .font(.headline)
+            .foregroundColor(.white)
 
         HStack {
             Spacer()
@@ -291,11 +313,13 @@ struct PaymentField: View {
             Text(header)
                 .font(.subheadline)
                 .font(.system(size: 13))
+                .foregroundColor(.white)
             TextField("", text: $text)
                 .padding(8)
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color.black, lineWidth: 1)
+                        .stroke(Color.black, lineWidth: 2)
+                        .fill(Color.white)
                 )
                 .frame(height: 40)
         }
