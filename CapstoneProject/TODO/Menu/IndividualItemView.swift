@@ -22,6 +22,7 @@ struct IndividualItemView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.dismiss) var dismiss
     
+    
     var body: some View {
         ZStack {
             Image("PlainBG")
@@ -58,7 +59,7 @@ struct IndividualItemView: View {
                 }
                 
                 Text(menuItem.title)
-                    .font(.largeTitle)
+                    .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                 
@@ -68,7 +69,7 @@ struct IndividualItemView: View {
                     .padding()
                 
                 Text("$\(menuItem.price, specifier: "%.2f")")
-                    .font(.title)
+                    .font(.title3)
                     .foregroundColor(.yellow)
                     .padding()
                 

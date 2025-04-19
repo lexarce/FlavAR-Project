@@ -26,12 +26,12 @@ class MenuViewModel: ObservableObject {
     func fetchMenuItems() {
         db.collection("MenuItems").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
-                print("❌ Error fetching menu items: \(error.localizedDescription)")
+                print("Error fetching menu items: \(error.localizedDescription)")
                 return
             }
 
             guard let documents = querySnapshot?.documents else {
-                print("❌ No documents found in MenuItems")
+                print("No documents found in MenuItems")
                 return
             }
 
