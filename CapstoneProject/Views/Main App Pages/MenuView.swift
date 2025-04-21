@@ -244,5 +244,6 @@ struct MenuView: View {
         .environmentObject(NavigationManager.shared)
         .environmentObject(UserSessionViewModel())
         .environmentObject(CartManager.shared)
+        .environmentObject(OrderViewModel())
 }
 

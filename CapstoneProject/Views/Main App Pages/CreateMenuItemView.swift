@@ -563,5 +563,7 @@ struct EditableCategoryView: View {
 struct CreateMenuItemView_Previews: PreviewProvider {
     static var previews: some View {
         CreateMenuItemView()
+            .environmentObject(UserSessionViewModel())
+            .environmentObject(OrderViewModel())
     }
 }

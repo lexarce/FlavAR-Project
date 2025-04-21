@@ -62,5 +62,7 @@ struct NavigationBar_Previews: PreviewProvider {
     static var previews: some View {
         NavigationBar()
             .environmentObject(NavigationManager.shared)
+            .environmentObject(OrderViewModel())
+            .environmentObject(UserSessionViewModel())
     }
 }

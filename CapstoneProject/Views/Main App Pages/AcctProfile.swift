@@ -312,5 +312,6 @@ struct AcctProfile: View {
     AcctProfile()
         .environmentObject(UserSessionViewModel())
         .environmentObject(NavigationManager.shared)
+        .environmentObject(OrderViewModel())
 }
 

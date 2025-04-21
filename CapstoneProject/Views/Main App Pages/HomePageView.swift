@@ -182,6 +182,7 @@ struct CustomerGalleryImageView: View {
 #Preview {
     HomePageView()
         .environmentObject(UserSessionViewModel())
+        .environmentObject(OrderViewModel())
         .environmentObject(NavigationManager.shared)
 }
 
