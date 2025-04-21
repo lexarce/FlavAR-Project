@@ -28,7 +28,7 @@ struct OrderDetailView: View {
                         .foregroundColor(.white.opacity(0.7))
                         .shadow(color: .black.opacity(0.6), radius: 3, x: 1, y: 1)
 
-                    Divider().background(.white.opacity(0.3))
+                    Divider().background(.white.opacity(0.5))
 
                     // item section
                     VStack(alignment: .leading, spacing: 12) {
@@ -54,7 +54,7 @@ struct OrderDetailView: View {
                         }
                     }
 
-                    Divider().background(.white.opacity(0.3))
+                    Divider().background(.white.opacity(0.5))
 
                     // status
                     HStack {
@@ -67,6 +67,8 @@ struct OrderDetailView: View {
                             .foregroundColor(.white)
                             .shadow(color: .black.opacity(0.6), radius: 3, x: 1, y: 1)
                     }
+                    
+                    OrderStatusProgressView(currentStatus: order.status)
 
                     Spacer()
                 }
@@ -90,6 +92,61 @@ struct OrderDetailView: View {
         case .cancelled:
             GradientBackgroundView(startHex: "#888888", endHex: "#b13337")
         }
+    }
+}
+
+// for displaying the status
+struct OrderStatusProgressView: View {
+    let currentStatus: OrderStatus
+
+    private let allStatuses: [OrderStatus] = [
+        .orderPlaced,
+        .preparing,
+        .readyForPickup,
+        .completed
+    ]
+
+    private func statusIndex(_ status: OrderStatus) -> Int {
+        return allStatuses.firstIndex(of: status) ?? 0
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            /*Text("Status")
+                .font(.headline)
+                .foregroundColor(.white)
+                .shadow(color: .black.opacity(0.6), radius: 2, x: 1, y: 1)
+            Spacer()*/
+            HStack {
+                ForEach(allStatuses.indices, id: \.self) { index in
+                    let status = allStatuses[index]
+                    let isCompleted = statusIndex(currentStatus) >= index
+
+                    Circle()
+                        .fill(isCompleted ? Color(hex: "9e0000") : Color.gray)
+                        .frame(width: 12, height: 12)
+                        .overlay(
+                            Circle()
+                                .stroke(Color.white.opacity(0.6), lineWidth: isCompleted ? 0 : 1)
+                        )
+
+                    if index < allStatuses.count - 1 {
+                        Rectangle()
+                            .fill(isCompleted ? Color(hex: "9e0000") : Color.gray)
+                            .frame(height: 2)
+                            .frame(maxWidth: .infinity)
+                    }
+                    
+                    
+                }
+            }
+            
+            Text(currentStatus.rawValue)
+                .font(.subheadline)
+                .foregroundColor(.white)
+                .shadow(color: .black.opacity(0.6), radius: 2, x: 1, y: 1)
+        }
+        .padding(.vertical, 10)
     }
 }
 
