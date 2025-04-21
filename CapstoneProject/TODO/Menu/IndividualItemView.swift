@@ -22,6 +22,9 @@ struct IndividualItemView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.dismiss) var dismiss
     
+    @StateObject private var customizationVM = CustomizationViewModel()
+    @State private var showCustomizationSheet = false
+    
     
     var body: some View {
         ZStack {
@@ -67,6 +70,54 @@ struct IndividualItemView: View {
                     .font(.body)
                     .foregroundColor(.white)
                     .padding()
+                
+                // Only show if the item has customizations
+                if ["PremiumBeefBulgogiBox", "PremiumJapchaeBox", "PremiumPorkBellyBox", "PremiumSpicyPorkBox"].contains(menuItem.id ?? "") {
+                    Button(action: {
+                        showCustomizationSheet = true
+                    }) {
+                        Text("Customize Your Order")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color("AppColor4"))
+                            .cornerRadius(10)
+                    }
+                    .sheet(isPresented: $showCustomizationSheet) {
+                        if let id = menuItem.id {
+                            CustomizationSheetView(viewModel: customizationVM, basePrice: menuItem.price)
+                                .onAppear {
+                                    customizationVM.fetchCustomizations(for: id)
+                                }
+                        }
+                    }
+                }
+
+                
+                // Customizations
+                ForEach(customizationVM.customizations) { category in
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(category.categoryName)
+                            .font(.headline)
+                            .foregroundColor(.white)
+                        
+                        ForEach(category.options) { option in
+                            HStack {
+                                Text(option.name)
+                                    .foregroundColor(.white)
+                                
+                                Spacer()
+                                
+                                if let cost = option.additionalCost, cost > 0 {
+                                    Text("+$\(cost, specifier: "%.2f")")
+                                        .foregroundColor(.yellow)
+                                        .font(.subheadline)
+                                }
+                            }
+                        }
+                    }
+                    .padding(.horizontal)
+                }
                 
                 Text("$\(menuItem.price, specifier: "%.2f")")
                     .font(.title3)
@@ -143,6 +194,9 @@ struct IndividualItemView: View {
         
         .onAppear {
             loadImage()
+            if let id = menuItem.id {
+                customizationVM.fetchCustomizations(for: id)
+            }
         }
     }
     
